@@ -530,24 +530,45 @@ function defaultState() {
 function hydrateState(raw) {
   var base = defaultState();
   if (!raw || typeof raw !== 'object') return base;
+
+  function readBool(src, i) {
+    if (src == null) return false;
+    // JSON.parse always gives real arrays, but guard against
+    // string-keyed objects in case a serializer ever did otherwise
+    var v = Array.isArray(src)
+      ? src[i]
+      : (src[i] !== undefined ? src[i] : src[String(i)]);
+    return !!v;
+  }
+
   ENTRIES_RAW.forEach(function(e) {
-    if (raw.tasks && Array.isArray(raw.tasks[e.id])) {
-      for (var i = 0; i < base.tasks[e.id].length; i++) base.tasks[e.id][i] = !!raw.tasks[e.id][i];
+    if (raw.tasks && raw.tasks[e.id] != null) {
+      for (var i = 0; i < base.tasks[e.id].length; i++) {
+        base.tasks[e.id][i] = readBool(raw.tasks[e.id], i);
+      }
     }
     if (raw.checkins && raw.checkins[e.id]) {
       var c = raw.checkins[e.id];
-      base.checkins[e.id] = { status:c.status||null, notes:typeof c.notes==='string'?c.notes:'', savedAt:c.savedAt||null };
+      base.checkins[e.id] = {
+        status: c.status || null,
+        notes: typeof c.notes === 'string' ? c.notes : '',
+        savedAt: c.savedAt || null
+      };
     }
   });
+
   PHASES.forEach(function(p) {
-    if (raw.phaseExit && Array.isArray(raw.phaseExit[p.id])) {
-      for (var i = 0; i < base.phaseExit[p.id].length; i++) base.phaseExit[p.id][i] = !!raw.phaseExit[p.id][i];
+    if (raw.phaseExit && raw.phaseExit[p.id] != null) {
+      for (var i = 0; i < base.phaseExit[p.id].length; i++) {
+        base.phaseExit[p.id][i] = readBool(raw.phaseExit[p.id], i);
+      }
     }
   });
-  base.leetcode = (typeof raw.leetcode === 'number' && raw.leetcode >= 0) ? raw.leetcode : 0;
+
+  base.leetcode = (typeof raw.leetcode === 'number' && raw.leetcode >= 0)
+    ? raw.leetcode : 0;
   return base;
 }
-
 function calcEntryProgress(entryId, state) {
   var arr = state.tasks[entryId] || [];
   return { done: arr.filter(Boolean).length, total: arr.length };
@@ -628,7 +649,7 @@ function renderEntry(entry, state, isCurrent) {
   var checkin = state.checkins[entry.id];
   var meta = statusMeta(checkin.status);
   var tasksHtml = entry.tasks.map(function(task, idx) {
-    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="' + entry.id + '" data-idx="' + idx + '"' + (state.tasks[entry.id][idx]?' checked':'') + ' /><span>' + escapeHtml(task) + '</span></label>';
+    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="' + entry.id + '" data-idx="' + idx + '"' + (state.tasks[entry.id][idx]?' checked="checked"':'') + ' /><span>' + escapeHtml(task) + '</span></label>';
   }).join('');
   var noteHtml = entry.note ? '<p class="entry-note">' + escapeHtml(entry.note) + '</p>' : '';
   var currentTag = isCurrent ? '<span class="now-tag">NOW</span>' : '';
@@ -657,7 +678,7 @@ function renderPhase(phase, entries, state, currentEntry) {
   var phaseEntries = entries.filter(function(e){return e.phase===phase.id;});
   var prog = calcPhaseProgress(phase.id, entries, state);
   var exitHtml = phase.exit.map(function(item,idx) {
-    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="' + phase.id + '" data-idx="' + idx + '"' + (state.phaseExit[phase.id][idx]?' checked':'') + ' /><span>' + escapeHtml(item) + '</span></label>';
+    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="' + phase.id + '" data-idx="' + idx + '"' + (state.phaseExit[phase.id][idx]?' checked="checked"':'') + ' /><span>' + escapeHtml(item) + '</span></label>';
   }).join('');
   var entriesHtml = phaseEntries.map(function(e){return renderEntry(e,state,!!(currentEntry&&currentEntry.id===e.id));}).join('');
   return '<section class="phase-section">' +
