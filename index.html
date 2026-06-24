@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ML Internship Roadmap \u2014 Build Log</title>
+<title>ML Internship Roadmap — Build Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -45,286 +45,88 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  .app-shell{
-    max-width:880px;
-    margin:0 auto;
-    padding:36px 24px 64px;
-  }
-
+  .app-shell{ max-width:880px; margin:0 auto; padding:36px 24px 64px; }
   h1,h2,h3{ font-family:var(--font-display); margin:0; }
-
   button{ font-family:var(--font-body); cursor:pointer; }
   input, textarea{ font-family:var(--font-body); }
-
   :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  /* ---------- progress bars ---------- */
-  .progress-track{
-    flex:1;
-    height:8px;
-    background:rgba(255,255,255,0.10);
-    border-radius:5px;
-    overflow:hidden;
-    min-width:80px;
-  }
-  .progress-fill{
-    height:100%;
-    background:var(--accent);
-    border-radius:5px;
-    transition:width 0.35s ease;
-  }
+  .progress-track{ flex:1; height:8px; background:rgba(255,255,255,0.10); border-radius:5px; overflow:hidden; min-width:80px; }
+  .progress-fill{ height:100%; background:var(--accent); border-radius:5px; transition:width 0.35s ease; }
   .progress-fill.accent2{ background:var(--green); }
 
-  /* ---------- title block ---------- */
-  .titleblock{
-    border:1px solid var(--line);
-    background:var(--navy-deep);
-    border-radius:6px;
-    padding:20px 22px;
-    margin-bottom:18px;
-  }
-  .tb-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:14px 18px;
-    padding-bottom:16px;
-    border-bottom:1px solid var(--line);
-  }
+  .titleblock{ border:1px solid var(--line); background:var(--navy-deep); border-radius:6px; padding:20px 22px; margin-bottom:18px; }
+  .tb-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px 18px; padding-bottom:16px; border-bottom:1px solid var(--line); }
   .tb-cell{ display:flex; flex-direction:column; gap:3px; }
-  .tb-label{
-    font-family:var(--font-mono);
-    font-size:10.5px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--gray);
-  }
-  .tb-value{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:15px;
-    color:var(--paper);
-  }
-  .tb-progress-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-top:16px;
-  }
-  .tb-progress-label{
-    font-family:var(--font-mono);
-    font-size:11px;
-    color:var(--gray);
-    white-space:nowrap;
-  }
-  .tb-progress-text{
-    font-family:var(--font-mono);
-    font-size:12px;
-    color:var(--paper);
-    white-space:nowrap;
-  }
-  .tb-note{
-    margin:14px 0 0;
-    font-size:12.5px;
-    color:var(--gray);
-    line-height:1.55;
-  }
+  .tb-label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); }
+  .tb-value{ font-family:var(--font-display); font-weight:600; font-size:15px; color:var(--paper); }
+  .tb-progress-row{ display:flex; align-items:center; gap:12px; margin-top:16px; }
+  .tb-progress-label{ font-family:var(--font-mono); font-size:11px; color:var(--gray); white-space:nowrap; }
+  .tb-progress-text{ font-family:var(--font-mono); font-size:12px; color:var(--paper); white-space:nowrap; }
+  .tb-note{ margin:14px 0 0; font-size:12.5px; color:var(--gray); line-height:1.55; }
   .tb-note strong{ color:var(--accent); }
 
-  /* ---------- generic panel ---------- */
-  .panel{
-    background:var(--paper);
-    color:var(--ink);
-    border-radius:6px;
-    padding:20px 22px;
-    margin-bottom:18px;
-    border-left:4px solid var(--accent);
-  }
-  .eyebrow{
-    display:block;
-    font-family:var(--font-mono);
-    font-size:10.5px;
-    letter-spacing:0.10em;
-    text-transform:uppercase;
-    color:var(--accent-dim);
-    margin-bottom:8px;
-  }
+  .panel{ background:var(--paper); color:var(--ink); border-radius:6px; padding:20px 22px; margin-bottom:18px; border-left:4px solid var(--accent); }
+  .eyebrow{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.10em; text-transform:uppercase; color:var(--accent-dim); margin-bottom:8px; }
 
-  /* ---------- this week ---------- */
   .thisweek h2{ font-size:21px; color:var(--ink); margin-bottom:8px; }
   .thisweek.complete{ border-left-color:var(--green); }
   .thisweek-top{ margin-bottom:4px; }
   .thisweek-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
-  .tag{
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    background:var(--paper-dim);
-    color:var(--ink-soft);
-    padding:3px 8px;
-    border-radius:4px;
-  }
+  .tag{ font-family:var(--font-mono); font-size:11.5px; background:var(--paper-dim); color:var(--ink-soft); padding:3px 8px; border-radius:4px; }
   .deliverable{ font-size:13.5px; color:var(--ink-soft); margin:0 0 14px; }
   .thisweek-bottom{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .mini-stat{ font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); }
 
-  .badge{
-    font-family:var(--font-mono);
-    font-size:11px;
-    padding:3px 9px;
-    border-radius:20px;
-    white-space:nowrap;
-  }
+  .badge{ font-family:var(--font-mono); font-size:11px; padding:3px 9px; border-radius:20px; white-space:nowrap; }
   .badge.st-ontrack{ background:rgba(79,157,105,0.16); color:#2F6B45; }
   .badge.st-behind{ background:rgba(217,163,62,0.18); color:#8A6418; }
   .badge.st-skipped{ background:rgba(199,84,80,0.16); color:#9C3D3A; }
   .badge.st-none{ background:rgba(20,32,43,0.08); color:var(--gray); }
 
-  .btn-primary{
-    border:none;
-    background:var(--ink);
-    color:var(--paper);
-    font-size:13px;
-    font-weight:600;
-    padding:9px 16px;
-    border-radius:5px;
-    margin-left:auto;
-    transition:background 0.15s ease;
-  }
+  .btn-primary{ border:none; background:var(--ink); color:var(--paper); font-size:13px; font-weight:600; padding:9px 16px; border-radius:5px; margin-left:auto; transition:background 0.15s ease; }
   .btn-primary:hover{ background:var(--accent-dim); }
 
-  /* ---------- parallel track ---------- */
   .parallel{ border-left-color:var(--green); }
   .parallel-note{ font-size:13px; color:var(--ink-soft); margin:0 0 14px; }
   .parallel-controls{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .step-btn{
-    width:30px; height:30px;
-    border:1px solid var(--line-soft);
-    background:#fff;
-    color:var(--ink);
-    border-radius:5px;
-    font-size:16px;
-    line-height:1;
-  }
+  .step-btn{ width:30px; height:30px; border:1px solid var(--line-soft); background:#fff; color:var(--ink); border-radius:5px; font-size:16px; line-height:1; }
   .step-btn:hover{ background:var(--paper-dim); }
-  #leetcodeinput{
-    width:70px;
-    text-align:center;
-    font-family:var(--font-mono);
-    font-size:15px;
-    font-weight:600;
-    border:1px solid var(--line-soft);
-    border-radius:5px;
-    padding:6px 4px;
-    background:#fff;
-    color:var(--ink);
-  }
+  #leetcodeinput{ width:70px; text-align:center; font-family:var(--font-mono); font-size:15px; font-weight:600; border:1px solid var(--line-soft); border-radius:5px; padding:6px 4px; background:#fff; color:var(--ink); }
   .parallel-target{ font-family:var(--font-mono); font-size:12.5px; color:var(--gray); }
 
-  /* ---------- phase sections ---------- */
-  .phase-section{
-    margin-top:30px;
-    margin-bottom:14px;
-  }
-  .phase-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    flex-wrap:wrap;
-    gap:8px;
-    border-bottom:1px solid var(--line);
-    padding-bottom:10px;
-  }
+  .phase-section{ margin-top:30px; margin-bottom:14px; }
+  .phase-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; }
   .phase-heading{ display:flex; align-items:baseline; gap:10px; }
-  .phase-code{
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    letter-spacing:0.06em;
-    color:var(--accent);
-  }
+  .phase-code{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.06em; color:var(--accent); }
   .phase-header h3{ font-size:18px; color:var(--paper); }
   .phase-time{ font-family:var(--font-mono); font-size:12px; color:var(--gray); }
   .phase-goal{ font-size:13px; color:var(--gray); max-width:640px; margin:10px 0 14px; line-height:1.55; }
   .phase-progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
   .phase-progress-text{ font-family:var(--font-mono); font-size:11.5px; color:var(--gray); white-space:nowrap; }
 
-  .exit-toggle{
-    display:inline-block;
-    background:none;
-    border:1px solid var(--line);
-    color:var(--paper);
-    font-size:12px;
-    padding:6px 12px;
-    border-radius:5px;
-    margin-bottom:6px;
-  }
+  .exit-toggle{ display:inline-block; background:none; border:1px solid var(--line); color:var(--paper); font-size:12px; padding:6px 12px; border-radius:5px; margin-bottom:6px; }
   .exit-toggle:hover{ border-color:var(--accent); }
   .exit-panel{ display:none; margin:10px 0 16px; padding:14px 16px; background:var(--navy-deep); border:1px solid var(--line); border-radius:6px; }
   .exit-panel.open{ display:block; }
-  .exit-item{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-    padding:6px 0;
-    font-size:13px;
-    color:var(--paper);
-  }
+  .exit-item{ display:flex; align-items:flex-start; gap:10px; padding:6px 0; font-size:13px; color:var(--paper); }
   .exit-item input{ margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--accent); }
 
   .entry-list{ display:flex; flex-direction:column; gap:10px; }
 
-  /* ---------- entry cards ---------- */
-  .entry{
-    background:var(--paper);
-    color:var(--ink);
-    border-radius:6px;
-    overflow:hidden;
-    border:1px solid transparent;
-  }
+  .entry{ background:var(--paper); color:var(--ink); border-radius:6px; overflow:hidden; border:1px solid transparent; }
   .entry.open{ border-color:var(--accent); }
-  .entry-header{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:13px 16px;
-  }
-  .entry-code{
-    font-family:var(--font-mono);
-    font-size:12px;
-    font-weight:600;
-    color:var(--accent-dim);
-    flex-shrink:0;
-    width:64px;
-  }
+  .entry-header{ display:flex; align-items:center; gap:14px; padding:13px 16px; }
+  .entry-code{ font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--accent-dim); flex-shrink:0; width:64px; }
   .entry-titlewrap{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
   .entry-date{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); }
   .entry-title{ font-family:var(--font-display); font-weight:600; font-size:14.5px; color:var(--ink); }
-  .now-tag{
-    font-family:var(--font-mono);
-    font-size:9.5px;
-    background:var(--accent);
-    color:#fff;
-    padding:2px 6px;
-    border-radius:3px;
-    margin-left:6px;
-    letter-spacing:0.04em;
-    vertical-align:middle;
-  }
-  .chevron{
-    font-size:18px;
-    color:var(--ink-soft);
-    transition:transform 0.2s ease;
-    flex-shrink:0;
-  }
+  .now-tag{ font-family:var(--font-mono); font-size:9.5px; background:var(--accent); color:#fff; padding:2px 6px; border-radius:3px; margin-left:6px; letter-spacing:0.04em; vertical-align:middle; }
+  .chevron{ font-size:18px; color:var(--ink-soft); transition:transform 0.2s ease; flex-shrink:0; }
   .entry.open .chevron{ transform:rotate(90deg); }
-
   .entry-body{ display:none; padding:0 18px 18px; }
   .entry.open .entry-body{ display:block; }
-
-  .entry-note{
-    font-size:12.5px;
-    font-style:italic;
-    color:var(--accent-dim);
-    margin:0 0 10px;
-  }
+  .entry-note{ font-size:12.5px; font-style:italic; color:var(--accent-dim); margin:0 0 10px; }
   .entry-deliverable{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; }
 
   .task-list{ display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
@@ -332,85 +134,25 @@
   .task-item input{ margin-top:3px; flex-shrink:0; width:17px; height:17px; accent-color:var(--accent); }
   .task-progress{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft); margin:0 0 16px; }
 
-  .checkin{
-    border-top:1px solid var(--line-soft);
-    padding-top:14px;
-  }
-  .checkin-label{
-    display:block;
-    font-family:var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--gray);
-    margin-bottom:8px;
-  }
+  .checkin{ border-top:1px solid var(--line-soft); padding-top:14px; }
+  .checkin-label{ display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray); margin-bottom:8px; }
   .pill-group{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
-  .pill{
-    border:1px solid var(--line-soft);
-    background:#fff;
-    color:var(--ink-soft);
-    font-size:12.5px;
-    padding:6px 13px;
-    border-radius:20px;
-  }
+  .pill{ border:1px solid var(--line-soft); background:#fff; color:var(--ink-soft); font-size:12.5px; padding:6px 13px; border-radius:20px; }
   .pill:hover{ border-color:var(--accent); }
   .pill.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
-  textarea[data-action="notes"]{
-    width:100%;
-    min-height:64px;
-    resize:vertical;
-    border:1px solid var(--line-soft);
-    border-radius:5px;
-    padding:9px 11px;
-    font-size:13px;
-    color:var(--ink);
-    background:#fff;
-    margin-bottom:10px;
-  }
+  textarea[data-action="notes"]{ width:100%; min-height:64px; resize:vertical; border:1px solid var(--line-soft); border-radius:5px; padding:9px 11px; font-size:13px; color:var(--ink); background:#fff; margin-bottom:10px; }
   .save-row{ display:flex; align-items:center; gap:10px; }
-  .btn-secondary{
-    border:1px solid var(--ink);
-    background:transparent;
-    color:var(--ink);
-    font-size:12.5px;
-    font-weight:600;
-    padding:7px 14px;
-    border-radius:5px;
-  }
+  .btn-secondary{ border:1px solid var(--ink); background:transparent; color:var(--ink); font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:5px; }
   .btn-secondary:hover{ background:var(--ink); color:var(--paper); }
-  .saved-msg{
-    font-family:var(--font-mono);
-    font-size:11.5px;
-    color:var(--green);
-    opacity:0;
-    transition:opacity 0.2s ease;
-  }
+  .saved-msg{ font-family:var(--font-mono); font-size:11.5px; color:var(--green); opacity:0; transition:opacity 0.2s ease; }
   .saved-msg.show{ opacity:1; }
 
-  /* ---------- footer ---------- */
-  .footer-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:30px;
-    padding-top:16px;
-    border-top:1px solid var(--line);
-  }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; margin-top:30px; padding-top:16px; border-top:1px solid var(--line); }
   .save-status{ font-family:var(--font-mono); font-size:11.5px; color:var(--gray); }
-  .reset-btn{
-    background:none;
-    border:1px solid var(--line);
-    color:var(--gray);
-    font-size:12px;
-    padding:7px 13px;
-    border-radius:5px;
-  }
+  .reset-btn{ background:none; border:1px solid var(--line); color:var(--gray); font-size:12px; padding:7px 13px; border-radius:5px; }
   .reset-btn:hover{ border-color:var(--red); color:var(--red); }
-
   .loading-note{ font-family:var(--font-mono); font-size:13px; color:var(--gray); padding:40px 0; text-align:center; }
 
-  /* ---------- responsive ---------- */
   @media (max-width:600px){
     .app-shell{ padding:24px 14px 48px; }
     .tb-grid{ grid-template-columns:repeat(2, 1fr); }
@@ -418,30 +160,23 @@
     .entry-code{ width:auto; }
     .badge{ order:3; }
   }
-  @media (max-width:420px){
-    .tb-grid{ grid-template-columns:1fr 1fr; gap:10px 14px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; }
-  }
+  @media (max-width:420px){ .tb-grid{ grid-template-columns:1fr 1fr; gap:10px 14px; } }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
 </style>
 </head>
 <body>
   <div class="app-shell">
     <div id="app">
-      <p class="loading-note">Loading your roadmap\u2026</p>
+      <p class="loading-note">Loading your roadmap&hellip;</p>
     </div>
   </div>
 
 <script>
-/* ===== Constants ===== */
 var STORAGE_KEY = 'adi-ml-roadmap-progress';
-var START_DATE = new Date(2026, 5, 18); // 18 June 2026
+var START_DATE = new Date(2026, 5, 18);
 START_DATE.setHours(0,0,0,0);
 var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
-/* ===== Phase definitions ===== */
 var PHASES = [
   {
     id: 1, code: 'SECTION 01', name: 'Foundation Sprint',
@@ -497,8 +232,6 @@ var PHASES = [
   }
 ];
 
-/* ===== Week / sprint entries, in calendar order ===== */
-/* days = length of this entry in real days. weekNums = which roadmap week numbers it covers. */
 var ENTRIES_RAW = [
   { id:'w1', phase:1, weekNums:[1], days:7,
     title:'Linear Algebra \u2014 Vectors & Matrix Operations',
@@ -741,7 +474,6 @@ var ENTRIES_RAW = [
   }
 ];
 
-/* ===== Schedule builder ===== */
 function addDays(date, n) {
   var d = new Date(date.getTime());
   d.setDate(d.getDate() + n);
@@ -762,346 +494,216 @@ function buildSchedule() {
     var codeLabel = raw.weekNums.length > 1
       ? ('W' + pad2(raw.weekNums[0]) + '\u2013' + pad2(raw.weekNums[raw.weekNums.length - 1]))
       : ('W' + pad2(raw.weekNums[0]));
-    entries.push(Object.assign({}, raw, {
-      start: start, end: end, weekLabel: weekLabel, codeLabel: codeLabel
-    }));
+    entries.push(Object.assign({}, raw, { start:start, end:end, weekLabel:weekLabel, codeLabel:codeLabel }));
   }
   return entries;
 }
 
 function pad2(n) { return n < 10 ? ('0' + n) : ('' + n); }
-
-function fmtDate(d) {
-  return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
-}
-function fmtDateShort(d) {
-  return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()];
-}
+function fmtDate(d) { return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
+function fmtDateShort(d) { return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()]; }
 function fmtRange(start, end) {
-  if (start.getFullYear() === end.getFullYear()) {
-    return fmtDateShort(start) + ' \u2013 ' + fmtDateShort(end) + ' ' + end.getFullYear();
-  }
+  if (start.getFullYear() === end.getFullYear()) return fmtDateShort(start) + ' \u2013 ' + fmtDateShort(end) + ' ' + end.getFullYear();
   return fmtDate(start) + ' \u2013 ' + fmtDate(end);
 }
-
-function todayMidnight() {
-  var t = new Date();
-  t.setHours(0,0,0,0);
-  return t;
-}
+function todayMidnight() { var t = new Date(); t.setHours(0,0,0,0); return t; }
 
 function findCurrentEntry(entries, today) {
   for (var i = 0; i < entries.length; i++) {
-    if (today.getTime() >= entries[i].start.getTime() && today.getTime() <= entries[i].end.getTime()) {
-      return entries[i];
-    }
+    if (today.getTime() >= entries[i].start.getTime() && today.getTime() <= entries[i].end.getTime()) return entries[i];
   }
   if (today.getTime() < entries[0].start.getTime()) return entries[0];
-  return null; // past the final entry
+  return null;
 }
 
-/* ===== State management ===== */
 function defaultState() {
-  var tasks = {};
-  var checkins = {};
-  ENTRIES_RAW.forEach(function (e) {
-    tasks[e.id] = e.tasks.map(function () { return false; });
-    checkins[e.id] = { status: null, notes: '', savedAt: null };
+  var tasks = {}, checkins = {};
+  ENTRIES_RAW.forEach(function(e) {
+    tasks[e.id] = e.tasks.map(function() { return false; });
+    checkins[e.id] = { status:null, notes:'', savedAt:null };
   });
   var phaseExit = {};
-  PHASES.forEach(function (p) {
-    phaseExit[p.id] = p.exit.map(function () { return false; });
-  });
-  return { tasks: tasks, checkins: checkins, phaseExit: phaseExit, leetcode: 0 };
+  PHASES.forEach(function(p) { phaseExit[p.id] = p.exit.map(function() { return false; }); });
+  return { tasks:tasks, checkins:checkins, phaseExit:phaseExit, leetcode:0 };
 }
 
 function hydrateState(raw) {
   var base = defaultState();
   if (!raw || typeof raw !== 'object') return base;
-  ENTRIES_RAW.forEach(function (e) {
+  ENTRIES_RAW.forEach(function(e) {
     if (raw.tasks && Array.isArray(raw.tasks[e.id])) {
-      for (var i = 0; i < base.tasks[e.id].length; i++) {
-        base.tasks[e.id][i] = !!raw.tasks[e.id][i];
-      }
+      for (var i = 0; i < base.tasks[e.id].length; i++) base.tasks[e.id][i] = !!raw.tasks[e.id][i];
     }
     if (raw.checkins && raw.checkins[e.id]) {
       var c = raw.checkins[e.id];
-      base.checkins[e.id] = {
-        status: c.status || null,
-        notes: typeof c.notes === 'string' ? c.notes : '',
-        savedAt: c.savedAt || null
-      };
+      base.checkins[e.id] = { status:c.status||null, notes:typeof c.notes==='string'?c.notes:'', savedAt:c.savedAt||null };
     }
   });
-  PHASES.forEach(function (p) {
+  PHASES.forEach(function(p) {
     if (raw.phaseExit && Array.isArray(raw.phaseExit[p.id])) {
-      for (var i = 0; i < base.phaseExit[p.id].length; i++) {
-        base.phaseExit[p.id][i] = !!raw.phaseExit[p.id][i];
-      }
+      for (var i = 0; i < base.phaseExit[p.id].length; i++) base.phaseExit[p.id][i] = !!raw.phaseExit[p.id][i];
     }
   });
   base.leetcode = (typeof raw.leetcode === 'number' && raw.leetcode >= 0) ? raw.leetcode : 0;
   return base;
 }
 
-/* ===== Progress calculations ===== */
 function calcEntryProgress(entryId, state) {
   var arr = state.tasks[entryId] || [];
-  var done = arr.filter(Boolean).length;
-  return { done: done, total: arr.length };
+  return { done: arr.filter(Boolean).length, total: arr.length };
 }
-
 function calcPhaseProgress(phaseId, entries, state) {
   var done = 0, total = 0;
-  entries.forEach(function (e) {
-    if (e.phase === phaseId) {
-      var p = calcEntryProgress(e.id, state);
-      done += p.done; total += p.total;
-    }
-  });
-  return { done: done, total: total };
+  entries.forEach(function(e) { if (e.phase === phaseId) { var p = calcEntryProgress(e.id, state); done += p.done; total += p.total; } });
+  return { done:done, total:total };
 }
-
 function calcOverallProgress(entries, state) {
   var done = 0, total = 0;
-  entries.forEach(function (e) {
-    var p = calcEntryProgress(e.id, state);
-    done += p.done; total += p.total;
-  });
-  return { done: done, total: total };
+  entries.forEach(function(e) { var p = calcEntryProgress(e.id, state); done += p.done; total += p.total; });
+  return { done:done, total:total };
 }
-
-function pct(done, total) { return total > 0 ? Math.round((done / total) * 100) : 0; }
-
+function pct(done, total) { return total > 0 ? Math.round((done/total)*100) : 0; }
 function statusMeta(status) {
-  if (status === 'ontrack') return { label: 'On track', cls: 'st-ontrack' };
-  if (status === 'behind') return { label: 'Behind', cls: 'st-behind' };
-  if (status === 'skipped') return { label: 'Skipped', cls: 'st-skipped' };
-  return { label: 'No check-in', cls: 'st-none' };
+  if (status === 'ontrack') return { label:'On track', cls:'st-ontrack' };
+  if (status === 'behind') return { label:'Behind', cls:'st-behind' };
+  if (status === 'skipped') return { label:'Skipped', cls:'st-skipped' };
+  return { label:'No check-in', cls:'st-none' };
 }
-
 function findPhaseForEntry(entryId, entries) {
   for (var i = 0; i < entries.length; i++) { if (entries[i].id === entryId) return entries[i].phase; }
   return null;
 }
-
 function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, function (c) {
-    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+  return String(str).replace(/[&<>"']/g, function(c) {
+    return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
   });
 }
 
-/* ===== Render functions (return HTML strings) ===== */
 function renderTitleBlock(entries, state, currentEntry) {
   var overall = calcOverallProgress(entries, state);
-  var lastEntry = entries[entries.length - 1];
-  var phaseObj = currentEntry ? PHASES.filter(function (p) { return p.id === currentEntry.phase; })[0] : null;
+  var lastEntry = entries[entries.length-1];
+  var phaseObj = currentEntry ? PHASES.filter(function(p){return p.id===currentEntry.phase;})[0] : null;
   var phaseText = currentEntry ? (phaseObj.code + ' \u2014 ' + phaseObj.name) : 'Complete';
   var weekText = currentEntry ? (currentEntry.weekLabel + ' of 28') : 'All 28 weeks scheduled';
-  return `
-    <div class="titleblock">
-      <div class="tb-grid">
-        <div class="tb-cell"><span class="tb-label">Project</span><span class="tb-value">ML Internship Roadmap</span></div>
-        <div class="tb-cell"><span class="tb-label">Operator</span><span class="tb-value">Adi</span></div>
-        <div class="tb-cell"><span class="tb-label">Started</span><span class="tb-value">${fmtDate(START_DATE)}</span></div>
-        <div class="tb-cell"><span class="tb-label">Finish (est.)</span><span class="tb-value">${fmtDate(lastEntry.end)}</span></div>
-        <div class="tb-cell"><span class="tb-label">Now in</span><span class="tb-value">${phaseText}</span></div>
-        <div class="tb-cell"><span class="tb-label">Calendar</span><span class="tb-value">${weekText}</span></div>
-      </div>
-      <div class="tb-progress-row">
-        <span class="tb-progress-label">Tasks logged</span>
-        <div class="progress-track"><div class="progress-fill" id="overallfill" style="width:${pct(overall.done, overall.total)}%"></div></div>
-        <span class="tb-progress-text" id="overalltext">${overall.done}/${overall.total} \u2022 ${pct(overall.done, overall.total)}%</span>
-      </div>
-      <p class="tb-note">Originally paced from June 2025 for the Apr\u2013Jun 2026 hiring cycle. Starting today instead, finishing on schedule lines you up for the <strong>Apr\u2013Jun 2027</strong> cycle \u2014 compress weeks if you want to aim earlier.</p>
-    </div>
-  `;
+  return '<div class="titleblock"><div class="tb-grid">' +
+    '<div class="tb-cell"><span class="tb-label">Project</span><span class="tb-value">ML Internship Roadmap</span></div>' +
+    '<div class="tb-cell"><span class="tb-label">Operator</span><span class="tb-value">Adi</span></div>' +
+    '<div class="tb-cell"><span class="tb-label">Started</span><span class="tb-value">' + fmtDate(START_DATE) + '</span></div>' +
+    '<div class="tb-cell"><span class="tb-label">Finish (est.)</span><span class="tb-value">' + fmtDate(lastEntry.end) + '</span></div>' +
+    '<div class="tb-cell"><span class="tb-label">Now in</span><span class="tb-value">' + escapeHtml(phaseText) + '</span></div>' +
+    '<div class="tb-cell"><span class="tb-label">Calendar</span><span class="tb-value">' + escapeHtml(weekText) + '</span></div>' +
+    '</div><div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>' +
+    '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:' + pct(overall.done,overall.total) + '%"></div></div>' +
+    '<span class="tb-progress-text" id="overalltext">' + overall.done + '/' + overall.total + ' \u2022 ' + pct(overall.done,overall.total) + '%</span></div>' +
+    '<p class="tb-note">Originally paced from June 2025 for the Apr\u2013Jun 2026 hiring cycle. Starting today instead, finishing on schedule lines you up for the <strong>Apr\u2013Jun 2027</strong> cycle \u2014 compress weeks if you want to aim earlier.</p></div>';
 }
 
 function renderThisWeek(entries, currentEntry, state) {
-  if (!currentEntry) {
-    return `
-      <div class="panel thisweek complete">
-        <span class="eyebrow">STATUS</span>
-        <h2>Roadmap window complete</h2>
-        <p>You have reached the end of the scheduled 28 weeks. Scroll down to finish any outstanding tasks or update the LeetCode counter.</p>
-      </div>
-    `;
-  }
-  var phase = PHASES.filter(function (p) { return p.id === currentEntry.phase; })[0];
+  if (!currentEntry) return '<div class="panel thisweek complete"><span class="eyebrow">STATUS</span><h2>Roadmap window complete</h2><p>You have reached the end of the scheduled 28 weeks.</p></div>';
+  var phase = PHASES.filter(function(p){return p.id===currentEntry.phase;})[0];
   var prog = calcEntryProgress(currentEntry.id, state);
-  var checkin = state.checkins[currentEntry.id];
-  var meta = statusMeta(checkin.status);
-  return `
-    <div class="panel thisweek">
-      <span class="eyebrow">THIS WEEK \u2022 ${currentEntry.codeLabel}</span>
-      <div class="thisweek-top">
-        <h2>${escapeHtml(currentEntry.title)}</h2>
-        <div class="thisweek-tags">
-          <span class="tag">${fmtRange(currentEntry.start, currentEntry.end)}</span>
-          <span class="tag">${escapeHtml(phase.dailyTime)}</span>
-        </div>
-      </div>
-      <p class="deliverable">Deliverable: ${escapeHtml(currentEntry.deliverable)}</p>
-      <div class="thisweek-bottom">
-        <span class="mini-stat">${prog.done}/${prog.total} tasks done</span>
-        <span class="badge ${meta.cls}">${meta.label}</span>
-        <button class="btn-primary" type="button" data-action="jump" data-entry="${currentEntry.id}">Open this week\u2019s checklist \u2193</button>
-      </div>
-    </div>
-  `;
+  var meta = statusMeta(state.checkins[currentEntry.id].status);
+  return '<div class="panel thisweek"><span class="eyebrow">THIS WEEK \u2022 ' + currentEntry.codeLabel + '</span>' +
+    '<div class="thisweek-top"><h2>' + escapeHtml(currentEntry.title) + '</h2>' +
+    '<div class="thisweek-tags"><span class="tag">' + fmtRange(currentEntry.start, currentEntry.end) + '</span><span class="tag">' + escapeHtml(phase.dailyTime) + '</span></div></div>' +
+    '<p class="deliverable">Deliverable: ' + escapeHtml(currentEntry.deliverable) + '</p>' +
+    '<div class="thisweek-bottom"><span class="mini-stat">' + prog.done + '/' + prog.total + ' tasks done</span>' +
+    '<span class="badge ' + meta.cls + '">' + meta.label + '</span>' +
+    '<button class="btn-primary" type="button" data-action="jump" data-entry="' + currentEntry.id + '">Open this week\u2019s checklist \u2193</button></div></div>';
 }
 
 function renderParallelTrack(state) {
-  return `
-    <div class="panel parallel">
-      <span class="eyebrow">PARALLEL TRACK \u2014 LEETCODE (from Week 21)</span>
-      <p class="parallel-note">2\u20133 problems/week from Week 21 onward. Target: 100+ solved (70% Easy / 30% Medium) via NeetCode 150 before applications open.</p>
-      <div class="parallel-controls">
-        <button class="step-btn" type="button" data-action="leetcode-dec" aria-label="Decrease count">\u2212</button>
-        <input id="leetcodeinput" type="number" min="0" value="${state.leetcode}" aria-label="LeetCode problems solved" />
-        <button class="step-btn" type="button" data-action="leetcode-inc" aria-label="Increase count">+</button>
-        <span class="parallel-target">/ 100</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill accent2" id="leetcodefill" style="width:${pct(state.leetcode, 100)}%"></div></div>
-    </div>
-  `;
+  return '<div class="panel parallel"><span class="eyebrow">PARALLEL TRACK \u2014 LEETCODE (from Week 21)</span>' +
+    '<p class="parallel-note">2\u20133 problems/week from Week 21 onward. Target: 100+ solved (70% Easy / 30% Medium) via NeetCode 150 before applications open.</p>' +
+    '<div class="parallel-controls">' +
+    '<button class="step-btn" type="button" data-action="leetcode-dec" aria-label="Decrease count">\u2212</button>' +
+    '<input id="leetcodeinput" type="number" min="0" value="' + state.leetcode + '" aria-label="LeetCode problems solved" />' +
+    '<button class="step-btn" type="button" data-action="leetcode-inc" aria-label="Increase count">+</button>' +
+    '<span class="parallel-target">/ 100</span></div>' +
+    '<div class="progress-track"><div class="progress-fill accent2" id="leetcodefill" style="width:' + pct(state.leetcode,100) + '%"></div></div></div>';
 }
 
 function renderEntry(entry, state, isCurrent) {
   var prog = calcEntryProgress(entry.id, state);
   var checkin = state.checkins[entry.id];
   var meta = statusMeta(checkin.status);
-  var tasksHtml = entry.tasks.map(function (task, idx) {
-    var checked = state.tasks[entry.id][idx] ? 'checked' : '';
-    return `
-      <label class="task-item">
-        <input type="checkbox" data-action="task" data-entry="${entry.id}" data-idx="${idx}" ${checked} />
-        <span>${escapeHtml(task)}</span>
-      </label>
-    `;
+  var tasksHtml = entry.tasks.map(function(task, idx) {
+    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="' + entry.id + '" data-idx="' + idx + '"' + (state.tasks[entry.id][idx]?' checked':'') + ' /><span>' + escapeHtml(task) + '</span></label>';
   }).join('');
-  var noteHtml = entry.note ? `<p class="entry-note">${escapeHtml(entry.note)}</p>` : '';
-  var openClass = isCurrent ? ' open' : '';
+  var noteHtml = entry.note ? '<p class="entry-note">' + escapeHtml(entry.note) + '</p>' : '';
   var currentTag = isCurrent ? '<span class="now-tag">NOW</span>' : '';
-  return `
-    <div class="entry${openClass}" id="entry_${entry.id}">
-      <div class="entry-header" data-action="toggle-entry" data-entry="${entry.id}" role="button" tabindex="0" aria-expanded="${isCurrent ? 'true' : 'false'}">
-        <span class="entry-code">${entry.codeLabel}</span>
-        <div class="entry-titlewrap">
-          <span class="entry-date">${fmtRange(entry.start, entry.end)}</span>
-          <span class="entry-title">${escapeHtml(entry.title)} ${currentTag}</span>
-        </div>
-        <span class="badge ${meta.cls}" id="badge_${entry.id}">${meta.label}</span>
-        <span class="chevron" aria-hidden="true">\u203a</span>
-      </div>
-      <div class="entry-body">
-        ${noteHtml}
-        <p class="entry-deliverable">Deliverable: ${escapeHtml(entry.deliverable)}</p>
-        <div class="task-list">${tasksHtml}</div>
-        <p class="task-progress" id="taskprog_${entry.id}">${prog.done}/${prog.total} tasks done</p>
-        <div class="checkin" id="checkin_${entry.id}">
-          <span class="checkin-label">Weekly check-in</span>
-          <div class="pill-group">
-            <button class="pill ${checkin.status === 'ontrack' ? 'active' : ''}" type="button" data-action="status" data-entry="${entry.id}" data-status="ontrack">On track</button>
-            <button class="pill ${checkin.status === 'behind' ? 'active' : ''}" type="button" data-action="status" data-entry="${entry.id}" data-status="behind">Behind</button>
-            <button class="pill ${checkin.status === 'skipped' ? 'active' : ''}" type="button" data-action="status" data-entry="${entry.id}" data-status="skipped">Skipped</button>
-          </div>
-          <textarea data-action="notes" data-entry="${entry.id}" id="notes_${entry.id}" placeholder="What happened this week? What blocked you, what changes next week?">${escapeHtml(checkin.notes)}</textarea>
-          <div class="save-row">
-            <button class="btn-secondary" type="button" data-action="save-checkin" data-entry="${entry.id}" id="save_${entry.id}">Save check-in</button>
-            <span class="saved-msg" id="savedmsg_${entry.id}"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+  return '<div class="entry' + (isCurrent?' open':'') + '" id="entry_' + entry.id + '">' +
+    '<div class="entry-header" data-action="toggle-entry" data-entry="' + entry.id + '" role="button" tabindex="0" aria-expanded="' + (isCurrent?'true':'false') + '">' +
+    '<span class="entry-code">' + entry.codeLabel + '</span>' +
+    '<div class="entry-titlewrap"><span class="entry-date">' + fmtRange(entry.start,entry.end) + '</span>' +
+    '<span class="entry-title">' + escapeHtml(entry.title) + ' ' + currentTag + '</span></div>' +
+    '<span class="badge ' + meta.cls + '" id="badge_' + entry.id + '">' + meta.label + '</span>' +
+    '<span class="chevron" aria-hidden="true">\u203a</span></div>' +
+    '<div class="entry-body">' + noteHtml +
+    '<p class="entry-deliverable">Deliverable: ' + escapeHtml(entry.deliverable) + '</p>' +
+    '<div class="task-list">' + tasksHtml + '</div>' +
+    '<p class="task-progress" id="taskprog_' + entry.id + '">' + prog.done + '/' + prog.total + ' tasks done</p>' +
+    '<div class="checkin"><span class="checkin-label">Weekly check-in</span>' +
+    '<div class="pill-group">' +
+    '<button class="pill' + (checkin.status==='ontrack'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="ontrack">On track</button>' +
+    '<button class="pill' + (checkin.status==='behind'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="behind">Behind</button>' +
+    '<button class="pill' + (checkin.status==='skipped'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="skipped">Skipped</button>' +
+    '</div><textarea data-action="notes" data-entry="' + entry.id + '" id="notes_' + entry.id + '" placeholder="What happened this week? What blocked you, what changes next week?">' + escapeHtml(checkin.notes) + '</textarea>' +
+    '<div class="save-row"><button class="btn-secondary" type="button" data-action="save-checkin" data-entry="' + entry.id + '">Save check-in</button>' +
+    '<span class="saved-msg" id="savedmsg_' + entry.id + '"></span></div></div></div></div>';
 }
 
 function renderPhase(phase, entries, state, currentEntry) {
-  var phaseEntries = entries.filter(function (e) { return e.phase === phase.id; });
+  var phaseEntries = entries.filter(function(e){return e.phase===phase.id;});
   var prog = calcPhaseProgress(phase.id, entries, state);
-  var exitHtml = phase.exit.map(function (item, idx) {
-    var checked = state.phaseExit[phase.id][idx] ? 'checked' : '';
-    return `
-      <label class="exit-item">
-        <input type="checkbox" data-action="exit" data-phase="${phase.id}" data-idx="${idx}" ${checked} />
-        <span>${escapeHtml(item)}</span>
-      </label>
-    `;
+  var exitHtml = phase.exit.map(function(item,idx) {
+    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="' + phase.id + '" data-idx="' + idx + '"' + (state.phaseExit[phase.id][idx]?' checked':'') + ' /><span>' + escapeHtml(item) + '</span></label>';
   }).join('');
-  var entriesHtml = phaseEntries.map(function (e) {
-    return renderEntry(e, state, !!(currentEntry && currentEntry.id === e.id));
-  }).join('');
-  return `
-    <section class="phase-section">
-      <div class="phase-header">
-        <div class="phase-heading">
-          <span class="phase-code">${phase.code}</span>
-          <h3>${escapeHtml(phase.name)}</h3>
-        </div>
-        <span class="phase-time">${escapeHtml(phase.dailyTime)}</span>
-      </div>
-      <p class="phase-goal">${escapeHtml(phase.goal)}</p>
-      <div class="phase-progress-row">
-        <div class="progress-track"><div class="progress-fill" id="phaseprogfill_${phase.id}" style="width:${pct(prog.done, prog.total)}%"></div></div>
-        <span class="phase-progress-text" id="phaseprogtext_${phase.id}">${prog.done}/${prog.total} tasks</span>
-      </div>
-      <button class="exit-toggle" type="button" data-action="toggle-exit-panel" data-phase="${phase.id}" aria-expanded="false">View phase exit checklist \u25be</button>
-      <div class="exit-panel" id="exitpanel_${phase.id}">${exitHtml}</div>
-      <div class="entry-list">${entriesHtml}</div>
-    </section>
-  `;
+  var entriesHtml = phaseEntries.map(function(e){return renderEntry(e,state,!!(currentEntry&&currentEntry.id===e.id));}).join('');
+  return '<section class="phase-section">' +
+    '<div class="phase-header"><div class="phase-heading"><span class="phase-code">' + phase.code + '</span><h3>' + escapeHtml(phase.name) + '</h3></div>' +
+    '<span class="phase-time">' + escapeHtml(phase.dailyTime) + '</span></div>' +
+    '<p class="phase-goal">' + escapeHtml(phase.goal) + '</p>' +
+    '<div class="phase-progress-row"><div class="progress-track"><div class="progress-fill" id="phaseprogfill_' + phase.id + '" style="width:' + pct(prog.done,prog.total) + '%"></div></div>' +
+    '<span class="phase-progress-text" id="phaseprogtext_' + phase.id + '">' + prog.done + '/' + prog.total + ' tasks</span></div>' +
+    '<button class="exit-toggle" type="button" data-action="toggle-exit-panel" data-phase="' + phase.id + '" aria-expanded="false">View phase exit checklist \u25be</button>' +
+    '<div class="exit-panel" id="exitpanel_' + phase.id + '">' + exitHtml + '</div>' +
+    '<div class="entry-list">' + entriesHtml + '</div></section>';
 }
 
 function renderFooter() {
-  return `
-    <div class="footer-row">
-      <span class="save-status" id="savestatus">Loaded</span>
-      <button class="reset-btn" type="button" data-action="reset" id="resetbtn">Reset all progress</button>
-    </div>
-  `;
+  return '<div class="footer-row"><span class="save-status" id="savestatus">Loaded</span><button class="reset-btn" type="button" data-action="reset">Reset all progress</button></div>';
 }
 
 function renderApp(entries, state) {
   var today = todayMidnight();
   var currentEntry = findCurrentEntry(entries, today);
-  var html = '';
-  html += renderTitleBlock(entries, state, currentEntry);
-  html += renderThisWeek(entries, currentEntry, state);
-  html += renderParallelTrack(state);
-  PHASES.forEach(function (phase) {
-    html += renderPhase(phase, entries, state, currentEntry);
-  });
+  var html = renderTitleBlock(entries, state, currentEntry) + renderThisWeek(entries, currentEntry, state) + renderParallelTrack(state);
+  PHASES.forEach(function(phase){ html += renderPhase(phase, entries, state, currentEntry); });
   html += renderFooter();
   return html;
 }
 
-/* ===== Targeted DOM update helpers (avoid full re-render on every click) ===== */
 function updateBadge(entryId, state) {
   var el = document.getElementById('badge_' + entryId);
   if (!el) return;
   var meta = statusMeta(state.checkins[entryId].status);
-  el.className = 'badge ' + meta.cls;
-  el.textContent = meta.label;
+  el.className = 'badge ' + meta.cls; el.textContent = meta.label;
 }
-
 function updatePhaseProgressUI(phaseId, entries, state) {
   var prog = calcPhaseProgress(phaseId, entries, state);
   var fill = document.getElementById('phaseprogfill_' + phaseId);
   var text = document.getElementById('phaseprogtext_' + phaseId);
-  if (fill) fill.style.width = pct(prog.done, prog.total) + '%';
+  if (fill) fill.style.width = pct(prog.done,prog.total) + '%';
   if (text) text.textContent = prog.done + '/' + prog.total + ' tasks';
 }
-
 function updateOverallProgressUI(entries, state) {
   var prog = calcOverallProgress(entries, state);
   var fill = document.getElementById('overallfill');
   var text = document.getElementById('overalltext');
-  if (fill) fill.style.width = pct(prog.done, prog.total) + '%';
-  if (text) text.textContent = prog.done + '/' + prog.total + ' \u2022 ' + pct(prog.done, prog.total) + '%';
+  if (fill) fill.style.width = pct(prog.done,prog.total) + '%';
+  if (text) text.textContent = prog.done + '/' + prog.total + ' \u2022 ' + pct(prog.done,prog.total) + '%';
 }
-
 function updateEntryUI(entryId, entries, state) {
   var taskEl = document.getElementById('taskprog_' + entryId);
   var prog = calcEntryProgress(entryId, state);
@@ -1110,50 +712,32 @@ function updateEntryUI(entryId, entries, state) {
   if (phaseId) updatePhaseProgressUI(phaseId, entries, state);
   updateOverallProgressUI(entries, state);
 }
-
 function updateLeetcodeUI(state) {
   var input = document.getElementById('leetcodeinput');
   var fill = document.getElementById('leetcodefill');
   if (input) input.value = state.leetcode;
-  if (fill) fill.style.width = pct(state.leetcode, 100) + '%';
+  if (fill) fill.style.width = pct(state.leetcode,100) + '%';
 }
-
 function showSavedMessage(entryId) {
   var el = document.getElementById('savedmsg_' + entryId);
   if (!el) return;
-  el.textContent = 'Saved \u2713';
-  el.classList.add('show');
-  setTimeout(function () { el.classList.remove('show'); }, 2200);
+  el.textContent = 'Saved \u2713'; el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); }, 2200);
 }
+function setStatus(text) { var el = document.getElementById('savestatus'); if (el) el.textContent = text; }
 
-function setStatus(text) {
-  var el = document.getElementById('savestatus');
-  if (el) el.textContent = text;
-}
-
-/* ===== Save / load via window.storage ===== */
+/* ===== localStorage persistence ===== */
 var saveTimer = null;
 
 function doSave() {
   setStatus('Saving\u2026');
-  var payload;
   try {
-    payload = JSON.stringify(state);
-  } catch (err) {
-    console.error('Could not serialize state', err);
-    setStatus('Save failed');
-    return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    setStatus('Saved');
+  } catch(err) {
+    console.error('Save error', err);
+    setStatus('Save failed \u2014 storage full?');
   }
-  if (!window.storage || typeof window.storage.set !== 'function') {
-    setStatus('Not saved \u2014 storage unavailable');
-    return;
-  }
-  window.storage.set(STORAGE_KEY, payload, false).then(function (res) {
-    setStatus(res ? 'Saved' : 'Save failed');
-  }).catch(function (err) {
-    console.error('Storage save error', err);
-    setStatus('Save failed \u2014 will retry on next change');
-  });
 }
 
 function scheduleSave(immediate) {
@@ -1165,21 +749,11 @@ function scheduleSave(immediate) {
 
 function resetProgress(entries) {
   state = defaultState();
-  var afterDelete = function () {
-    render(entries);
-    setStatus('Reset');
-  };
-  if (window.storage && typeof window.storage.delete === 'function') {
-    window.storage.delete(STORAGE_KEY, false).then(afterDelete).catch(function (err) {
-      console.warn('Reset delete error (ok if key was already absent)', err);
-      afterDelete();
-    });
-  } else {
-    afterDelete();
-  }
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  render(entries);
+  setStatus('Reset');
 }
 
-/* ===== Event wiring (delegated on the #app root, survives re-renders) ===== */
 var appEl = null;
 var entries = null;
 var state = null;
@@ -1188,138 +762,96 @@ function handleClick(actionEl, entriesArg) {
   if (!actionEl || !actionEl.getAttribute) return;
   var action = actionEl.getAttribute('data-action');
   if (!action) return;
-
   if (action === 'toggle-entry') {
     var id = actionEl.getAttribute('data-entry');
     var container = document.getElementById('entry_' + id);
-    if (container) {
-      var nowOpen = container.classList.toggle('open');
-      actionEl.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
-    }
+    if (container) { var nowOpen = container.classList.toggle('open'); actionEl.setAttribute('aria-expanded', nowOpen?'true':'false'); }
   } else if (action === 'toggle-exit-panel') {
     var phaseId = actionEl.getAttribute('data-phase');
     var panel = document.getElementById('exitpanel_' + phaseId);
-    if (panel) {
-      var open = panel.classList.toggle('open');
-      actionEl.setAttribute('aria-expanded', open ? 'true' : 'false');
-    }
+    if (panel) { var open = panel.classList.toggle('open'); actionEl.setAttribute('aria-expanded', open?'true':'false'); }
   } else if (action === 'jump') {
     var entryId = actionEl.getAttribute('data-entry');
     var target = document.getElementById('entry_' + entryId);
-    if (target) {
-      target.classList.add('open');
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (target) { target.classList.add('open'); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
   } else if (action === 'status') {
     var eId = actionEl.getAttribute('data-entry');
     var statusVal = actionEl.getAttribute('data-status');
-    var current = state.checkins[eId].status;
-    state.checkins[eId].status = (current === statusVal) ? null : statusVal;
+    state.checkins[eId].status = (state.checkins[eId].status === statusVal) ? null : statusVal;
     var group = actionEl.parentElement;
-    if (group) {
-      Array.prototype.forEach.call(group.children, function (btn) { btn.classList.remove('active'); });
-      if (state.checkins[eId].status === statusVal) actionEl.classList.add('active');
-    }
-    updateBadge(eId, state);
-    scheduleSave();
+    if (group) { Array.prototype.forEach.call(group.children, function(btn){btn.classList.remove('active');}); if (state.checkins[eId].status === statusVal) actionEl.classList.add('active'); }
+    updateBadge(eId, state); scheduleSave();
   } else if (action === 'save-checkin') {
     var eId2 = actionEl.getAttribute('data-entry');
     var notesEl = document.getElementById('notes_' + eId2);
     state.checkins[eId2].notes = notesEl ? notesEl.value : '';
     state.checkins[eId2].savedAt = new Date().toISOString();
-    showSavedMessage(eId2);
-    scheduleSave(true);
+    showSavedMessage(eId2); scheduleSave(true);
   } else if (action === 'leetcode-inc' || action === 'leetcode-dec') {
     state.leetcode = Math.max(0, state.leetcode + (action === 'leetcode-inc' ? 1 : -1));
-    updateLeetcodeUI(state);
-    scheduleSave();
+    updateLeetcodeUI(state); scheduleSave();
   } else if (action === 'reset') {
-    if (window.confirm('Reset all saved progress? This clears every checked task, check-in, and the LeetCode counter. This cannot be undone.')) {
-      resetProgress(entriesArg);
-    }
+    if (window.confirm('Reset all saved progress? This cannot be undone.')) resetProgress(entriesArg);
   }
 }
 
 function attachEvents(entriesArg) {
-  appEl.addEventListener('click', function (e) {
-    var actionEl = e.target.closest('[data-action]');
-    handleClick(actionEl, entriesArg);
-  });
-  appEl.addEventListener('keydown', function (e) {
+  appEl.addEventListener('click', function(e) { handleClick(e.target.closest('[data-action]'), entriesArg); });
+  appEl.addEventListener('keydown', function(e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
-    var actionEl = e.target.closest('[data-action="toggle-entry"], [data-action="toggle-exit-panel"]');
+    var actionEl = e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit-panel"]');
     if (actionEl) { e.preventDefault(); handleClick(actionEl, entriesArg); }
   });
-  appEl.addEventListener('change', function (e) {
+  appEl.addEventListener('change', function(e) {
     var t = e.target;
     if (!t.matches) return;
     if (t.matches('input[type="checkbox"][data-action="task"]')) {
       var entryId = t.getAttribute('data-entry');
       var idx = parseInt(t.getAttribute('data-idx'), 10);
       state.tasks[entryId][idx] = t.checked;
-      updateEntryUI(entryId, entriesArg, state);
-      scheduleSave();
+      updateEntryUI(entryId, entriesArg, state); scheduleSave();
     } else if (t.matches('input[type="checkbox"][data-action="exit"]')) {
       var phaseId = t.getAttribute('data-phase');
       var idx2 = parseInt(t.getAttribute('data-idx'), 10);
-      state.phaseExit[phaseId][idx2] = t.checked;
-      scheduleSave();
+      state.phaseExit[phaseId][idx2] = t.checked; scheduleSave();
     } else if (t.id === 'leetcodeinput') {
       var v = parseInt(t.value, 10);
       if (isNaN(v) || v < 0) v = 0;
-      state.leetcode = v;
-      updateLeetcodeUI(state);
-      scheduleSave();
+      state.leetcode = v; updateLeetcodeUI(state); scheduleSave();
     }
   });
-  appEl.addEventListener('input', function (e) {
+  appEl.addEventListener('input', function(e) {
     var t = e.target;
     if (t.matches && t.matches('textarea[data-action="notes"]')) {
-      var entryId = t.getAttribute('data-entry');
-      state.checkins[entryId].notes = t.value;
-      scheduleSave();
+      state.checkins[t.getAttribute('data-entry')].notes = t.value; scheduleSave();
     }
   });
 }
 
-/* ===== Render + init ===== */
-function render(entriesArg) {
-  appEl.innerHTML = renderApp(entriesArg, state);
-}
+function render(entriesArg) { appEl.innerHTML = renderApp(entriesArg, state); }
 
 function init() {
   appEl = document.getElementById('app');
   entries = buildSchedule();
   state = defaultState();
 
-  var afterLoad = function () {
-    render(entries);
-    attachEvents(entries);
-    setStatus('Loaded');
-  };
-
-  if (window.storage && typeof window.storage.get === 'function') {
-    window.storage.get(STORAGE_KEY, false).then(function (res) {
-      if (res && res.value) {
-        try { state = hydrateState(JSON.parse(res.value)); }
-        catch (err) { console.warn('Could not parse saved progress, starting fresh.', err); }
-      }
-      afterLoad();
-    }).catch(function (err) {
-      console.warn('No saved progress yet, starting fresh.', err);
-      afterLoad();
-    });
-  } else {
-    afterLoad();
+  // Load from localStorage — persists across tab closes and browser restarts
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) state = hydrateState(JSON.parse(saved));
+  } catch(err) {
+    console.warn('Could not load saved progress, starting fresh.', err);
   }
+
+  render(entries);
+  attachEvents(entries);
+  setStatus('Loaded');
 }
 
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
 }
 </script>
 </body>
