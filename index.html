@@ -3,27 +3,29 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ML Internship Roadmap — Build Log</title>
+<title>ML Roadmap — Revised Edition // Adi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#102C40;
-    --navy-deep:#0A1F2E;
-    --navy-soft:#193C54;
+    --navy:#0F2235;
+    --navy-deep:#091827;
+    --navy-soft:#183351;
     --paper:#ECEEE7;
     --paper-dim:#D8DCD2;
     --ink:#14202B;
     --ink-soft:#3C4A56;
-    --accent:#F2742C;
-    --accent-dim:#C75A1F;
-    --line:rgba(255,255,255,0.12);
+    --accent:#0D9488;
+    --accent-dim:#0A7870;
+    --accent-light:rgba(13,148,136,0.14);
+    --line:rgba(255,255,255,0.10);
     --line-soft:rgba(20,32,43,0.14);
-    --green:#4F9D69;
-    --amber:#D9A33E;
+    --green:#16A34A;
+    --amber:#D97706;
     --red:#C75450;
-    --gray:#8FA0AC;
+    --violet:#7C3AED;
+    --gray:#7A90A0;
     --font-display:'Space Grotesk', sans-serif;
     --font-mono:'JetBrains Mono', monospace;
     --font-body:'Inter', sans-serif;
@@ -45,17 +47,21 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  .app-shell{ max-width:880px; margin:0 auto; padding:36px 24px 64px; }
+  .app-shell{ max-width:900px; margin:0 auto; padding:36px 24px 72px; }
   h1,h2,h3{ font-family:var(--font-display); margin:0; }
   button{ font-family:var(--font-body); cursor:pointer; }
   input, textarea{ font-family:var(--font-body); }
   :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-  .progress-track{ flex:1; height:8px; background:rgba(255,255,255,0.10); border-radius:5px; overflow:hidden; min-width:80px; }
+  /* ── progress ── */
+  .progress-track{ flex:1; height:7px; background:rgba(255,255,255,0.09); border-radius:5px; overflow:hidden; min-width:80px; }
   .progress-fill{ height:100%; background:var(--accent); border-radius:5px; transition:width 0.35s ease; }
-  .progress-fill.accent2{ background:var(--green); }
+  .progress-fill.green{ background:var(--green); }
+  .progress-fill.violet{ background:var(--violet); }
 
-  .titleblock{ border:1px solid var(--line); background:var(--navy-deep); border-radius:6px; padding:20px 22px; margin-bottom:18px; }
+  /* ── title block ── */
+  .titleblock{ border:1px solid var(--line); background:var(--navy-deep); border-radius:8px; padding:20px 22px; margin-bottom:16px; }
+  .rev-badge{ display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.08em; background:var(--accent); color:#fff; padding:2px 7px; border-radius:3px; margin-bottom:10px; }
   .tb-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px 18px; padding-bottom:16px; border-bottom:1px solid var(--line); }
   .tb-cell{ display:flex; flex-direction:column; gap:3px; }
   .tb-label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); }
@@ -63,48 +69,62 @@
   .tb-progress-row{ display:flex; align-items:center; gap:12px; margin-top:16px; }
   .tb-progress-label{ font-family:var(--font-mono); font-size:11px; color:var(--gray); white-space:nowrap; }
   .tb-progress-text{ font-family:var(--font-mono); font-size:12px; color:var(--paper); white-space:nowrap; }
-  .tb-note{ margin:14px 0 0; font-size:12.5px; color:var(--gray); line-height:1.55; }
+  .tb-note{ margin:12px 0 0; font-size:12.5px; color:var(--gray); line-height:1.55; }
   .tb-note strong{ color:var(--accent); }
 
-  .panel{ background:var(--paper); color:var(--ink); border-radius:6px; padding:20px 22px; margin-bottom:18px; border-left:4px solid var(--accent); }
+  /* ── panels ── */
+  .panel{ background:var(--paper); color:var(--ink); border-radius:8px; padding:20px 22px; margin-bottom:16px; border-left:4px solid var(--accent); }
+  .panel.green-border{ border-left-color:var(--green); }
+  .panel.violet-border{ border-left-color:var(--violet); }
   .eyebrow{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.10em; text-transform:uppercase; color:var(--accent-dim); margin-bottom:8px; }
 
-  .thisweek h2{ font-size:21px; color:var(--ink); margin-bottom:8px; }
+  /* ── this week panel ── */
+  .thisweek h2{ font-size:20px; color:var(--ink); margin-bottom:8px; }
   .thisweek.complete{ border-left-color:var(--green); }
-  .thisweek-top{ margin-bottom:4px; }
   .thisweek-tags{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
   .tag{ font-family:var(--font-mono); font-size:11.5px; background:var(--paper-dim); color:var(--ink-soft); padding:3px 8px; border-radius:4px; }
+  .tag.new-tag{ background:rgba(124,58,237,0.12); color:var(--violet); border:1px solid rgba(124,58,237,0.25); }
   .deliverable{ font-size:13.5px; color:var(--ink-soft); margin:0 0 14px; }
   .thisweek-bottom{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   .mini-stat{ font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); }
 
+  /* ── badges ── */
   .badge{ font-family:var(--font-mono); font-size:11px; padding:3px 9px; border-radius:20px; white-space:nowrap; }
-  .badge.st-ontrack{ background:rgba(79,157,105,0.16); color:#2F6B45; }
-  .badge.st-behind{ background:rgba(217,163,62,0.18); color:#8A6418; }
-  .badge.st-skipped{ background:rgba(199,84,80,0.16); color:#9C3D3A; }
-  .badge.st-none{ background:rgba(20,32,43,0.08); color:var(--gray); }
+  .badge.st-ontrack{ background:rgba(22,163,74,0.15); color:#166534; }
+  .badge.st-behind{ background:rgba(217,119,6,0.15); color:#92400E; }
+  .badge.st-skipped{ background:rgba(199,84,80,0.15); color:#9B1C1C; }
+  .badge.st-none{ background:rgba(20,32,43,0.07); color:var(--gray); }
 
+  /* ── buttons ── */
   .btn-primary{ border:none; background:var(--ink); color:var(--paper); font-size:13px; font-weight:600; padding:9px 16px; border-radius:5px; margin-left:auto; transition:background 0.15s ease; }
   .btn-primary:hover{ background:var(--accent-dim); }
+  .btn-secondary{ border:1px solid var(--ink); background:transparent; color:var(--ink); font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:5px; }
+  .btn-secondary:hover{ background:var(--ink); color:var(--paper); }
 
-  .parallel{ border-left-color:var(--green); }
-  .parallel-note{ font-size:13px; color:var(--ink-soft); margin:0 0 14px; }
-  .parallel-controls{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .step-btn{ width:30px; height:30px; border:1px solid var(--line-soft); background:#fff; color:var(--ink); border-radius:5px; font-size:16px; line-height:1; }
+  /* ── DSA parallel track ── */
+  .dsa-panel{ background:var(--paper); color:var(--ink); border-radius:8px; padding:18px 20px; margin-bottom:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; border-left:4px solid var(--green); }
+  .dsa-col{ display:flex; flex-direction:column; gap:8px; }
+  .dsa-col + .dsa-col{ border-left:1px solid var(--line-soft); padding-left:16px; }
+  .dsa-label{ font-family:var(--font-mono); font-size:10px; letter-spacing:0.10em; text-transform:uppercase; color:var(--green); margin-bottom:2px; }
+  .dsa-controls{ display:flex; align-items:center; gap:8px; }
+  .step-btn{ width:28px; height:28px; border:1px solid var(--line-soft); background:#fff; color:var(--ink); border-radius:5px; font-size:15px; line-height:1; }
   .step-btn:hover{ background:var(--paper-dim); }
-  #leetcodeinput{ width:70px; text-align:center; font-family:var(--font-mono); font-size:15px; font-weight:600; border:1px solid var(--line-soft); border-radius:5px; padding:6px 4px; background:#fff; color:var(--ink); }
-  .parallel-target{ font-family:var(--font-mono); font-size:12.5px; color:var(--gray); }
+  .num-input{ width:64px; text-align:center; font-family:var(--font-mono); font-size:15px; font-weight:600; border:1px solid var(--line-soft); border-radius:5px; padding:5px 4px; background:#fff; color:var(--ink); }
+  .dsa-target{ font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); }
+  .dsa-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; }
 
-  .phase-section{ margin-top:30px; margin-bottom:14px; }
+  /* ── phase sections ── */
+  .phase-section{ margin-top:28px; margin-bottom:12px; }
   .phase-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; }
   .phase-heading{ display:flex; align-items:baseline; gap:10px; }
   .phase-code{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:0.06em; color:var(--accent); }
   .phase-header h3{ font-size:18px; color:var(--paper); }
   .phase-time{ font-family:var(--font-mono); font-size:12px; color:var(--gray); }
-  .phase-goal{ font-size:13px; color:var(--gray); max-width:640px; margin:10px 0 14px; line-height:1.55; }
+  .phase-goal{ font-size:13px; color:var(--gray); max-width:660px; margin:10px 0 12px; line-height:1.55; }
   .phase-progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
   .phase-progress-text{ font-family:var(--font-mono); font-size:11.5px; color:var(--gray); white-space:nowrap; }
 
+  /* ── exit panel ── */
   .exit-toggle{ display:inline-block; background:none; border:1px solid var(--line); color:var(--paper); font-size:12px; padding:6px 12px; border-radius:5px; margin-bottom:6px; }
   .exit-toggle:hover{ border-color:var(--accent); }
   .exit-panel{ display:none; margin:10px 0 16px; padding:14px 16px; background:var(--navy-deep); border:1px solid var(--line); border-radius:6px; }
@@ -112,137 +132,153 @@
   .exit-item{ display:flex; align-items:flex-start; gap:10px; padding:6px 0; font-size:13px; color:var(--paper); }
   .exit-item input{ margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--accent); }
 
+  /* ── entry cards ── */
   .entry-list{ display:flex; flex-direction:column; gap:10px; }
-
-  .entry{ background:var(--paper); color:var(--ink); border-radius:6px; overflow:hidden; border:1px solid transparent; }
+  .entry{ background:var(--paper); color:var(--ink); border-radius:7px; overflow:hidden; border:1px solid transparent; }
   .entry.open{ border-color:var(--accent); }
-  .entry-header{ display:flex; align-items:center; gap:14px; padding:13px 16px; }
+  .entry-header{ display:flex; align-items:center; gap:14px; padding:13px 16px; cursor:pointer; }
+  .entry-header:hover{ background:rgba(0,0,0,0.02); }
   .entry-code{ font-family:var(--font-mono); font-size:12px; font-weight:600; color:var(--accent-dim); flex-shrink:0; width:64px; }
   .entry-titlewrap{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
   .entry-date{ font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); }
   .entry-title{ font-family:var(--font-display); font-weight:600; font-size:14.5px; color:var(--ink); }
   .now-tag{ font-family:var(--font-mono); font-size:9.5px; background:var(--accent); color:#fff; padding:2px 6px; border-radius:3px; margin-left:6px; letter-spacing:0.04em; vertical-align:middle; }
+  .new-feature-tag{ font-family:var(--font-mono); font-size:9px; background:rgba(124,58,237,0.15); color:var(--violet); border:1px solid rgba(124,58,237,0.3); padding:2px 5px; border-radius:3px; margin-left:5px; vertical-align:middle; }
   .chevron{ font-size:18px; color:var(--ink-soft); transition:transform 0.2s ease; flex-shrink:0; }
   .entry.open .chevron{ transform:rotate(90deg); }
   .entry-body{ display:none; padding:0 18px 18px; }
   .entry.open .entry-body{ display:block; }
-  .entry-note{ font-size:12.5px; font-style:italic; color:var(--accent-dim); margin:0 0 10px; }
+  .entry-note{ font-size:12.5px; font-style:italic; border-left:3px solid var(--accent); padding-left:10px; background:rgba(13,148,136,0.06); padding:8px 10px; border-radius:0 5px 5px 0; margin:0 0 12px; color:var(--ink-soft); }
+  .entry-note.warn{ border-left-color:var(--violet); background:rgba(124,58,237,0.06); }
   .entry-deliverable{ font-size:13px; color:var(--ink-soft); margin:0 0 12px; }
 
+  /* ── task list ── */
   .task-list{ display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
   .task-item{ display:flex; align-items:flex-start; gap:10px; font-size:13.5px; }
   .task-item input{ margin-top:3px; flex-shrink:0; width:17px; height:17px; accent-color:var(--accent); }
+  .task-item span.new-item{ color:var(--violet); font-style:italic; }
   .task-progress{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft); margin:0 0 16px; }
 
+  /* ── check-in ── */
   .checkin{ border-top:1px solid var(--line-soft); padding-top:14px; }
   .checkin-label{ display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gray); margin-bottom:8px; }
   .pill-group{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
-  .pill{ border:1px solid var(--line-soft); background:#fff; color:var(--ink-soft); font-size:12.5px; padding:6px 13px; border-radius:20px; }
+  .pill{ border:1px solid var(--line-soft); background:#fff; color:var(--ink-soft); font-size:12.5px; padding:6px 13px; border-radius:20px; cursor:pointer; }
   .pill:hover{ border-color:var(--accent); }
   .pill.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
   textarea[data-action="notes"]{ width:100%; min-height:64px; resize:vertical; border:1px solid var(--line-soft); border-radius:5px; padding:9px 11px; font-size:13px; color:var(--ink); background:#fff; margin-bottom:10px; }
   .save-row{ display:flex; align-items:center; gap:10px; }
-  .btn-secondary{ border:1px solid var(--ink); background:transparent; color:var(--ink); font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:5px; }
-  .btn-secondary:hover{ background:var(--ink); color:var(--paper); }
   .saved-msg{ font-family:var(--font-mono); font-size:11.5px; color:var(--green); opacity:0; transition:opacity 0.2s ease; }
   .saved-msg.show{ opacity:1; }
 
-  .footer-row{ display:flex; justify-content:space-between; align-items:center; margin-top:30px; padding-top:16px; border-top:1px solid var(--line); }
+  /* ── footer ── */
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; margin-top:32px; padding-top:16px; border-top:1px solid var(--line); }
   .save-status{ font-family:var(--font-mono); font-size:11.5px; color:var(--gray); }
   .reset-btn{ background:none; border:1px solid var(--line); color:var(--gray); font-size:12px; padding:7px 13px; border-radius:5px; }
   .reset-btn:hover{ border-color:var(--red); color:var(--red); }
   .loading-note{ font-family:var(--font-mono); font-size:13px; color:var(--gray); padding:40px 0; text-align:center; }
 
-  @media (max-width:600px){
-    .app-shell{ padding:24px 14px 48px; }
+  /* ── responsive ── */
+  @media (max-width:640px){
+    .app-shell{ padding:20px 14px 56px; }
     .tb-grid{ grid-template-columns:repeat(2, 1fr); }
+    .dsa-panel{ grid-template-columns:1fr; }
+    .dsa-col + .dsa-col{ border-left:none; border-top:1px solid var(--line-soft); padding-left:0; padding-top:12px; }
     .entry-header{ flex-wrap:wrap; }
     .entry-code{ width:auto; }
-    .badge{ order:3; }
   }
-  @media (max-width:420px){ .tb-grid{ grid-template-columns:1fr 1fr; gap:10px 14px; } }
   @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
 </style>
 </head>
 <body>
-  <div class="app-shell">
-    <div id="app">
-      <p class="loading-note">Loading your roadmap&hellip;</p>
-    </div>
-  </div>
+<div class="app-shell">
+  <div id="app"><p class="loading-note">Loading your roadmap&hellip;</p></div>
+</div>
 
 <script>
-var STORAGE_KEY = 'adi-ml-roadmap-progress';
-var START_DATE = new Date(2026, 5, 18);
-START_DATE.setHours(0,0,0,0);
+/* ──────────────────────────────────────────────
+   REVISED EDITION TRACKER  ·  July 1 – Dec 31 2026
+   ────────────────────────────────────────────── */
+var STORAGE_KEY = 'adi-ml-roadmap-v2-progress';
+var START_DATE  = (function(){ var d=new Date(2026,6,1); d.setHours(0,0,0,0); return d; })();
 var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
+/* ── PHASES ── */
 var PHASES = [
   {
-    id: 1, code: 'SECTION 01', name: 'Foundation Sprint',
-    dailyTime: '4\u20134.5 hrs / day',
-    goal: 'Build enough math to see what ML is actually doing, and get Python + Pandas fluent enough to handle any CSV without Googling every line.',
-    exit: [
-      'Given a raw CSV, load, clean, and produce summary statistics without Googling',
-      'Can explain what an eigenvector is geometrically, not just mathematically',
-      'Can solve the Bayes\u2019 disease problem from memory, no lookup',
-      '60+ HackerRank Easy problems solved, Medium tier started',
-      'Can explain why NumPy beats raw Python loops for speed'
+    id:1, code:'SECTION 01', name:'Foundation Sprint',
+    dailyTime:'4 hrs / day',
+    goal:'Build linear algebra and probability intuition, get Python/NumPy/Pandas functional, and establish the LeetCode DSA habit from day one.',
+    exit:[
+      'Load, clean, and summarise any raw CSV without Googling',
+      'Explain eigenvectors geometrically — not just mathematically',
+      'Solve the Bayes disease false-positive problem from memory',
+      '40+ HackerRank Easy problems solved, Medium tier started',
+      'Understand why NumPy is faster than Python loops at the C-extension level',
+      'LeetCode DSA habit established — 3+ problems/week minimum'
     ]
   },
   {
-    id: 2, code: 'SECTION 02', name: 'Core ML \u2014 Math, Derivation & Project 1',
-    dailyTime: '2\u20132.5 hrs / day',
-    goal: 'Derive three core ML algorithms by hand, implement them from scratch, then in sklearn. Ship Project 1: a Financial Risk Predictor.',
-    exit: [
+    id:2, code:'SECTION 02', name:'Core ML + First Project',
+    dailyTime:'2–2.5 hrs / day',
+    goal:'Understand three core ML algorithms at the mathematical level. Derive, implement from scratch, then use sklearn. Ship Project 1 with SHAP explainability as a core deliverable.',
+    exit:[
       'Can derive the gradient descent update rule for MSE loss without notes',
-      'Can explain the Precision\u2013Recall tradeoff and when each matters',
+      'Can explain the Precision–Recall tradeoff and when each metric matters',
       'Can explain why Random Forest reduces variance but not bias',
-      'Project 1 is on GitHub with a professional README and quantified results',
-      '15+ LeetCode SQL Medium problems solved, including window functions',
-      '80+ total LeetCode Easy/Medium problems solved'
+      'Project 1 on GitHub: SHAP plots + quantified ROC-AUC > 0.92 in README',
+      '15+ LeetCode SQL Medium problems including window functions',
+      '80+ total coding problems combined (HackerRank + LeetCode)',
+      'Prompt engineering: zero-shot, few-shot, chain-of-thought — know the differences cold'
     ]
   },
   {
-    id: 3, code: 'SECTION 03', name: 'Neural Network Foundations',
-    dailyTime: '2 hrs / day',
-    goal: 'Build the bridge the original plan skipped: backpropagation, MLPs, and PyTorch \u2014 so Transformers feel like a natural next step, not a cliff.',
-    exit: [
-      'Can explain backprop using the computational-graph metaphor, without notes',
+    id:3, code:'SECTION 03', name:'Neural Networks & NLP Foundations',
+    dailyTime:'2 hrs / day',
+    goal:'Build the neural network foundations Phase 4 requires. Backprop, PyTorch, and traditional NLP are the mandatory middle section between sklearn and Transformers.',
+    exit:[
+      'Can explain backpropagation using the computational-graph metaphor without notes',
       'Built micrograd from scratch and trained it on XOR',
-      'Can write a PyTorch training loop from memory (forward, loss, zero_grad, backward, step)',
-      'Built an MNIST classifier in PyTorch at 97%+ accuracy',
-      'Built a TF-IDF sentiment classifier on IMDB',
-      'Can explain why cosine similarity measures semantic closeness'
+      'Can write a full PyTorch training loop from memory (forward, loss, zero_grad, backward, step)',
+      'Built MNIST classifier in PyTorch at 97%+ test accuracy',
+      'Built IMDB TF-IDF sentiment classifier at 88%+ accuracy',
+      'Can explain why cosine similarity measures semantic closeness in embedding space',
+      'Know stratified K-Fold CV, calibration curves, learning curves, AP vs AUC-ROC for imbalanced data',
+      '100+ LeetCode problems cumulative'
     ]
   },
   {
-    id: 4, code: 'SECTION 04', name: 'NLP + LLMs + Project 2',
-    dailyTime: '2 hrs / day',
-    goal: 'Transformers and Hugging Face, from nanoGPT to fine-tuning to deployment. Finish with two live projects, not just GitHub links.',
-    exit: [
-      'Can explain self-attention via Q/K/V and derive scaled dot-product attention',
-      'Can explain encoder-only (BERT) vs decoder-only (GPT) vs encoder-decoder (T5)',
-      'Fine-tuned at least one Hugging Face model on a real task',
-      'Project 2 is live at a public URL, not just on GitHub',
-      'Both projects have quantified metrics in their READMEs',
-      '100+ LeetCode problems solved',
-      'Hugging Face profile has at least one public model or Space'
+    id:4, code:'SECTION 04', name:'Transformers, LLMs & Project 2',
+    dailyTime:'2 hrs / day',
+    goal:'With Phase 3 foundations, Transformers now make sense. This phase adds LLM APIs, LangChain, and RAG. By December 31: two live projects with public URLs.',
+    exit:[
+      'Can explain self-attention with Q/K/V formulation and derive scaled dot-product attention',
+      'Can explain BERT vs GPT vs T5 architectural differences without notes',
+      'Fine-tuned at least one HuggingFace model on a real task',
+      'Made a real API call to OpenAI or Anthropic in Python (not just read the docs)',
+      'Can explain the full RAG pipeline: embed → retrieve → inject → generate',
+      'Project 2 live at a public URL — both projects have quantified metrics in README',
+      'HuggingFace profile has at least one public model or Space',
+      '120+ LeetCode problems solved (Easy + Medium combined)'
     ]
   }
 ];
 
+/* ── ENTRIES ── */
+/* isNew marks tasks added in the revised edition */
 var ENTRIES_RAW = [
+  /* ── PHASE 1 ── */
   { id:'w1', phase:1, weekNums:[1], days:7,
     title:'Linear Algebra \u2014 Vectors & Matrix Operations',
     deliverable:'NumPy matrix exercises',
     tasks:[
-      'Watch 3Blue1Brown \u2014 Essence of Linear Algebra, episodes 1\u20135',
+      '3Blue1Brown \u2014 Essence of Linear Algebra, episodes 1\u20135',
+      'MML Book sections 2.1\u20132.4 \u2014 skim for intuition only, do not grind every exercise',
       'Recreate each video\u2019s visuals in NumPy + Matplotlib',
-      'Multiply two 3\u00d73 matrices by hand, verify with NumPy',
-      'Find determinants of a 2\u00d72 and 3\u00d73 matrix, incl. a linearly dependent case',
-      'Write a dot-product function from scratch, without np.dot',
-      'Solve 3+ HackerRank Easy problems every day this week'
+      'Multiply two 3\xd73 matrices by hand, verify with NumPy',
+      'Find determinants of 2\xd72 and 3\xd73 matrices, including a linearly dependent case',
+      'Write a dot-product function from scratch without np.dot',
+      'LeetCode DSA: 3+ problems this week \u2014 NeetCode Easy tier (Arrays, Strings)'
     ]
   },
   { id:'w2', phase:1, weekNums:[2], days:7,
@@ -250,630 +286,574 @@ var ENTRIES_RAW = [
     deliverable:'Eigen derivation + Bayes problem',
     tasks:[
       '3Blue1Brown \u2014 Essence of Linear Algebra, episodes 6\u201311',
-      'Khan Academy: probability, conditional probability, Bayes\u2019 theorem, normal distribution',
-      'Compute eigenvalues/eigenvectors of a 2\u00d72 by hand, verify with np.linalg.eig',
-      'Solve the classic Bayes disease-test problem on paper, then in code',
-      'Plot a normal distribution and shade 1/2/3 standard deviations',
-      'MML book \u00a72.1\u20132.7 and Ch.6 \u2014 read + 2\u20133 exercises per section'
+      'Khan Academy Stats & Probability: Bayes\u2019 theorem, Normal distribution, Expected value (3\u20134 days)',
+      'Compute eigenvalues/eigenvectors of a 2\xd72 by hand using the characteristic equation, verify with np.linalg.eig()',
+      'Bayes problem: 1% disease prevalence, 99% accurate test \u2014 solve on paper, then code it',
+      'Plot N(0,1) and shade 1\u03c3 / 2\u03c3 / 3\u03c3 regions with matplotlib',
+      'LeetCode DSA: 3+ problems this week (HashMaps, Two Pointers)'
     ]
   },
   { id:'w3', phase:1, weekNums:[3], days:7,
     title:'Python Deep Dive + NumPy Vectorization',
-    deliverable:'60+ HackerRank problems',
+    deliverable:'40+ HackerRank problems',
     tasks:[
-      'Official Python Tutorial, Ch. 3\u20139 \u2014 type every example',
-      'NumPy quickstart tutorial + the broadcasting/indexing docs',
-      'Python Data Science Handbook, Ch. 2 (NumPy)',
-      'Understand broadcasting: why does (3,1) + (1,4) = (3,4)?',
-      '3+ HackerRank Easy problems/day; start Medium tier by day 16'
+      'Official Python Tutorial Ch. 3\u20139 \u2014 type every example, do not copy-paste',
+      'Python Data Science Handbook Ch. 2 (NumPy) \u2014 free online',
+      'NumPy quickstart + broadcasting/indexing docs',
+      'Understand broadcasting: why (3,1) + (1,4) = (3,4)',
+      'Understand vectorization: why np.sum() is 100\xd7 faster at the C-extension level, not just empirically',
+      'File I/O: read a CSV with open() before ever touching Pandas',
+      'Target: 40+ HackerRank Easy problems by end of Week 3. Start Medium tier by Day 18.',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w4', phase:1, weekNums:[4], days:4,
-    title:'Pandas \u2014 Data Manipulation Foundations',
+  { id:'w4', phase:1, weekNums:[4], days:7,
+    title:'Pandas \u2014 Data Manipulation',
     deliverable:'End-to-end CSV pipeline',
     tasks:[
-      'Day 1: DataFrame creation, loc vs iloc, explore the Titanic dataset',
-      'Day 2: missing data (isnull/fillna/dropna) + groupby split-apply-combine',
-      'Day 3: merge/join/concat \u2014 inner/outer/left/right joins',
-      'Day 4: apply(), value_counts(), pivot tables, export to CSV',
-      'Build one full load \u2192 clean \u2192 explore \u2192 export pipeline'
+      'Python Data Science Handbook Ch. 3 (Pandas) \u2014 free online',
+      'Pandas User Guide: Indexing, GroupBy, Merge, Missing data, I/O tools',
+      'Day 1: DataFrame creation, loc vs iloc, Series ops \u2014 load the Titanic dataset from seaborn',
+      'Day 2: isnull(), fillna(), dropna() \u2014 GroupBy split-apply-combine pattern',
+      'Day 3: merge, join, concat \u2014 inner/outer/left/right joins',
+      'Day 4: apply(), value_counts(), pivot tables. Full loop: load \u2192 clean \u2192 explore \u2192 export',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
+
+  /* ── PHASE 2 ── */
   { id:'w5', phase:2, weekNums:[5], days:7,
     title:'Calculus Bridge \u2014 Gradient Descent from First Principles',
-    deliverable:'GD loop on f(x) = x\u00b2',
+    deliverable:'GD loop on f(x) = x\xb2',
     tasks:[
       '3Blue1Brown \u2014 Essence of Calculus, episodes 1\u20139',
-      'CS229 notes \u2014 the gradient descent derivation section',
-      'Derive the GD update rule yourself, from the definition of a derivative',
-      'Code gradient descent for f(x)=x\u00b2 from scratch (x\u2080=10, lr=0.1, 100 iters), plot convergence'
+      'Andrew Ng CS229 Lecture Notes \u2014 gradient descent derivation section',
+      'Understand the derivative geometrically: instantaneous rate of change, slope of a tangent line',
+      'Partial derivatives and chain rule \u2014 this is the mathematical core of backpropagation',
+      'Derive the GD update rule: \u03b8_j = \u03b8_j \u2212 \u03b1 \u00b7 \u2202J/\u2202\u03b8_j yourself from the definition of a derivative',
+      'CRITICAL: Write GD for f(x)=x\xb2 from scratch. Start x=10, lr=0.1, 100 iters, plot convergence.',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w6', phase:2, weekNums:[6], days:7,
     title:'Linear Regression \u2014 Full Derivation to Code',
     deliverable:'LR in NumPy vs sklearn',
     tasks:[
-      'CS229 notes: Linear Regression + StatQuest LR videos (first 4)',
-      'Derive the hypothesis function, MSE cost, and its gradient by hand',
-      'Derive the Normal Equation; know when X\u1d40X isn\u2019t invertible',
-      'Implement LR from scratch in NumPy on California Housing; compute R\u00b2 manually',
-      'Replicate with sklearn \u2014 coefficients should match to several decimals'
+      'Andrew Ng CS229 Lecture Notes: Linear Regression (pages 1\u201316) \u2014 gold standard for this derivation',
+      'StatQuest Linear Regression series \u2014 first 4 videos for intuition before math',
+      'Derive the hypothesis function, MSE cost, and its gradient by hand on paper',
+      'Derive the Normal Equation: \u03b8 = (X\u1d40X)\u207b\u00b9X\u1d40y \u2014 when does X\u1d40X fail to be invertible?',
+      'Implement LR from scratch in NumPy on California Housing; compute R\xb2 manually',
+      'Replicate with sklearn.linear_model.LinearRegression \u2014 coefficients must match to several decimals',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w7', phase:2, weekNums:[7], days:7,
     title:'Logistic Regression \u2014 Classification Foundations',
     deliverable:'LR + ROC-AUC on Breast Cancer',
     tasks:[
-      'CS229 notes: Classification & Logistic Regression + StatQuest LR series',
-      'Derive the sigmoid function and the cross-entropy loss + its gradient',
-      'Implement from scratch: sigmoid, log loss, GD update, 0.5-threshold prediction',
-      'Add L2 (Ridge) regularization',
-      'Replicate with sklearn on Breast Cancer; compute Precision/Recall/F1/ROC-AUC by hand'
+      'Andrew Ng CS229 Lecture Notes: Classification & Logistic Regression (pages 16\u201330)',
+      'StatQuest Logistic Regression series (4 videos) \u2014 watch before the math',
+      'Derive sigmoid \u03c3(z) = 1/(1+e\u207b\u1d63): why it maps \u211d \u2192 (0,1). Plot it.',
+      'Cross-entropy loss: why not MSE for classification? (non-convex loss surface)',
+      'Derive the gradient of cross-entropy. Implement: sigmoid, log loss, GD update, 0.5-threshold prediction.',
+      'Add L2 regularization (Ridge) \u2014 understand what \u03bb does geometrically to the decision boundary',
+      'Sklearn replication on Breast Cancer: compute Precision/Recall/F1/ROC-AUC manually. PR tradeoff is in every fintech interview.',
+      'LeetCode DSA: 3+ problems this week (SQL Medium starts here)'
     ]
   },
   { id:'w8', phase:2, weekNums:[8], days:7,
     title:'Decision Trees + Ensemble Methods',
     deliverable:'Ensemble model comparison',
     tasks:[
-      'StatQuest: Decision Trees, Random Forest, Gradient Boosting series',
+      'StatQuest: Decision Trees, Random Forest, Gradient Boosting series (8\u201310 videos)',
       'sklearn User Guide: Decision Trees + Ensemble methods sections',
-      'Understand Gini impurity / information gain and how a tree grows',
-      'Understand bagging (Random Forest) and boosting (XGBoost) conceptually',
-      'Know the key hyperparameters: n_estimators, max_depth, learning_rate, subsample'
+      'Splitting criteria: Gini impurity = 1 \u2212 \u03a3p_i\xb2. Information Gain via entropy. Derive Gini.',
+      'Overfitting in trees \u2192 pruning via max_depth, min_samples_split',
+      'Random Forest: bagging + random feature subsets. Why averaging overfit trees works (bias-variance tradeoff).',
+      'XGBoost: sequential error correction. Tune: n_estimators, max_depth, learning_rate, subsample, colsample_bytree.',
+      'Do NOT derive RF or XGBoost from scratch \u2014 time cost >> interview payoff at this stage',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w9', phase:2, weekNums:[9], days:7,
-    title:'SQL Proficiency + EDA Start',
+    title:'SQL Window Functions + EDA Start',
     deliverable:'15 LeetCode SQL Medium',
-    note:'Mandatory \u2014 fintech interviewers will test this.',
+    note:'Mandatory \u2014 fintech interviewers will test this. Do it in Week 9, not later.',
     tasks:[
-      'LeetCode SQL Medium \u00d7 15 \u2014 window functions, CTEs, subqueries, GROUP BY/HAVING',
-      'Mode Analytics SQL Tutorial \u2014 the Advanced SQL / window functions section',
-      'Rewrite each LeetCode SQL solution again using a CTE',
-      'Download the Kaggle Credit Card Fraud dataset and start exploring it'
+      'LeetCode SQL Medium \xd715: window functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD), CTEs, subqueries, GROUP BY/HAVING',
+      'Mode Analytics SQL Tutorial \u2014 Advanced SQL section on window functions',
+      'After each LeetCode SQL problem, rewrite the solution using a CTE for practice',
+      'Download Kaggle Credit Card Fraud Detection dataset (0.17% fraud rate)',
+      'Begin EDA: feature distributions, initial class imbalance analysis, correlation matrix',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w10', phase:2, weekNums:[10], days:7,
-    title:'EDA Deep Dive on the Fraud Dataset',
+    title:'EDA Deep Dive \u2014 Credit Card Fraud Dataset',
     deliverable:'Full EDA notebook + feature engineering',
     tasks:[
-      'Full EDA: feature distributions, class imbalance (0.17% fraud), correlation matrix, outliers',
-      'Run ydata-profiling, then replicate its key findings manually',
-      'Engineer 3+ new features and document your reasoning'
+      'Full EDA: feature distributions, correlation matrix, outlier detection, class imbalance (0.17% fraud \u2014 understand why this matters)',
+      'Run ydata-profiling auto-report, then replicate key findings manually in a notebook',
+      'Feature engineering: create at least 3 new features with documented reasoning for each',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w11', phase:2, weekNums:[11], days:7,
     title:'Project 1 \u2014 Data Pipeline + SMOTE',
-    deliverable:'Clean dataset, imbalance addressed',
+    deliverable:'Clean dataset, class imbalance handled',
     tasks:[
-      'Clean the dataset: missing values, duplicates, check for data leakage',
-      'Address class imbalance with SMOTE (imbalanced-learn)',
-      'Apply StandardScaler for logistic regression; know why trees don\u2019t need it'
+      'Clean dataset: handle missing values, remove duplicates, check for data leakage',
+      'Address class imbalance with SMOTE (imbalanced-learn). Understand why accuracy is a useless metric here.',
+      'Feature scaling: StandardScaler for logistic regression. Understand why tree-based models do not need it.',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w12', phase:2, weekNums:[12], days:7,
-    title:'Project 1 \u2014 Modeling + Tuning',
+    title:'Project 1 \u2014 Modeling + Hyperparameter Tuning',
     deliverable:'Final model, ROC-AUC > 0.92',
     tasks:[
-      'Train Logistic Regression, Random Forest, and XGBoost baselines; compare ROC-AUC',
-      'Tune the best model with GridSearchCV / RandomizedSearchCV',
-      'Plot the confusion matrix, Precision-Recall curve, and ROC curve'
+      'Train Logistic Regression, Random Forest, and XGBoost baselines \u2014 compare ROC-AUC',
+      'Tune the best model with GridSearchCV or RandomizedSearchCV',
+      'Final evaluation: Confusion matrix, Precision-Recall curve, ROC curve \u2014 plot all three',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w13', phase:2, weekNums:[13], days:7,
-    title:'Project 1 \u2014 Polish + GitHub',
-    deliverable:'Public GitHub repo + README',
+    title:'Project 1 \u2014 SHAP Explainability + GitHub',
+    deliverable:'SHAP plots + professional README',
+    note:'SHAP is now core \u2014 not optional. Fintech interviewers at Barclays and JP Morgan probe model interpretability specifically.',
     tasks:[
-      'Write a clean, reproducible notebook with markdown explaining each step',
-      'Write a README: problem statement, dataset, approach, results, how to run',
-      'Push to a public GitHub repo; draft the ROC-AUC resume line'
+      'Add SHAP explainability: install shap library, run TreeExplainer on your best model',
+      'Generate SHAP force plots for individual predictions (show why the model predicted fraud for a specific row)',
+      'Generate global SHAP bar chart of feature importances',
+      'Write a clean, reproducible Jupyter notebook with markdown explaining each step',
+      'Write README.md: problem statement, dataset, approach, SHAP findings, ROC-AUC result, how to run',
+      'Push to public GitHub repo. Draft the resume line: include ROC-AUC score + SHAP insight.',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
   { id:'w14', phase:2, weekNums:[14], days:7,
-    title:'Buffer + Review',
-    deliverable:'SHAP plots, if ahead of schedule',
+    title:'Buffer + Prompt Engineering Fundamentals',
+    deliverable:'Prompt engineering fundamentals',
+    note:'New in revised edition \u2014 the 2026 internship landscape expects hands-on LLM experience.',
     tasks:[
-      'Review weak areas from Weeks 5\u201313',
-      'If ahead of schedule: add a SHAP explainability analysis to Project 1',
-      'Start Hands-On ML (G\u00e9ron), Chapters 1\u20134'
+      'Review any weak areas from Weeks 5\u201313',
+      'Read Anthropic Prompt Engineering docs (docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)',
+      'Read OpenAI Prompt Engineering guide (platform.openai.com/docs/guides/prompt-engineering)',
+      'Zero-shot vs few-shot vs chain-of-thought prompting \u2014 know the difference cold',
+      'System prompts, temperature, max_tokens \u2014 what each controls and why',
+      'Structured output prompting and role-play prompting for production pipelines',
+      'If ahead of schedule: add calibration curves to Project 1 (strong fintech bonus)',
+      'LeetCode DSA: 3+ problems this week'
     ]
   },
+
+  /* ── PHASE 3 ── */
   { id:'w15', phase:3, weekNums:[15,16], days:14,
-    title:'Backpropagation \u2014 The Engine of Deep Learning',
+    title:'Backpropagation \u2014 Build Micrograd',
     deliverable:'Micrograd trained on XOR',
-    note:'The single most important exercise in the whole roadmap.',
+    note:'Single most important exercise in the entire roadmap. Do not compress this sprint.',
     tasks:[
-      'Watch Karpathy\u2019s \u201cbuilding micrograd\u201d video \u2014 twice',
-      'Read the micrograd source on GitHub (under 200 lines)',
-      'Nielsen, Neural Networks and Deep Learning, Ch. 1\u20132',
-      'Mandatory: delete the source, rebuild micrograd from memory (Value, __add__, __mul__, __pow__, relu, tanh, backward)',
-      'Train your micrograd MLP on XOR until it converges'
+      'Watch Karpathy\u2019s \u201cbuilding micrograd\u201d video \u2014 twice (2.5 hrs each)',
+      'Read every line of the micrograd source code on GitHub (under 200 lines)',
+      'Michael Nielsen \u2014 Neural Networks and Deep Learning, Ch. 1\u20132 (free online)',
+      'Forward pass: data flows input \u2192 output, activations computed at each layer',
+      'Backward pass: chain rule applied recursively from output \u2192 input',
+      'MANDATORY: Clone micrograd. Read it. DELETE the source. Rebuild from memory: Value class, __add__, __mul__, __pow__, relu, tanh, backward()',
+      'Train your micrograd MLP on XOR (2 inputs, 1 output). Convergence confirms correct gradients.',
+      'LeetCode DSA: 3+ problems per week (Sliding Window, Binary Search \u2014 NeetCode Medium)'
     ]
   },
   { id:'w17', phase:3, weekNums:[17,18], days:14,
-    title:'PyTorch Basics \u2014 Tensors, Autograd, First MLP',
+    title:'PyTorch \u2014 Tensors, Autograd, First MLP',
     deliverable:'MNIST 97%+ accuracy',
     tasks:[
-      'PyTorch \u201cLearn the Basics\u201d tutorial series, in order',
-      'Fast.ai Practical Deep Learning Part 1, Lessons 1\u20134',
-      'Build an MLP on MNIST (784\u2192128\u219264\u219210, ReLU, Adam) \u2014 target 97%+ test accuracy',
-      'Plot training vs. validation loss; spot overfitting',
-      'Experiment with Dropout and BatchNorm'
+      'PyTorch \u201cLearn the Basics\u201d tutorial series in order (pytorch.org/tutorials)',
+      'Fast.ai Practical Deep Learning Part 1, Lessons 1\u20134 (course.fast.ai)',
+      'Tensors: same as NumPy arrays but with GPU support and gradient tracking',
+      'torch.autograd: requires_grad=True, .backward(), .grad \u2014 micrograd at production scale',
+      'nn.Module pattern: __init__ and forward. Training loop: forward \u2192 loss \u2192 zero_grad() \u2192 backward() \u2192 step(). Memorize this.',
+      'Build MLP on MNIST: 784\u2192128\u219264\u219210, ReLU, cross-entropy loss, Adam optimizer. Target: 97%+ test accuracy.',
+      'Plot training vs validation loss; spot overfitting. Experiment with Dropout and BatchNorm.',
+      'LeetCode DSA: 3+ problems per week (Trees BFS/DFS)'
     ]
   },
   { id:'w19', phase:3, weekNums:[19,20], days:14,
-    title:'Traditional NLP \u2014 Text as Math',
-    deliverable:'IMDB sentiment classifier',
+    title:'Traditional NLP + Model Evaluation Best Practices',
+    deliverable:'IMDB sentiment classifier + evaluation report',
+    note:'New in revised edition: Model Evaluation Best Practices added in Week 20. Spend 2\u20133 extra hours on this \u2014 interviewers draw a clear line between candidates who know this and those who do not.',
     tasks:[
-      'Jurafsky & Martin, Speech and Language Processing, Ch. 2, 3, 6',
-      'StatQuest Word2Vec series, then the original Word2Vec paper',
-      'Build a text preprocessing pipeline with NLTK (tokenize, stopwords, stem/lemmatize)',
-      'Build a TF-IDF classifier on 20 Newsgroups + a bigram model from scratch',
-      'Build a TF-IDF + Logistic Regression sentiment classifier on IMDB \u2014 target 88%+ accuracy'
+      'Jurafsky & Martin SLP3, Chapters 2, 3, 6 (web.stanford.edu/~jurafsky/slp3)',
+      'StatQuest Word2Vec series (3 videos) + read Mikolov et al. 2013 paper',
+      'Text preprocessing: tokenization, stopword removal, lemmatization \u2014 use spaCy, not NLTK from scratch',
+      'TF-IDF: build a TF-IDF + LogReg classifier on 20 Newsgroups dataset',
+      'Word embeddings and cosine similarity: why king \u2212 man + woman \u2248 queen',
+      'Build IMDB sentiment classifier: TF-IDF + Logistic Regression. Target 88%+ accuracy.',
+      'NEW \u2014 Stratified K-Fold cross-validation: when and why vs simple train/test split',
+      'NEW \u2014 Calibration curves: is a predicted probability of 0.8 actually correct 80% of the time?',
+      'NEW \u2014 Learning curves: diagnose underfitting vs overfitting by varying training set size',
+      'NEW \u2014 AP vs AUC-ROC for imbalanced datasets: Average Precision is almost always the better metric for fraud detection',
+      'LeetCode DSA: 3+ problems per week \u2014 cumulative target: 100+ by end of Phase 3'
     ]
   },
+
+  /* ── PHASE 4 ── */
   { id:'w21', phase:4, weekNums:[21,22], days:14,
-    title:'Transformer Architecture \u2014 Deep Understanding',
-    deliverable:'Character-level GPT trained',
+    title:'Transformer Architecture + nanoGPT',
+    deliverable:'Character-level GPT trained on Shakespeare',
     tasks:[
-      'Watch Karpathy\u2019s \u201cLet\u2019s build GPT\u201d \u2014 before reading the paper',
-      'Read \u201cAttention Is All You Need,\u201d \u00a73 and \u00a73.2',
-      'Read Jay Alammar\u2019s \u201cThe Illustrated Transformer\u201d',
-      'Karpathy\u2019s makemore series (bigrams \u2192 MLP \u2192 RNN \u2192 attention)',
-      'Build a character-level GPT (nanoGPT) on Shakespeare text'
+      'Watch Karpathy\u2019s \u201cLet\u2019s build GPT\u201d (1h 56min) BEFORE reading the paper',
+      'Read \u201cAttention Is All You Need\u201d sections 3 and 3.2 only (arxiv.org/abs/1706.03762)',
+      'Read Jay Alammar\u2019s \u201cThe Illustrated Transformer\u201d (jalammar.github.io)',
+      'Watch Karpathy\u2019s makemore series \u2014 all 5 videos: bigrams \u2192 MLP \u2192 RNN \u2192 attention',
+      'Derive self-attention: Attention(Q,K,V) = softmax(QK\u1d40/\u221ad_k)\u00b7V from first principles',
+      'Multi-head attention: parallel heads attend to different aspects simultaneously',
+      'Positional encoding: sinusoidal \u2014 Transformers have no inherent sense of token position',
+      'Encoder-only (BERT) vs Decoder-only (GPT) vs Encoder-Decoder (T5) \u2014 know when each is appropriate',
+      'Build: follow Karpathy\u2019s nanoGPT, train character-level GPT on Shakespeare text',
+      'LeetCode DSA: 3+ problems per week'
     ]
   },
   { id:'w23', phase:4, weekNums:[23,24], days:14,
-    title:'Hugging Face \u2014 Pretrained Models & Fine-tuning',
-    deliverable:'DistilBERT fine-tuned on SST-2',
+    title:'Hugging Face + LLM APIs + LangChain + RAG',
+    deliverable:'DistilBERT fine-tuned + RAG demo',
+    note:'New in revised edition: LLM APIs, LangChain, and RAG added. The 2026 internship landscape expects hands-on experience with all three.',
     tasks:[
-      'Hugging Face course, Chapters 1\u20134',
-      'Run the pipeline() API on classification, NER, QA, summarization, zero-shot',
-      'Load raw BERT \u2014 understand tokenization, [CLS]/[SEP], attention masks',
-      'Fine-tune DistilBERT on SST-2 with the Trainer API',
-      'Evaluate with accuracy, F1, and Matthews correlation coefficient'
+      'Hugging Face Course, Chapters 1\u20134 (huggingface.co/course) \u2014 the definitive resource',
+      'Week 23 inference: pipeline() for classification, NER, QA, summarization, zero-shot. Load raw BERT + understand WordPiece tokenization, [CLS]/[SEP], attention masks.',
+      'Week 24 fine-tuning: Fine-tune DistilBERT on SST-2 with the Trainer API. Also run one loop with raw PyTorch.',
+      'Compare distilbert / bert-base / roberta on size vs speed vs accuracy tradeoffs',
+      'NEW \u2014 LLM APIs: make a real API call to OpenAI or Anthropic in Python. Understand messages[], role, temperature, max_tokens.',
+      'NEW \u2014 LangChain LCEL: chain a prompt template \u2192 LLM \u2192 output parser in 10 lines of code',
+      'NEW \u2014 Tool use / function calling: how models call external functions (search, calculator)',
+      'NEW \u2014 Streaming responses: why streaming matters for production UX',
+      'NEW \u2014 RAG pipeline: embed a PDF with sentence-transformers + FAISS, call an LLM with retrieved chunks',
+      'Understand vector databases: FAISS (in-memory) and ChromaDB (persistent). Chunking strategy.',
+      'LeetCode DSA: 3+ problems per week'
     ]
   },
   { id:'w25', phase:4, weekNums:[25], days:7,
     title:'Project 2 \u2014 Core NLP Pipeline',
     deliverable:'3-task pipeline working locally',
     tasks:[
-      'Build: ingest text \u2192 tokenize \u2192 fine-tuned model \u2192 extract info',
-      'Implement 3 tasks minimum: sentiment, NER, extractive summarization',
-      'Pick a dataset: CUAD contracts, earnings calls, or product reviews'
+      'Build core pipeline: ingest raw text \u2192 tokenize \u2192 fine-tuned model \u2192 extract key info',
+      'Three tasks minimum: sentiment analysis, NER (company names, dates, amounts), extractive summarization',
+      'Dataset options: legal contracts (CUAD on HuggingFace), earnings call transcripts, product reviews',
+      'Consider adding RAG-enhanced Q&A using ChromaDB \u2014 strong differentiator per revised roadmap',
+      'LeetCode DSA: 3+ problems this week \u2014 final push toward 120+ total'
     ]
   },
   { id:'w26', phase:4, weekNums:[26], days:7,
-    title:'Project 2 \u2014 FastAPI Backend',
-    deliverable:'API with /analyze endpoint',
+    title:'Project 2 \u2014 FastAPI + Deployment + Polish',
+    deliverable:'Live URL + resume metrics',
+    note:'Mandatory \u2014 it must be a live URL, not just a GitHub link. If behind schedule, use HuggingFace Spaces + Gradio to save \u22481 week.',
     tasks:[
-      'Wrap the pipeline in FastAPI: POST /analyze + GET /health',
-      'Add Pydantic validation; handle empty/long/non-English input gracefully',
-      'Add response caching for repeated identical inputs'
-    ]
-  },
-  { id:'w27', phase:4, weekNums:[27], days:7,
-    title:'Project 2 \u2014 Deployment',
-    deliverable:'Live URL on Railway/Render',
-    note:'Mandatory \u2014 it must be a live URL, not just a GitHub link.',
-    tasks:[
-      'Deploy to Railway, Render, or HF Spaces + Gradio',
-      'Confirm the live URL responds from outside your machine',
-      'Put the live URL \u2014 not just the GitHub link \u2014 on your resume',
-      'Document the API with FastAPI\u2019s auto-generated /docs page'
-    ]
-  },
-  { id:'w28', phase:4, weekNums:[28], days:7,
-    title:'Project 2 \u2014 Polish + Resume Quantification',
-    deliverable:'Resume line with latency + accuracy',
-    tasks:[
-      'Measure inference latency (target <500ms), accuracy, and API uptime',
-      'Write the README: problem, architecture, how to run, demo URL, results',
-      'Draft a resume line with real, quantified numbers'
+      'Wrap pipeline in FastAPI: POST /analyze + GET /health endpoints, Pydantic models, graceful error handling',
+      'Add response caching for repeated identical inputs',
+      'Deploy to Railway, Render, or HuggingFace Spaces + Gradio \u2014 confirm live URL from outside your machine',
+      'Measure inference latency (target <500ms), model accuracy, and API uptime',
+      'Write README: problem, architecture diagram, live demo URL, results table, how to run locally',
+      'Draft resume line: \u201cBuilt NLP pipeline using fine-tuned DistilBERT (91.3% accuracy) with RAG-enhanced Q&A using ChromaDB; deployed as FastAPI service, <400ms p99 latency.\u201d',
+      'LeetCode DSA: final push \u2014 target 120+ problems total before January applications'
     ]
   }
 ];
 
-function addDays(date, n) {
-  var d = new Date(date.getTime());
-  d.setDate(d.getDate() + n);
-  return d;
-}
+/* ────────────────────────────────
+   SCHEDULE BUILDER
+────────────────────────────────── */
+function addDays(d, n){ var r=new Date(d.getTime()); r.setDate(r.getDate()+n); return r; }
+function pad2(n){ return n<10?('0'+n):(''+n); }
+function fmtDate(d){ return pad2(d.getDate())+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
+function fmtShort(d){ return pad2(d.getDate())+' '+MONTHS[d.getMonth()]; }
+function fmtRange(s,e){ if(s.getFullYear()===e.getFullYear()) return fmtShort(s)+' \u2013 '+fmtShort(e)+' '+e.getFullYear(); return fmtDate(s)+' \u2013 '+fmtDate(e); }
+function todayMid(){ var t=new Date(); t.setHours(0,0,0,0); return t; }
 
-function buildSchedule() {
-  var offset = 0;
-  var entries = [];
-  for (var i = 0; i < ENTRIES_RAW.length; i++) {
-    var raw = ENTRIES_RAW[i];
-    var start = addDays(START_DATE, offset);
-    var end = addDays(start, raw.days - 1);
-    offset += raw.days;
-    var weekLabel = raw.weekNums.length > 1
-      ? ('Weeks ' + raw.weekNums[0] + '\u2013' + raw.weekNums[raw.weekNums.length - 1])
-      : ('Week ' + raw.weekNums[0]);
-    var codeLabel = raw.weekNums.length > 1
-      ? ('W' + pad2(raw.weekNums[0]) + '\u2013' + pad2(raw.weekNums[raw.weekNums.length - 1]))
-      : ('W' + pad2(raw.weekNums[0]));
-    entries.push(Object.assign({}, raw, { start:start, end:end, weekLabel:weekLabel, codeLabel:codeLabel }));
+function buildSchedule(){
+  var off=0, out=[];
+  for(var i=0;i<ENTRIES_RAW.length;i++){
+    var raw=ENTRIES_RAW[i];
+    var s=addDays(START_DATE,off), e=addDays(s,raw.days-1);
+    off+=raw.days;
+    var wl=raw.weekNums.length>1?('Weeks '+raw.weekNums[0]+'\u2013'+raw.weekNums[raw.weekNums.length-1]):('Week '+raw.weekNums[0]);
+    var cl=raw.weekNums.length>1?('W'+pad2(raw.weekNums[0])+'\u2013'+pad2(raw.weekNums[raw.weekNums.length-1])):('W'+pad2(raw.weekNums[0]));
+    out.push(Object.assign({},raw,{start:s,end:e,weekLabel:wl,codeLabel:cl}));
   }
-  return entries;
+  return out;
 }
 
-function pad2(n) { return n < 10 ? ('0' + n) : ('' + n); }
-function fmtDate(d) { return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear(); }
-function fmtDateShort(d) { return pad2(d.getDate()) + ' ' + MONTHS[d.getMonth()]; }
-function fmtRange(start, end) {
-  if (start.getFullYear() === end.getFullYear()) return fmtDateShort(start) + ' \u2013 ' + fmtDateShort(end) + ' ' + end.getFullYear();
-  return fmtDate(start) + ' \u2013 ' + fmtDate(end);
-}
-function todayMidnight() { var t = new Date(); t.setHours(0,0,0,0); return t; }
-
-function findCurrentEntry(entries, today) {
-  for (var i = 0; i < entries.length; i++) {
-    if (today.getTime() >= entries[i].start.getTime() && today.getTime() <= entries[i].end.getTime()) return entries[i];
-  }
-  if (today.getTime() < entries[0].start.getTime()) return entries[0];
+function findCurrent(entries, today){
+  for(var i=0;i<entries.length;i++) if(today.getTime()>=entries[i].start.getTime()&&today.getTime()<=entries[i].end.getTime()) return entries[i];
+  if(today.getTime()<entries[0].start.getTime()) return entries[0];
   return null;
 }
 
-function defaultState() {
-  var tasks = {}, checkins = {};
-  ENTRIES_RAW.forEach(function(e) {
-    tasks[e.id] = e.tasks.map(function() { return false; });
-    checkins[e.id] = { status:null, notes:'', savedAt:null };
-  });
-  var phaseExit = {};
-  PHASES.forEach(function(p) { phaseExit[p.id] = p.exit.map(function() { return false; }); });
-  return { tasks:tasks, checkins:checkins, phaseExit:phaseExit, leetcode:0 };
+/* ────────────────────────────────
+   STATE
+────────────────────────────────── */
+function defaultState(){
+  var tasks={}, checkins={}, phaseExit={};
+  ENTRIES_RAW.forEach(function(e){ tasks[e.id]=e.tasks.map(function(){return false;}); checkins[e.id]={status:null,notes:'',savedAt:null}; });
+  PHASES.forEach(function(p){ phaseExit[p.id]=p.exit.map(function(){return false;}); });
+  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:0,hackerrank:0};
 }
 
-function hydrateState(raw) {
-  var base = defaultState();
-  if (!raw || typeof raw !== 'object') return base;
-
-  function readBool(src, i) {
-    if (src == null) return false;
-    // JSON.parse always gives real arrays, but guard against
-    // string-keyed objects in case a serializer ever did otherwise
-    var v = Array.isArray(src)
-      ? src[i]
-      : (src[i] !== undefined ? src[i] : src[String(i)]);
-    return !!v;
-  }
-
-  ENTRIES_RAW.forEach(function(e) {
-    if (raw.tasks && raw.tasks[e.id] != null) {
-      for (var i = 0; i < base.tasks[e.id].length; i++) {
-        base.tasks[e.id][i] = readBool(raw.tasks[e.id], i);
-      }
-    }
-    if (raw.checkins && raw.checkins[e.id]) {
-      var c = raw.checkins[e.id];
-      base.checkins[e.id] = {
-        status: c.status || null,
-        notes: typeof c.notes === 'string' ? c.notes : '',
-        savedAt: c.savedAt || null
-      };
-    }
+function hydrateState(raw){
+  var base=defaultState();
+  if(!raw||typeof raw!=='object') return base;
+  ENTRIES_RAW.forEach(function(e){
+    if(raw.tasks&&raw.tasks[e.id]!=null) for(var i=0;i<base.tasks[e.id].length;i++) base.tasks[e.id][i]=!!(Array.isArray(raw.tasks[e.id])?raw.tasks[e.id][i]:raw.tasks[e.id][String(i)]);
+    if(raw.checkins&&raw.checkins[e.id]){ var c=raw.checkins[e.id]; base.checkins[e.id]={status:c.status||null,notes:typeof c.notes==='string'?c.notes:'',savedAt:c.savedAt||null}; }
   });
-
-  PHASES.forEach(function(p) {
-    if (raw.phaseExit && raw.phaseExit[p.id] != null) {
-      for (var i = 0; i < base.phaseExit[p.id].length; i++) {
-        base.phaseExit[p.id][i] = readBool(raw.phaseExit[p.id], i);
-      }
-    }
-  });
-
-  base.leetcode = (typeof raw.leetcode === 'number' && raw.leetcode >= 0)
-    ? raw.leetcode : 0;
+  PHASES.forEach(function(p){ if(raw.phaseExit&&raw.phaseExit[p.id]!=null) for(var i=0;i<base.phaseExit[p.id].length;i++) base.phaseExit[p.id][i]=!!(Array.isArray(raw.phaseExit[p.id])?raw.phaseExit[p.id][i]:raw.phaseExit[p.id][String(i)]); });
+  base.leetcode=(typeof raw.leetcode==='number'&&raw.leetcode>=0)?raw.leetcode:0;
+  base.hackerrank=(typeof raw.hackerrank==='number'&&raw.hackerrank>=0)?raw.hackerrank:0;
   return base;
 }
-function calcEntryProgress(entryId, state) {
-  var arr = state.tasks[entryId] || [];
-  return { done: arr.filter(Boolean).length, total: arr.length };
-}
-function calcPhaseProgress(phaseId, entries, state) {
-  var done = 0, total = 0;
-  entries.forEach(function(e) { if (e.phase === phaseId) { var p = calcEntryProgress(e.id, state); done += p.done; total += p.total; } });
-  return { done:done, total:total };
-}
-function calcOverallProgress(entries, state) {
-  var done = 0, total = 0;
-  entries.forEach(function(e) { var p = calcEntryProgress(e.id, state); done += p.done; total += p.total; });
-  return { done:done, total:total };
-}
-function pct(done, total) { return total > 0 ? Math.round((done/total)*100) : 0; }
-function statusMeta(status) {
-  if (status === 'ontrack') return { label:'On track', cls:'st-ontrack' };
-  if (status === 'behind') return { label:'Behind', cls:'st-behind' };
-  if (status === 'skipped') return { label:'Skipped', cls:'st-skipped' };
-  return { label:'No check-in', cls:'st-none' };
-}
-function findPhaseForEntry(entryId, entries) {
-  for (var i = 0; i < entries.length; i++) { if (entries[i].id === entryId) return entries[i].phase; }
-  return null;
-}
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, function(c) {
-    return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
-  });
+
+/* ────────────────────────────────
+   PROGRESS
+────────────────────────────────── */
+function calcEntry(id, state){ var a=state.tasks[id]||[]; return{done:a.filter(Boolean).length,total:a.length}; }
+function calcPhase(pid, entries, state){ var d=0,t=0; entries.forEach(function(e){if(e.phase===pid){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}}); return{done:d,total:t}; }
+function calcOverall(entries, state){ var d=0,t=0; entries.forEach(function(e){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}); return{done:d,total:t}; }
+function pct(d,t){ return t>0?Math.round((d/t)*100):0; }
+function statusMeta(s){ if(s==='ontrack') return{label:'On track',cls:'st-ontrack'}; if(s==='behind') return{label:'Behind',cls:'st-behind'}; if(s==='skipped') return{label:'Skipped',cls:'st-skipped'}; return{label:'No check-in',cls:'st-none'}; }
+function phaseForEntry(id, entries){ for(var i=0;i<entries.length;i++) if(entries[i].id===id) return entries[i].phase; return null; }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
+
+/* ────────────────────────────────
+   RENDER
+────────────────────────────────── */
+function renderTitle(entries, state, cur){
+  var ov=calcOverall(entries,state);
+  var last=entries[entries.length-1];
+  var phObj=cur?PHASES.filter(function(p){return p.id===cur.phase;})[0]:null;
+  var phText=cur?(phObj.code+' \u2014 '+phObj.name):'Complete';
+  var wkText=cur?(cur.weekLabel+' of 26'):'All 26 weeks done';
+  return '<div class="titleblock">'+
+    '<span class="rev-badge">REVISED EDITION 2026</span>'+
+    '<div class="tb-grid">'+
+    '<div class="tb-cell"><span class="tb-label">Project</span><span class="tb-value">ML Roadmap v2</span></div>'+
+    '<div class="tb-cell"><span class="tb-label">Operator</span><span class="tb-value">Adi</span></div>'+
+    '<div class="tb-cell"><span class="tb-label">Started</span><span class="tb-value">'+fmtDate(START_DATE)+'</span></div>'+
+    '<div class="tb-cell"><span class="tb-label">Finish (est.)</span><span class="tb-value">'+fmtDate(last.end)+'</span></div>'+
+    '<div class="tb-cell"><span class="tb-label">Now in</span><span class="tb-value">'+esc(phText)+'</span></div>'+
+    '<div class="tb-cell"><span class="tb-label">Calendar</span><span class="tb-value">'+esc(wkText)+'</span></div>'+
+    '</div>'+
+    '<div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>'+
+    '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:'+pct(ov.done,ov.total)+'%"></div></div>'+
+    '<span class="tb-progress-text" id="overalltext">'+ov.done+'/'+ov.total+' \u2022 '+pct(ov.done,ov.total)+'%</span></div>'+
+    '<p class="tb-note">Revised edition: <strong>SHAP is now core</strong>, LeetCode starts Week 1, and <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4. Window: Jul 1 \u2013 Dec 31, 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>.</p></div>';
 }
 
-function renderTitleBlock(entries, state, currentEntry) {
-  var overall = calcOverallProgress(entries, state);
-  var lastEntry = entries[entries.length-1];
-  var phaseObj = currentEntry ? PHASES.filter(function(p){return p.id===currentEntry.phase;})[0] : null;
-  var phaseText = currentEntry ? (phaseObj.code + ' \u2014 ' + phaseObj.name) : 'Complete';
-  var weekText = currentEntry ? (currentEntry.weekLabel + ' of 28') : 'All 28 weeks scheduled';
-  return '<div class="titleblock"><div class="tb-grid">' +
-    '<div class="tb-cell"><span class="tb-label">Project</span><span class="tb-value">ML Internship Roadmap</span></div>' +
-    '<div class="tb-cell"><span class="tb-label">Operator</span><span class="tb-value">Adi</span></div>' +
-    '<div class="tb-cell"><span class="tb-label">Started</span><span class="tb-value">' + fmtDate(START_DATE) + '</span></div>' +
-    '<div class="tb-cell"><span class="tb-label">Finish (est.)</span><span class="tb-value">' + fmtDate(lastEntry.end) + '</span></div>' +
-    '<div class="tb-cell"><span class="tb-label">Now in</span><span class="tb-value">' + escapeHtml(phaseText) + '</span></div>' +
-    '<div class="tb-cell"><span class="tb-label">Calendar</span><span class="tb-value">' + escapeHtml(weekText) + '</span></div>' +
-    '</div><div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>' +
-    '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:' + pct(overall.done,overall.total) + '%"></div></div>' +
-    '<span class="tb-progress-text" id="overalltext">' + overall.done + '/' + overall.total + ' \u2022 ' + pct(overall.done,overall.total) + '%</span></div>' +
-    '<p class="tb-note">Originally paced from June 2025 for the Apr\u2013Jun 2026 hiring cycle. Starting today instead, finishing on schedule lines you up for the <strong>Apr\u2013Jun 2027</strong> cycle \u2014 compress weeks if you want to aim earlier.</p></div>';
+function renderThisWeek(entries, cur, state){
+  if(!cur) return '<div class="panel thisweek complete"><span class="eyebrow">STATUS</span><h2>Roadmap window complete</h2><p>All 26 weeks scheduled. Scroll down to update any outstanding tasks.</p></div>';
+  var ph=PHASES.filter(function(p){return p.id===cur.phase;})[0];
+  var prog=calcEntry(cur.id,state);
+  var meta=statusMeta(state.checkins[cur.id].status);
+  var isNew=(cur.id==='w13'||cur.id==='w14'||cur.id==='w19'||cur.id==='w23');
+  return '<div class="panel thisweek"><span class="eyebrow">THIS WEEK \u2022 '+cur.codeLabel+'</span>'+
+    '<div><h2>'+esc(cur.title)+'</h2>'+
+    '<div class="thisweek-tags"><span class="tag">'+fmtRange(cur.start,cur.end)+'</span><span class="tag">'+esc(ph.dailyTime)+'</span>'+
+    (isNew?'<span class="tag new-tag">\u2605 Revised edition addition</span>':'')+
+    '</div></div>'+
+    '<p class="deliverable">Deliverable: '+esc(cur.deliverable)+'</p>'+
+    '<div class="thisweek-bottom"><span class="mini-stat">'+prog.done+'/'+prog.total+' tasks done</span>'+
+    '<span class="badge '+meta.cls+'">'+meta.label+'</span>'+
+    '<button class="btn-primary" type="button" data-action="jump" data-entry="'+cur.id+'">Open this week\u2019s checklist \u2193</button></div></div>';
 }
 
-function renderThisWeek(entries, currentEntry, state) {
-  if (!currentEntry) return '<div class="panel thisweek complete"><span class="eyebrow">STATUS</span><h2>Roadmap window complete</h2><p>You have reached the end of the scheduled 28 weeks.</p></div>';
-  var phase = PHASES.filter(function(p){return p.id===currentEntry.phase;})[0];
-  var prog = calcEntryProgress(currentEntry.id, state);
-  var meta = statusMeta(state.checkins[currentEntry.id].status);
-  return '<div class="panel thisweek"><span class="eyebrow">THIS WEEK \u2022 ' + currentEntry.codeLabel + '</span>' +
-    '<div class="thisweek-top"><h2>' + escapeHtml(currentEntry.title) + '</h2>' +
-    '<div class="thisweek-tags"><span class="tag">' + fmtRange(currentEntry.start, currentEntry.end) + '</span><span class="tag">' + escapeHtml(phase.dailyTime) + '</span></div></div>' +
-    '<p class="deliverable">Deliverable: ' + escapeHtml(currentEntry.deliverable) + '</p>' +
-    '<div class="thisweek-bottom"><span class="mini-stat">' + prog.done + '/' + prog.total + ' tasks done</span>' +
-    '<span class="badge ' + meta.cls + '">' + meta.label + '</span>' +
-    '<button class="btn-primary" type="button" data-action="jump" data-entry="' + currentEntry.id + '">Open this week\u2019s checklist \u2193</button></div></div>';
+function renderDSA(state){
+  var lcPct=pct(state.leetcode,120);
+  var hrPct=pct(state.hackerrank,40);
+  return '<div class="dsa-panel">'+
+    '<div class="dsa-col">'+
+    '<span class="dsa-label">LeetCode DSA \u2014 Starts Week 1</span>'+
+    '<p class="dsa-note">3+ problems/week throughout all phases via NeetCode 150. Target: 120+ before January applications.</p>'+
+    '<div class="dsa-controls">'+
+    '<button class="step-btn" type="button" data-action="lc-dec">\u2212</button>'+
+    '<input class="num-input" id="lcinput" type="number" min="0" value="'+state.leetcode+'" aria-label="LeetCode problems solved" />'+
+    '<button class="step-btn" type="button" data-action="lc-inc">+</button>'+
+    '<span class="dsa-target">/ 120</span></div>'+
+    '<div class="progress-track"><div class="progress-fill green" id="lcfill" style="width:'+lcPct+'%"></div></div>'+
+    '</div>'+
+    '<div class="dsa-col">'+
+    '<span class="dsa-label">HackerRank Python \u2014 Phase 1</span>'+
+    '<p class="dsa-note">Easy tier (arrays, strings, sorting, dicts). Target: 40+ Easy by end of Week 3. Start Medium by Day 18.</p>'+
+    '<div class="dsa-controls">'+
+    '<button class="step-btn" type="button" data-action="hr-dec">\u2212</button>'+
+    '<input class="num-input" id="hrinput" type="number" min="0" value="'+state.hackerrank+'" aria-label="HackerRank problems solved" />'+
+    '<button class="step-btn" type="button" data-action="hr-inc">+</button>'+
+    '<span class="dsa-target">/ 40</span></div>'+
+    '<div class="progress-track"><div class="progress-fill violet" id="hrfill" style="width:'+hrPct+'%"></div></div>'+
+    '</div></div>';
 }
 
-function renderParallelTrack(state) {
-  return '<div class="panel parallel"><span class="eyebrow">PARALLEL TRACK \u2014 LEETCODE (from Week 21)</span>' +
-    '<p class="parallel-note">2\u20133 problems/week from Week 21 onward. Target: 100+ solved (70% Easy / 30% Medium) via NeetCode 150 before applications open.</p>' +
-    '<div class="parallel-controls">' +
-    '<button class="step-btn" type="button" data-action="leetcode-dec" aria-label="Decrease count">\u2212</button>' +
-    '<input id="leetcodeinput" type="number" min="0" value="' + state.leetcode + '" aria-label="LeetCode problems solved" />' +
-    '<button class="step-btn" type="button" data-action="leetcode-inc" aria-label="Increase count">+</button>' +
-    '<span class="parallel-target">/ 100</span></div>' +
-    '<div class="progress-track"><div class="progress-fill accent2" id="leetcodefill" style="width:' + pct(state.leetcode,100) + '%"></div></div></div>';
-}
+var NEW_TASK_PREFIXES=['NEW \u2014','NEW\u00a0\u2014'];
+function isNewTask(t){ return NEW_TASK_PREFIXES.some(function(p){return t.indexOf(p)===0;}); }
 
-function renderEntry(entry, state, isCurrent) {
-  var prog = calcEntryProgress(entry.id, state);
-  var checkin = state.checkins[entry.id];
-  var meta = statusMeta(checkin.status);
-  var tasksHtml = entry.tasks.map(function(task, idx) {
-    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="' + entry.id + '" data-idx="' + idx + '"' + (state.tasks[entry.id][idx]?' checked="checked"':'') + ' /><span>' + escapeHtml(task) + '</span></label>';
+function renderEntry(entry, state, isCurrent){
+  var prog=calcEntry(entry.id,state);
+  var checkin=state.checkins[entry.id];
+  var meta=statusMeta(checkin.status);
+  var isNewEntry=(entry.id==='w13'||entry.id==='w14'||entry.id==='w19'||entry.id==='w23');
+  var tasksHtml=entry.tasks.map(function(task,idx){
+    var checked=state.tasks[entry.id][idx]?' checked="checked"':'';
+    var newCls=isNewTask(task)?' class="new-item"':'';
+    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="'+entry.id+'" data-idx="'+idx+'"'+checked+' /><span'+newCls+'>'+esc(task)+'</span></label>';
   }).join('');
-  var noteHtml = entry.note ? '<p class="entry-note">' + escapeHtml(entry.note) + '</p>' : '';
-  var currentTag = isCurrent ? '<span class="now-tag">NOW</span>' : '';
-  return '<div class="entry' + (isCurrent?' open':'') + '" id="entry_' + entry.id + '">' +
-    '<div class="entry-header" data-action="toggle-entry" data-entry="' + entry.id + '" role="button" tabindex="0" aria-expanded="' + (isCurrent?'true':'false') + '">' +
-    '<span class="entry-code">' + entry.codeLabel + '</span>' +
-    '<div class="entry-titlewrap"><span class="entry-date">' + fmtRange(entry.start,entry.end) + '</span>' +
-    '<span class="entry-title">' + escapeHtml(entry.title) + ' ' + currentTag + '</span></div>' +
-    '<span class="badge ' + meta.cls + '" id="badge_' + entry.id + '">' + meta.label + '</span>' +
-    '<span class="chevron" aria-hidden="true">\u203a</span></div>' +
-    '<div class="entry-body">' + noteHtml +
-    '<p class="entry-deliverable">Deliverable: ' + escapeHtml(entry.deliverable) + '</p>' +
-    '<div class="task-list">' + tasksHtml + '</div>' +
-    '<p class="task-progress" id="taskprog_' + entry.id + '">' + prog.done + '/' + prog.total + ' tasks done</p>' +
-    '<div class="checkin"><span class="checkin-label">Weekly check-in</span>' +
-    '<div class="pill-group">' +
-    '<button class="pill' + (checkin.status==='ontrack'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="ontrack">On track</button>' +
-    '<button class="pill' + (checkin.status==='behind'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="behind">Behind</button>' +
-    '<button class="pill' + (checkin.status==='skipped'?' active':'') + '" type="button" data-action="status" data-entry="' + entry.id + '" data-status="skipped">Skipped</button>' +
-    '</div><textarea data-action="notes" data-entry="' + entry.id + '" id="notes_' + entry.id + '" placeholder="What happened this week? What blocked you, what changes next week?">' + escapeHtml(checkin.notes) + '</textarea>' +
-    '<div class="save-row"><button class="btn-secondary" type="button" data-action="save-checkin" data-entry="' + entry.id + '">Save check-in</button>' +
-    '<span class="saved-msg" id="savedmsg_' + entry.id + '"></span></div></div></div></div>';
+  var noteHtml=entry.note?('<p class="entry-note'+(entry.id==='w13'||entry.id==='w14'||entry.id==='w19'||entry.id==='w23'?' warn':'')+'">'+esc(entry.note)+'</p>'):'';
+  var curTag=isCurrent?'<span class="now-tag">NOW</span>':'';
+  var newTag=isNewEntry?'<span class="new-feature-tag">\u2605 REVISED</span>':'';
+  return '<div class="entry'+(isCurrent?' open':'')+'" id="entry_'+entry.id+'">' +
+    '<div class="entry-header" data-action="toggle-entry" data-entry="'+entry.id+'" role="button" tabindex="0" aria-expanded="'+(isCurrent?'true':'false')+'">'+
+    '<span class="entry-code">'+entry.codeLabel+'</span>'+
+    '<div class="entry-titlewrap"><span class="entry-date">'+fmtRange(entry.start,entry.end)+'</span>'+
+    '<span class="entry-title">'+esc(entry.title)+' '+curTag+newTag+'</span></div>'+
+    '<span class="badge '+meta.cls+'" id="badge_'+entry.id+'">'+meta.label+'</span>'+
+    '<span class="chevron" aria-hidden="true">\u203a</span></div>'+
+    '<div class="entry-body">'+noteHtml+
+    '<p class="entry-deliverable">Deliverable: '+esc(entry.deliverable)+'</p>'+
+    '<div class="task-list">'+tasksHtml+'</div>'+
+    '<p class="task-progress" id="taskprog_'+entry.id+'">'+prog.done+'/'+prog.total+' tasks done</p>'+
+    '<div class="checkin"><span class="checkin-label">Weekly check-in</span>'+
+    '<div class="pill-group">'+
+    '<button class="pill'+(checkin.status==='ontrack'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="ontrack">On track</button>'+
+    '<button class="pill'+(checkin.status==='behind'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="behind">Behind</button>'+
+    '<button class="pill'+(checkin.status==='skipped'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="skipped">Skipped</button>'+
+    '</div><textarea data-action="notes" data-entry="'+entry.id+'" id="notes_'+entry.id+'" placeholder="What happened this week? What blocked you, what changes next week?">'+esc(checkin.notes)+'</textarea>'+
+    '<div class="save-row"><button class="btn-secondary" type="button" data-action="save-checkin" data-entry="'+entry.id+'">Save check-in</button>'+
+    '<span class="saved-msg" id="savedmsg_'+entry.id+'"></span></div></div></div></div>';
 }
 
-function renderPhase(phase, entries, state, currentEntry) {
-  var phaseEntries = entries.filter(function(e){return e.phase===phase.id;});
-  var prog = calcPhaseProgress(phase.id, entries, state);
-  var exitHtml = phase.exit.map(function(item,idx) {
-    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="' + phase.id + '" data-idx="' + idx + '"' + (state.phaseExit[phase.id][idx]?' checked="checked"':'') + ' /><span>' + escapeHtml(item) + '</span></label>';
+function renderPhase(phase, entries, state, cur){
+  var phEntries=entries.filter(function(e){return e.phase===phase.id;});
+  var prog=calcPhase(phase.id,entries,state);
+  var exitHtml=phase.exit.map(function(item,idx){
+    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="'+phase.id+'" data-idx="'+idx+'"'+(state.phaseExit[phase.id][idx]?' checked="checked"':'')+' /><span>'+esc(item)+'</span></label>';
   }).join('');
-  var entriesHtml = phaseEntries.map(function(e){return renderEntry(e,state,!!(currentEntry&&currentEntry.id===e.id));}).join('');
-  return '<section class="phase-section">' +
-    '<div class="phase-header"><div class="phase-heading"><span class="phase-code">' + phase.code + '</span><h3>' + escapeHtml(phase.name) + '</h3></div>' +
-    '<span class="phase-time">' + escapeHtml(phase.dailyTime) + '</span></div>' +
-    '<p class="phase-goal">' + escapeHtml(phase.goal) + '</p>' +
-    '<div class="phase-progress-row"><div class="progress-track"><div class="progress-fill" id="phaseprogfill_' + phase.id + '" style="width:' + pct(prog.done,prog.total) + '%"></div></div>' +
-    '<span class="phase-progress-text" id="phaseprogtext_' + phase.id + '">' + prog.done + '/' + prog.total + ' tasks</span></div>' +
-    '<button class="exit-toggle" type="button" data-action="toggle-exit-panel" data-phase="' + phase.id + '" aria-expanded="false">View phase exit checklist \u25be</button>' +
-    '<div class="exit-panel" id="exitpanel_' + phase.id + '">' + exitHtml + '</div>' +
-    '<div class="entry-list">' + entriesHtml + '</div></section>';
+  var entriesHtml=phEntries.map(function(e){return renderEntry(e,state,!!(cur&&cur.id===e.id));}).join('');
+  return '<section class="phase-section">'+
+    '<div class="phase-header"><div class="phase-heading"><span class="phase-code">'+phase.code+'</span><h3>'+esc(phase.name)+'</h3></div>'+
+    '<span class="phase-time">'+esc(phase.dailyTime)+'</span></div>'+
+    '<p class="phase-goal">'+esc(phase.goal)+'</p>'+
+    '<div class="phase-progress-row"><div class="progress-track"><div class="progress-fill" id="phasefill_'+phase.id+'" style="width:'+pct(prog.done,prog.total)+'%"></div></div>'+
+    '<span class="phase-progress-text" id="phasetext_'+phase.id+'">'+prog.done+'/'+prog.total+' tasks</span></div>'+
+    '<button class="exit-toggle" type="button" data-action="toggle-exit" data-phase="'+phase.id+'" aria-expanded="false">View phase exit checklist \u25be</button>'+
+    '<div class="exit-panel" id="exitpanel_'+phase.id+'">'+exitHtml+'</div>'+
+    '<div class="entry-list">'+entriesHtml+'</div></section>';
 }
 
-function renderFooter() {
+function renderFooter(){
   return '<div class="footer-row"><span class="save-status" id="savestatus">Loaded</span><button class="reset-btn" type="button" data-action="reset">Reset all progress</button></div>';
 }
 
-function renderApp(entries, state) {
-  var today = todayMidnight();
-  var currentEntry = findCurrentEntry(entries, today);
-  var html = renderTitleBlock(entries, state, currentEntry) + renderThisWeek(entries, currentEntry, state) + renderParallelTrack(state);
-  PHASES.forEach(function(phase){ html += renderPhase(phase, entries, state, currentEntry); });
-  html += renderFooter();
+function renderApp(entries, state){
+  var today=todayMid(), cur=findCurrent(entries,today);
+  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state);
+  PHASES.forEach(function(ph){ html+=renderPhase(ph,entries,state,cur); });
+  html+=renderFooter();
   return html;
 }
 
-function updateBadge(entryId, state) {
-  var el = document.getElementById('badge_' + entryId);
-  if (!el) return;
-  var meta = statusMeta(state.checkins[entryId].status);
-  el.className = 'badge ' + meta.cls; el.textContent = meta.label;
-}
-function updatePhaseProgressUI(phaseId, entries, state) {
-  var prog = calcPhaseProgress(phaseId, entries, state);
-  var fill = document.getElementById('phaseprogfill_' + phaseId);
-  var text = document.getElementById('phaseprogtext_' + phaseId);
-  if (fill) fill.style.width = pct(prog.done,prog.total) + '%';
-  if (text) text.textContent = prog.done + '/' + prog.total + ' tasks';
-}
-function updateOverallProgressUI(entries, state) {
-  var prog = calcOverallProgress(entries, state);
-  var fill = document.getElementById('overallfill');
-  var text = document.getElementById('overalltext');
-  if (fill) fill.style.width = pct(prog.done,prog.total) + '%';
-  if (text) text.textContent = prog.done + '/' + prog.total + ' \u2022 ' + pct(prog.done,prog.total) + '%';
-}
-function updateEntryUI(entryId, entries, state) {
-  var taskEl = document.getElementById('taskprog_' + entryId);
-  var prog = calcEntryProgress(entryId, state);
-  if (taskEl) taskEl.textContent = prog.done + '/' + prog.total + ' tasks done';
-  var phaseId = findPhaseForEntry(entryId, entries);
-  if (phaseId) updatePhaseProgressUI(phaseId, entries, state);
-  updateOverallProgressUI(entries, state);
-}
-function updateLeetcodeUI(state) {
-  var input = document.getElementById('leetcodeinput');
-  var fill = document.getElementById('leetcodefill');
-  if (input) input.value = state.leetcode;
-  if (fill) fill.style.width = pct(state.leetcode,100) + '%';
-}
-function showSavedMessage(entryId) {
-  var el = document.getElementById('savedmsg_' + entryId);
-  if (!el) return;
-  el.textContent = 'Saved \u2713'; el.classList.add('show');
-  setTimeout(function(){ el.classList.remove('show'); }, 2200);
-}
-function setStatus(text) { var el = document.getElementById('savestatus'); if (el) el.textContent = text; }
+/* ────────────────────────────────
+   DOM UPDATES
+────────────────────────────────── */
+function updateBadge(id, state){ var el=document.getElementById('badge_'+id); if(!el) return; var m=statusMeta(state.checkins[id].status); el.className='badge '+m.cls; el.textContent=m.label; }
+function updatePhaseProg(pid, entries, state){ var p=calcPhase(pid,entries,state); var f=document.getElementById('phasefill_'+pid),t=document.getElementById('phasetext_'+pid); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' tasks'; }
+function updateOverallProg(entries, state){ var p=calcOverall(entries,state); var f=document.getElementById('overallfill'),t=document.getElementById('overalltext'); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' \u2022 '+pct(p.done,p.total)+'%'; }
+function updateEntryUI(id, entries, state){ var el=document.getElementById('taskprog_'+id); if(el){var p=calcEntry(id,state);el.textContent=p.done+'/'+p.total+' tasks done';} var pid=phaseForEntry(id,entries); if(pid)updatePhaseProg(pid,entries,state); updateOverallProg(entries,state); }
+function updateLCUI(state){ var i=document.getElementById('lcinput'),f=document.getElementById('lcfill'); if(i)i.value=state.leetcode; if(f)f.style.width=pct(state.leetcode,120)+'%'; }
+function updateHRUI(state){ var i=document.getElementById('hrinput'),f=document.getElementById('hrfill'); if(i)i.value=state.hackerrank; if(f)f.style.width=pct(state.hackerrank,40)+'%'; }
+function showSaved(id){ var el=document.getElementById('savedmsg_'+id); if(!el)return; el.textContent='Saved \u2713'; el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},2200); }
+function setStatus(text){ var el=document.getElementById('savestatus'); if(el)el.textContent=text; }
 
-/* ===== localStorage persistence ===== */
-var saveTimer = null;
+/* ────────────────────────────────
+   PERSISTENCE  (localStorage)
+────────────────────────────────── */
+var saveTimer=null;
+function doSave(){ setStatus('Saving\u2026'); try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); setStatus('Saved'); }catch(e){ setStatus('Save failed \u2014 storage full?'); } }
+function scheduleSave(now){ if(saveTimer){clearTimeout(saveTimer);saveTimer=null;} if(now){doSave();return;} setStatus('Saving\u2026'); saveTimer=setTimeout(doSave,700); }
+function resetProgress(entries){ state=defaultState(); try{localStorage.removeItem(STORAGE_KEY);}catch(e){} render(entries); setStatus('Reset'); }
 
-function doSave() {
-  setStatus('Saving\u2026');
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    setStatus('Saved');
-  } catch(err) {
-    console.error('Save error', err);
-    setStatus('Save failed \u2014 storage full?');
+/* ────────────────────────────────
+   EVENTS
+────────────────────────────────── */
+var appEl=null, entries=null, state=null;
+
+function handleClick(el, entriesArg){
+  if(!el||!el.getAttribute) return;
+  var action=el.getAttribute('data-action');
+  if(!action) return;
+  if(action==='toggle-entry'){
+    var id=el.getAttribute('data-entry'), c=document.getElementById('entry_'+id);
+    if(c){var o=c.classList.toggle('open'); el.setAttribute('aria-expanded',o?'true':'false');}
+  } else if(action==='toggle-exit'){
+    var pid=el.getAttribute('data-phase'), p=document.getElementById('exitpanel_'+pid);
+    if(p){var op=p.classList.toggle('open'); el.setAttribute('aria-expanded',op?'true':'false');}
+  } else if(action==='jump'){
+    var eid=el.getAttribute('data-entry'), tgt=document.getElementById('entry_'+eid);
+    if(tgt){tgt.classList.add('open'); tgt.scrollIntoView({behavior:'smooth',block:'start'});}
+  } else if(action==='status'){
+    var eId=el.getAttribute('data-entry'), sv=el.getAttribute('data-status');
+    state.checkins[eId].status=(state.checkins[eId].status===sv)?null:sv;
+    var grp=el.parentElement; if(grp)Array.prototype.forEach.call(grp.children,function(b){b.classList.remove('active');}); if(state.checkins[eId].status===sv)el.classList.add('active');
+    updateBadge(eId,state); scheduleSave();
+  } else if(action==='save-checkin'){
+    var eId2=el.getAttribute('data-entry'), ne=document.getElementById('notes_'+eId2);
+    state.checkins[eId2].notes=ne?ne.value:''; state.checkins[eId2].savedAt=new Date().toISOString();
+    showSaved(eId2); scheduleSave(true);
+  } else if(action==='lc-inc'||action==='lc-dec'){
+    state.leetcode=Math.max(0,state.leetcode+(action==='lc-inc'?1:-1)); updateLCUI(state); scheduleSave();
+  } else if(action==='hr-inc'||action==='hr-dec'){
+    state.hackerrank=Math.max(0,state.hackerrank+(action==='hr-inc'?1:-1)); updateHRUI(state); scheduleSave();
+  } else if(action==='reset'){
+    if(window.confirm('Reset all saved progress? This cannot be undone.')) resetProgress(entriesArg);
   }
 }
 
-function scheduleSave(immediate) {
-  if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
-  if (immediate) { doSave(); return; }
-  setStatus('Saving\u2026');
-  saveTimer = setTimeout(doSave, 700);
-}
-
-function resetProgress(entries) {
-  state = defaultState();
-  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-  render(entries);
-  setStatus('Reset');
-}
-
-var appEl = null;
-var entries = null;
-var state = null;
-
-function handleClick(actionEl, entriesArg) {
-  if (!actionEl || !actionEl.getAttribute) return;
-  var action = actionEl.getAttribute('data-action');
-  if (!action) return;
-  if (action === 'toggle-entry') {
-    var id = actionEl.getAttribute('data-entry');
-    var container = document.getElementById('entry_' + id);
-    if (container) { var nowOpen = container.classList.toggle('open'); actionEl.setAttribute('aria-expanded', nowOpen?'true':'false'); }
-  } else if (action === 'toggle-exit-panel') {
-    var phaseId = actionEl.getAttribute('data-phase');
-    var panel = document.getElementById('exitpanel_' + phaseId);
-    if (panel) { var open = panel.classList.toggle('open'); actionEl.setAttribute('aria-expanded', open?'true':'false'); }
-  } else if (action === 'jump') {
-    var entryId = actionEl.getAttribute('data-entry');
-    var target = document.getElementById('entry_' + entryId);
-    if (target) { target.classList.add('open'); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
-  } else if (action === 'status') {
-    var eId = actionEl.getAttribute('data-entry');
-    var statusVal = actionEl.getAttribute('data-status');
-    state.checkins[eId].status = (state.checkins[eId].status === statusVal) ? null : statusVal;
-    var group = actionEl.parentElement;
-    if (group) { Array.prototype.forEach.call(group.children, function(btn){btn.classList.remove('active');}); if (state.checkins[eId].status === statusVal) actionEl.classList.add('active'); }
-    updateBadge(eId, state); scheduleSave();
-  } else if (action === 'save-checkin') {
-    var eId2 = actionEl.getAttribute('data-entry');
-    var notesEl = document.getElementById('notes_' + eId2);
-    state.checkins[eId2].notes = notesEl ? notesEl.value : '';
-    state.checkins[eId2].savedAt = new Date().toISOString();
-    showSavedMessage(eId2); scheduleSave(true);
-  } else if (action === 'leetcode-inc' || action === 'leetcode-dec') {
-    state.leetcode = Math.max(0, state.leetcode + (action === 'leetcode-inc' ? 1 : -1));
-    updateLeetcodeUI(state); scheduleSave();
-  } else if (action === 'reset') {
-    if (window.confirm('Reset all saved progress? This cannot be undone.')) resetProgress(entriesArg);
-  }
-}
-
-function attachEvents(entriesArg) {
-  appEl.addEventListener('click', function(e) { handleClick(e.target.closest('[data-action]'), entriesArg); });
-  appEl.addEventListener('keydown', function(e) {
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    var actionEl = e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit-panel"]');
-    if (actionEl) { e.preventDefault(); handleClick(actionEl, entriesArg); }
+function attachEvents(entriesArg){
+  appEl.addEventListener('click',function(e){handleClick(e.target.closest('[data-action]'),entriesArg);});
+  appEl.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    var el=e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit"]');
+    if(el){e.preventDefault();handleClick(el,entriesArg);}
   });
-  appEl.addEventListener('change', function(e) {
-    var t = e.target;
-    if (!t.matches) return;
-    if (t.matches('input[type="checkbox"][data-action="task"]')) {
-      var entryId = t.getAttribute('data-entry');
-      var idx = parseInt(t.getAttribute('data-idx'), 10);
-      state.tasks[entryId][idx] = t.checked;
-      updateEntryUI(entryId, entriesArg, state); scheduleSave();
-    } else if (t.matches('input[type="checkbox"][data-action="exit"]')) {
-      var phaseId = t.getAttribute('data-phase');
-      var idx2 = parseInt(t.getAttribute('data-idx'), 10);
-      state.phaseExit[phaseId][idx2] = t.checked; scheduleSave();
-    } else if (t.id === 'leetcodeinput') {
-      var v = parseInt(t.value, 10);
-      if (isNaN(v) || v < 0) v = 0;
-      state.leetcode = v; updateLeetcodeUI(state); scheduleSave();
+  appEl.addEventListener('change',function(e){
+    var t=e.target; if(!t.matches) return;
+    if(t.matches('input[type="checkbox"][data-action="task"]')){
+      var eid=t.getAttribute('data-entry'), idx=parseInt(t.getAttribute('data-idx'),10);
+      state.tasks[eid][idx]=t.checked; updateEntryUI(eid,entriesArg,state); scheduleSave();
+    } else if(t.matches('input[type="checkbox"][data-action="exit"]')){
+      state.phaseExit[t.getAttribute('data-phase')][parseInt(t.getAttribute('data-idx'),10)]=t.checked; scheduleSave();
+    } else if(t.id==='lcinput'){
+      var v=parseInt(t.value,10); state.leetcode=isNaN(v)||v<0?0:v; updateLCUI(state); scheduleSave();
+    } else if(t.id==='hrinput'){
+      var v2=parseInt(t.value,10); state.hackerrank=isNaN(v2)||v2<0?0:v2; updateHRUI(state); scheduleSave();
     }
   });
-  appEl.addEventListener('input', function(e) {
-    var t = e.target;
-    if (t.matches && t.matches('textarea[data-action="notes"]')) {
-      state.checkins[t.getAttribute('data-entry')].notes = t.value; scheduleSave();
-    }
+  appEl.addEventListener('input',function(e){
+    var t=e.target;
+    if(t.matches&&t.matches('textarea[data-action="notes"]')){ state.checkins[t.getAttribute('data-entry')].notes=t.value; scheduleSave(); }
   });
 }
 
-function render(entriesArg) { appEl.innerHTML = renderApp(entriesArg, state); }
+function render(entriesArg){ appEl.innerHTML=renderApp(entriesArg,state); }
 
-function init() {
-  appEl = document.getElementById('app');
-  entries = buildSchedule();
-  state = defaultState();
-
-  // Load from localStorage — persists across tab closes and browser restarts
-  try {
-    var saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) state = hydrateState(JSON.parse(saved));
-  } catch(err) {
-    console.warn('Could not load saved progress, starting fresh.', err);
-  }
-
+function init(){
+  appEl=document.getElementById('app');
+  entries=buildSchedule();
+  state=defaultState();
+  try{ var s=localStorage.getItem(STORAGE_KEY); if(s)state=hydrateState(JSON.parse(s)); }catch(e){ console.warn('Could not load saved progress, starting fresh.',e); }
   render(entries);
   attachEvents(entries);
   setStatus('Loaded');
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+else init();
 </script>
 </body>
 </html>
