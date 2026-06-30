@@ -197,10 +197,11 @@
 
 <script>
 /* ──────────────────────────────────────────────
-   REVISED EDITION TRACKER  ·  July 1 – Dec 31 2026
+   REVISED EDITION TRACKER · Compressed to real schedule
+   Start: Mon 6 Jul 2026 · ~25 hrs/week · ~20 calendar weeks
    ────────────────────────────────────────────── */
 var STORAGE_KEY = 'adi-ml-roadmap-v2-progress';
-var START_DATE  = (function(){ var d=new Date(2026,6,1); d.setHours(0,0,0,0); return d; })();
+var START_DATE  = (function(){ var d=new Date(2026,6,6); d.setHours(0,0,0,0); return d; })(); // Mon 6 Jul 2026 — term + timetable start
 var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
 /* ── PHASES ── */
@@ -208,14 +209,14 @@ var PHASES = [
   {
     id:1, code:'SECTION 01', name:'Foundation Sprint',
     dailyTime:'4 hrs / day',
-    goal:'Build linear algebra and probability intuition, get Python/NumPy/Pandas functional, and establish the LeetCode DSA habit from day one.',
+    goal:'Build linear algebra and probability intuition, get Python/NumPy/Pandas functional. DSA habit is already established (337 on A2Z) \u2014 this phase is about the math, not building that habit from scratch.',
     exit:[
       'Load, clean, and summarise any raw CSV without Googling',
       'Explain eigenvectors geometrically — not just mathematically',
       'Solve the Bayes disease false-positive problem from memory',
       '40+ HackerRank Easy problems solved, Medium tier started',
       'Understand why NumPy is faster than Python loops at the C-extension level',
-      'LeetCode DSA habit established — 3+ problems/week minimum'
+      'A2Z: chip away at DP whenever there\u2019s a spare 20 minutes \u2014 no dedicated time needed yet'
     ]
   },
   {
@@ -228,7 +229,7 @@ var PHASES = [
       'Can explain why Random Forest reduces variance but not bias',
       'Project 1 on GitHub: SHAP plots + quantified ROC-AUC > 0.92 in README',
       '15+ LeetCode SQL Medium problems including window functions',
-      '80+ total coding problems combined (HackerRank + LeetCode)',
+      'A2Z DSA is no longer a Phase 2 concern \u2014 already 337 deep, well past any phase target',
       'Prompt engineering: zero-shot, few-shot, chain-of-thought — know the differences cold'
     ]
   },
@@ -244,7 +245,7 @@ var PHASES = [
       'Built IMDB TF-IDF sentiment classifier at 88%+ accuracy',
       'Can explain why cosine similarity measures semantic closeness in embedding space',
       'Know stratified K-Fold CV, calibration curves, learning curves, AP vs AUC-ROC for imbalanced data',
-      '100+ LeetCode problems cumulative'
+      'A2Z: DP section substantially underway (target deep progress, not a raw count)'
     ]
   },
   {
@@ -259,7 +260,7 @@ var PHASES = [
       'Can explain the full RAG pipeline: embed → retrieve → inject → generate',
       'Project 2 live at a public URL — both projects have quantified metrics in README',
       'HuggingFace profile has at least one public model or Space',
-      '120+ LeetCode problems solved (Easy + Medium combined)'
+      'A2Z DP + Tries fully closed \u2014 the sheet complete, not just \u201cenough problems\u201d'
     ]
   }
 ];
@@ -268,7 +269,7 @@ var PHASES = [
 /* isNew marks tasks added in the revised edition */
 var ENTRIES_RAW = [
   /* ── PHASE 1 ── */
-  { id:'w1', phase:1, weekNums:[1], days:7,
+  { id:'w1', phase:1, weekNums:[1], days:6,
     title:'Linear Algebra \u2014 Vectors & Matrix Operations',
     deliverable:'NumPy matrix exercises',
     tasks:[
@@ -278,10 +279,10 @@ var ENTRIES_RAW = [
       'Multiply two 3\xd73 matrices by hand, verify with NumPy',
       'Find determinants of 2\xd72 and 3\xd73 matrices, including a linearly dependent case',
       'Write a dot-product function from scratch without np.dot',
-      'LeetCode DSA: 3+ problems this week \u2014 NeetCode Easy tier (Arrays, Strings)'
+      'No dedicated DSA time needed this week \u2014 focus is linear algebra'
     ]
   },
-  { id:'w2', phase:1, weekNums:[2], days:7,
+  { id:'w2', phase:1, weekNums:[2], days:5,
     title:'Eigenvalues, Eigenvectors & Probability',
     deliverable:'Eigen derivation + Bayes problem',
     tasks:[
@@ -290,10 +291,10 @@ var ENTRIES_RAW = [
       'Compute eigenvalues/eigenvectors of a 2\xd72 by hand using the characteristic equation, verify with np.linalg.eig()',
       'Bayes problem: 1% disease prevalence, 99% accurate test \u2014 solve on paper, then code it',
       'Plot N(0,1) and shade 1\u03c3 / 2\u03c3 / 3\u03c3 regions with matplotlib',
-      'LeetCode DSA: 3+ problems this week (HashMaps, Two Pointers)'
+      'No dedicated DSA time needed this week \u2014 focus is eigenvectors + probability'
     ]
   },
-  { id:'w3', phase:1, weekNums:[3], days:7,
+  { id:'w3', phase:1, weekNums:[3], days:5,
     title:'Python Deep Dive + NumPy Vectorization',
     deliverable:'40+ HackerRank problems',
     tasks:[
@@ -304,10 +305,9 @@ var ENTRIES_RAW = [
       'Understand vectorization: why np.sum() is 100\xd7 faster at the C-extension level, not just empirically',
       'File I/O: read a CSV with open() before ever touching Pandas',
       'Target: 40+ HackerRank Easy problems by end of Week 3. Start Medium tier by Day 18.',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w4', phase:1, weekNums:[4], days:7,
+  { id:'w4', phase:1, weekNums:[4], days:5,
     title:'Pandas \u2014 Data Manipulation',
     deliverable:'End-to-end CSV pipeline',
     tasks:[
@@ -317,12 +317,11 @@ var ENTRIES_RAW = [
       'Day 2: isnull(), fillna(), dropna() \u2014 GroupBy split-apply-combine pattern',
       'Day 3: merge, join, concat \u2014 inner/outer/left/right joins',
       'Day 4: apply(), value_counts(), pivot tables. Full loop: load \u2192 clean \u2192 explore \u2192 export',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
 
   /* ── PHASE 2 ── */
-  { id:'w5', phase:2, weekNums:[5], days:7,
+  { id:'w5', phase:2, weekNums:[5], days:5,
     title:'Calculus Bridge \u2014 Gradient Descent from First Principles',
     deliverable:'GD loop on f(x) = x\xb2',
     tasks:[
@@ -332,10 +331,9 @@ var ENTRIES_RAW = [
       'Partial derivatives and chain rule \u2014 this is the mathematical core of backpropagation',
       'Derive the GD update rule: \u03b8_j = \u03b8_j \u2212 \u03b1 \u00b7 \u2202J/\u2202\u03b8_j yourself from the definition of a derivative',
       'CRITICAL: Write GD for f(x)=x\xb2 from scratch. Start x=10, lr=0.1, 100 iters, plot convergence.',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w6', phase:2, weekNums:[6], days:7,
+  { id:'w6', phase:2, weekNums:[6], days:6,
     title:'Linear Regression \u2014 Full Derivation to Code',
     deliverable:'LR in NumPy vs sklearn',
     tasks:[
@@ -345,10 +343,9 @@ var ENTRIES_RAW = [
       'Derive the Normal Equation: \u03b8 = (X\u1d40X)\u207b\u00b9X\u1d40y \u2014 when does X\u1d40X fail to be invertible?',
       'Implement LR from scratch in NumPy on California Housing; compute R\xb2 manually',
       'Replicate with sklearn.linear_model.LinearRegression \u2014 coefficients must match to several decimals',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w7', phase:2, weekNums:[7], days:7,
+  { id:'w7', phase:2, weekNums:[7], days:6,
     title:'Logistic Regression \u2014 Classification Foundations',
     deliverable:'LR + ROC-AUC on Breast Cancer',
     tasks:[
@@ -359,10 +356,10 @@ var ENTRIES_RAW = [
       'Derive the gradient of cross-entropy. Implement: sigmoid, log loss, GD update, 0.5-threshold prediction.',
       'Add L2 regularization (Ridge) \u2014 understand what \u03bb does geometrically to the decision boundary',
       'Sklearn replication on Breast Cancer: compute Precision/Recall/F1/ROC-AUC manually. PR tradeoff is in every fintech interview.',
-      'LeetCode DSA: 3+ problems this week (SQL Medium starts here)'
+      'SQL Medium track begins this week \u2014 separate tracker above, not A2Z'
     ]
   },
-  { id:'w8', phase:2, weekNums:[8], days:7,
+  { id:'w8', phase:2, weekNums:[8], days:5,
     title:'Decision Trees + Ensemble Methods',
     deliverable:'Ensemble model comparison',
     tasks:[
@@ -373,10 +370,9 @@ var ENTRIES_RAW = [
       'Random Forest: bagging + random feature subsets. Why averaging overfit trees works (bias-variance tradeoff).',
       'XGBoost: sequential error correction. Tune: n_estimators, max_depth, learning_rate, subsample, colsample_bytree.',
       'Do NOT derive RF or XGBoost from scratch \u2014 time cost >> interview payoff at this stage',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w9', phase:2, weekNums:[9], days:7,
+  { id:'w9', phase:2, weekNums:[9], days:6,
     title:'SQL Window Functions + EDA Start',
     deliverable:'15 LeetCode SQL Medium',
     note:'Mandatory \u2014 fintech interviewers will test this. Do it in Week 9, not later.',
@@ -386,40 +382,36 @@ var ENTRIES_RAW = [
       'After each LeetCode SQL problem, rewrite the solution using a CTE for practice',
       'Download Kaggle Credit Card Fraud Detection dataset (0.17% fraud rate)',
       'Begin EDA: feature distributions, initial class imbalance analysis, correlation matrix',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w10', phase:2, weekNums:[10], days:7,
+  { id:'w10', phase:2, weekNums:[10], days:5,
     title:'EDA Deep Dive \u2014 Credit Card Fraud Dataset',
     deliverable:'Full EDA notebook + feature engineering',
     tasks:[
       'Full EDA: feature distributions, correlation matrix, outlier detection, class imbalance (0.17% fraud \u2014 understand why this matters)',
       'Run ydata-profiling auto-report, then replicate key findings manually in a notebook',
       'Feature engineering: create at least 3 new features with documented reasoning for each',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w11', phase:2, weekNums:[11], days:7,
+  { id:'w11', phase:2, weekNums:[11], days:5,
     title:'Project 1 \u2014 Data Pipeline + SMOTE',
     deliverable:'Clean dataset, class imbalance handled',
     tasks:[
       'Clean dataset: handle missing values, remove duplicates, check for data leakage',
       'Address class imbalance with SMOTE (imbalanced-learn). Understand why accuracy is a useless metric here.',
       'Feature scaling: StandardScaler for logistic regression. Understand why tree-based models do not need it.',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w12', phase:2, weekNums:[12], days:7,
+  { id:'w12', phase:2, weekNums:[12], days:6,
     title:'Project 1 \u2014 Modeling + Hyperparameter Tuning',
     deliverable:'Final model, ROC-AUC > 0.92',
     tasks:[
       'Train Logistic Regression, Random Forest, and XGBoost baselines \u2014 compare ROC-AUC',
       'Tune the best model with GridSearchCV or RandomizedSearchCV',
       'Final evaluation: Confusion matrix, Precision-Recall curve, ROC curve \u2014 plot all three',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w13', phase:2, weekNums:[13], days:7,
+  { id:'w13', phase:2, weekNums:[13], days:6,
     title:'Project 1 \u2014 SHAP Explainability + GitHub',
     deliverable:'SHAP plots + professional README',
     note:'SHAP is now core \u2014 not optional. Fintech interviewers at Barclays and JP Morgan probe model interpretability specifically.',
@@ -430,10 +422,9 @@ var ENTRIES_RAW = [
       'Write a clean, reproducible Jupyter notebook with markdown explaining each step',
       'Write README.md: problem statement, dataset, approach, SHAP findings, ROC-AUC result, how to run',
       'Push to public GitHub repo. Draft the resume line: include ROC-AUC score + SHAP insight.',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
-  { id:'w14', phase:2, weekNums:[14], days:7,
+  { id:'w14', phase:2, weekNums:[14], days:4,
     title:'Buffer + Prompt Engineering Fundamentals',
     deliverable:'Prompt engineering fundamentals',
     note:'New in revised edition \u2014 the 2026 internship landscape expects hands-on LLM experience.',
@@ -445,12 +436,11 @@ var ENTRIES_RAW = [
       'System prompts, temperature, max_tokens \u2014 what each controls and why',
       'Structured output prompting and role-play prompting for production pipelines',
       'If ahead of schedule: add calibration curves to Project 1 (strong fintech bonus)',
-      'LeetCode DSA: 3+ problems this week'
     ]
   },
 
   /* ── PHASE 3 ── */
-  { id:'w15', phase:3, weekNums:[15,16], days:14,
+  { id:'w15', phase:3, weekNums:[15,16], days:12,
     title:'Backpropagation \u2014 Build Micrograd',
     deliverable:'Micrograd trained on XOR',
     note:'Single most important exercise in the entire roadmap. Do not compress this sprint.',
@@ -462,10 +452,10 @@ var ENTRIES_RAW = [
       'Backward pass: chain rule applied recursively from output \u2192 input',
       'MANDATORY: Clone micrograd. Read it. DELETE the source. Rebuild from memory: Value class, __add__, __mul__, __pow__, relu, tanh, backward()',
       'Train your micrograd MLP on XOR (2 inputs, 1 output). Convergence confirms correct gradients.',
-      'LeetCode DSA: 3+ problems per week (Sliding Window, Binary Search \u2014 NeetCode Medium)'
+      'This is the micrograd week \u2014 no DSA time. Protect this block.'
     ]
   },
-  { id:'w17', phase:3, weekNums:[17,18], days:14,
+  { id:'w17', phase:3, weekNums:[17,18], days:10,
     title:'PyTorch \u2014 Tensors, Autograd, First MLP',
     deliverable:'MNIST 97%+ accuracy',
     tasks:[
@@ -476,10 +466,10 @@ var ENTRIES_RAW = [
       'nn.Module pattern: __init__ and forward. Training loop: forward \u2192 loss \u2192 zero_grad() \u2192 backward() \u2192 step(). Memorize this.',
       'Build MLP on MNIST: 784\u2192128\u219264\u219210, ReLU, cross-entropy loss, Adam optimizer. Target: 97%+ test accuracy.',
       'Plot training vs validation loss; spot overfitting. Experiment with Dropout and BatchNorm.',
-      'LeetCode DSA: 3+ problems per week (Trees BFS/DFS)'
+      'Light A2Z DP practice if energy allows \u2014 PyTorch + MNIST is the priority'
     ]
   },
-  { id:'w19', phase:3, weekNums:[19,20], days:14,
+  { id:'w19', phase:3, weekNums:[19,20], days:10,
     title:'Traditional NLP + Model Evaluation Best Practices',
     deliverable:'IMDB sentiment classifier + evaluation report',
     note:'New in revised edition: Model Evaluation Best Practices added in Week 20. Spend 2\u20133 extra hours on this \u2014 interviewers draw a clear line between candidates who know this and those who do not.',
@@ -494,12 +484,12 @@ var ENTRIES_RAW = [
       'NEW \u2014 Calibration curves: is a predicted probability of 0.8 actually correct 80% of the time?',
       'NEW \u2014 Learning curves: diagnose underfitting vs overfitting by varying training set size',
       'NEW \u2014 AP vs AUC-ROC for imbalanced datasets: Average Precision is almost always the better metric for fraud detection',
-      'LeetCode DSA: 3+ problems per week \u2014 cumulative target: 100+ by end of Phase 3'
+      'Good checkpoint to push A2Z DP further \u2014 aim to be deep into DP by end of Phase 3'
     ]
   },
 
   /* ── PHASE 4 ── */
-  { id:'w21', phase:4, weekNums:[21,22], days:14,
+  { id:'w21', phase:4, weekNums:[21,22], days:11,
     title:'Transformer Architecture + nanoGPT',
     deliverable:'Character-level GPT trained on Shakespeare',
     tasks:[
@@ -512,10 +502,9 @@ var ENTRIES_RAW = [
       'Positional encoding: sinusoidal \u2014 Transformers have no inherent sense of token position',
       'Encoder-only (BERT) vs Decoder-only (GPT) vs Encoder-Decoder (T5) \u2014 know when each is appropriate',
       'Build: follow Karpathy\u2019s nanoGPT, train character-level GPT on Shakespeare text',
-      'LeetCode DSA: 3+ problems per week'
     ]
   },
-  { id:'w23', phase:4, weekNums:[23,24], days:14,
+  { id:'w23', phase:4, weekNums:[23,24], days:11,
     title:'Hugging Face + LLM APIs + LangChain + RAG',
     deliverable:'DistilBERT fine-tuned + RAG demo',
     note:'New in revised edition: LLM APIs, LangChain, and RAG added. The 2026 internship landscape expects hands-on experience with all three.',
@@ -530,10 +519,9 @@ var ENTRIES_RAW = [
       'NEW \u2014 Streaming responses: why streaming matters for production UX',
       'NEW \u2014 RAG pipeline: embed a PDF with sentence-transformers + FAISS, call an LLM with retrieved chunks',
       'Understand vector databases: FAISS (in-memory) and ChromaDB (persistent). Chunking strategy.',
-      'LeetCode DSA: 3+ problems per week'
     ]
   },
-  { id:'w25', phase:4, weekNums:[25], days:7,
+  { id:'w25', phase:4, weekNums:[25], days:5,
     title:'Project 2 \u2014 Core NLP Pipeline',
     deliverable:'3-task pipeline working locally',
     tasks:[
@@ -541,10 +529,10 @@ var ENTRIES_RAW = [
       'Three tasks minimum: sentiment analysis, NER (company names, dates, amounts), extractive summarization',
       'Dataset options: legal contracts (CUAD on HuggingFace), earnings call transcripts, product reviews',
       'Consider adding RAG-enhanced Q&A using ChromaDB \u2014 strong differentiator per revised roadmap',
-      'LeetCode DSA: 3+ problems this week \u2014 final push toward 120+ total'
+      'A2Z: this is a good week to close out remaining DP/Tries gaps'
     ]
   },
-  { id:'w26', phase:4, weekNums:[26], days:7,
+  { id:'w26', phase:4, weekNums:[26], days:6,
     title:'Project 2 \u2014 FastAPI + Deployment + Polish',
     deliverable:'Live URL + resume metrics',
     note:'Mandatory \u2014 it must be a live URL, not just a GitHub link. If behind schedule, use HuggingFace Spaces + Gradio to save \u22481 week.',
@@ -555,7 +543,7 @@ var ENTRIES_RAW = [
       'Measure inference latency (target <500ms), model accuracy, and API uptime',
       'Write README: problem, architecture diagram, live demo URL, results table, how to run locally',
       'Draft resume line: \u201cBuilt NLP pipeline using fine-tuned DistilBERT (91.3% accuracy) with RAG-enhanced Q&A using ChromaDB; deployed as FastAPI service, <400ms p99 latency.\u201d',
-      'LeetCode DSA: final push \u2014 target 120+ problems total before January applications'
+      'A2Z: aim to have DP + Tries fully closed before applications open in January'
     ]
   }
 ];
@@ -596,7 +584,7 @@ function defaultState(){
   var tasks={}, checkins={}, phaseExit={};
   ENTRIES_RAW.forEach(function(e){ tasks[e.id]=e.tasks.map(function(){return false;}); checkins[e.id]={status:null,notes:'',savedAt:null}; });
   PHASES.forEach(function(p){ phaseExit[p.id]=p.exit.map(function(){return false;}); });
-  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:0,hackerrank:0};
+  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:337,hackerrank:0};
 }
 
 function hydrateState(raw){
@@ -645,7 +633,7 @@ function renderTitle(entries, state, cur){
     '<div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>'+
     '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:'+pct(ov.done,ov.total)+'%"></div></div>'+
     '<span class="tb-progress-text" id="overalltext">'+ov.done+'/'+ov.total+' \u2022 '+pct(ov.done,ov.total)+'%</span></div>'+
-    '<p class="tb-note">Revised edition: <strong>SHAP is now core</strong>, LeetCode starts Week 1, and <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4. Window: Jul 1 \u2013 Dec 31, 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>.</p></div>';
+    '<p class="tb-note">Compressed to your real ~25 hr/week budget (weekday evenings around fixed practicals + a Saturday deep-work block + light Sunday review). <strong>SHAP is core</strong>, <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4, and DSA is rescoped around your existing 337-question A2Z progress \u2014 just DP + Tries left. Start: 6 Jul 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>, with Dec\u2013Mar free for polish.</p></div>';
 }
 
 function renderThisWeek(entries, cur, state){
@@ -666,28 +654,28 @@ function renderThisWeek(entries, cur, state){
 }
 
 function renderDSA(state){
-  var lcPct=pct(state.leetcode,120);
-  var hrPct=pct(state.hackerrank,40);
+  var a2zPct=pct(state.leetcode,450);
+  var sqlPct=pct(state.hackerrank,15);
   return '<div class="dsa-panel">'+
     '<div class="dsa-col">'+
-    '<span class="dsa-label">LeetCode DSA \u2014 Starts Week 1</span>'+
-    '<p class="dsa-note">3+ problems/week throughout all phases via NeetCode 150. Target: 120+ before January applications.</p>'+
+    '<span class="dsa-label">Striver\u2019s A2Z \u2014 DP + Tries (the actual gap)</span>'+
+    '<p class="dsa-note">337 done through Graphs. Arrays/Strings/Trees/Greedy/etc. already covered \u2014 no need to restart elsewhere. Remaining: DP + Tries, then 2\u20133 problems/week ongoing maintenance. ~450 is the full sheet (approximate).</p>'+
     '<div class="dsa-controls">'+
     '<button class="step-btn" type="button" data-action="lc-dec">\u2212</button>'+
-    '<input class="num-input" id="lcinput" type="number" min="0" value="'+state.leetcode+'" aria-label="LeetCode problems solved" />'+
+    '<input class="num-input" id="lcinput" type="number" min="0" value="'+state.leetcode+'" aria-label="A2Z problems solved" />'+
     '<button class="step-btn" type="button" data-action="lc-inc">+</button>'+
-    '<span class="dsa-target">/ 120</span></div>'+
-    '<div class="progress-track"><div class="progress-fill green" id="lcfill" style="width:'+lcPct+'%"></div></div>'+
+    '<span class="dsa-target">/ ~450</span></div>'+
+    '<div class="progress-track"><div class="progress-fill green" id="lcfill" style="width:'+a2zPct+'%"></div></div>'+
     '</div>'+
     '<div class="dsa-col">'+
-    '<span class="dsa-label">HackerRank Python \u2014 Phase 1</span>'+
-    '<p class="dsa-note">Easy tier (arrays, strings, sorting, dicts). Target: 40+ Easy by end of Week 3. Start Medium by Day 18.</p>'+
+    '<span class="dsa-label">LeetCode SQL Medium \u2014 Fintech track</span>'+
+    '<p class="dsa-note">Separate from A2Z \u2014 window functions, CTEs, subqueries. Not covered by general DSA practice. Mandatory for Barclays/JP Morgan-style interviews. Week 9.</p>'+
     '<div class="dsa-controls">'+
     '<button class="step-btn" type="button" data-action="hr-dec">\u2212</button>'+
-    '<input class="num-input" id="hrinput" type="number" min="0" value="'+state.hackerrank+'" aria-label="HackerRank problems solved" />'+
+    '<input class="num-input" id="hrinput" type="number" min="0" value="'+state.hackerrank+'" aria-label="SQL Medium problems solved" />'+
     '<button class="step-btn" type="button" data-action="hr-inc">+</button>'+
-    '<span class="dsa-target">/ 40</span></div>'+
-    '<div class="progress-track"><div class="progress-fill violet" id="hrfill" style="width:'+hrPct+'%"></div></div>'+
+    '<span class="dsa-target">/ 15</span></div>'+
+    '<div class="progress-track"><div class="progress-fill violet" id="hrfill" style="width:'+sqlPct+'%"></div></div>'+
     '</div></div>';
 }
 
