@@ -113,6 +113,12 @@
   .dsa-target{ font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); }
   .dsa-note{ font-size:12px; color:var(--ink-soft); line-height:1.5; }
 
+  /* ── growth track (CS fundamentals / outreach / applications) ── */
+  .growth-panel{ background:var(--paper); color:var(--ink); border-radius:8px; padding:18px 20px; margin-bottom:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; border-left:4px solid var(--violet); }
+  .growth-col{ display:flex; flex-direction:column; gap:8px; }
+  .growth-col + .growth-col{ border-left:1px solid var(--line-soft); padding-left:16px; }
+  .growth-label{ font-family:var(--font-mono); font-size:10px; letter-spacing:0.10em; text-transform:uppercase; color:var(--violet); margin-bottom:2px; }
+
   /* ── phase sections ── */
   .phase-section{ margin-top:28px; margin-bottom:12px; }
   .phase-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; }
@@ -184,6 +190,8 @@
     .tb-grid{ grid-template-columns:repeat(2, 1fr); }
     .dsa-panel{ grid-template-columns:1fr; }
     .dsa-col + .dsa-col{ border-left:none; border-top:1px solid var(--line-soft); padding-left:0; padding-top:12px; }
+    .growth-panel{ grid-template-columns:1fr; }
+    .growth-col + .growth-col{ border-left:none; border-top:1px solid var(--line-soft); padding-left:0; padding-top:12px; }
     .entry-header{ flex-wrap:wrap; }
     .entry-code{ width:auto; }
   }
@@ -204,6 +212,14 @@ var STORAGE_KEY = 'adi-ml-roadmap-v2-progress';
 var START_DATE  = (function(){ var d=new Date(2026,6,6); d.setHours(0,0,0,0); return d; })(); // Mon 6 Jul 2026 — term + timetable start
 var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
+/* ── CS FUNDAMENTALS ROTATION ── */
+var CS_TOPICS = [
+  'OS: processes vs threads, scheduling basics',
+  'DBMS: normalization, indexing, ACID transactions',
+  'Networking: TCP/IP, HTTP request lifecycle, DNS',
+  'OOP + one system design primer (how to scale a simple API)'
+];
+
 /* ── PHASES ── */
 var PHASES = [
   {
@@ -216,7 +232,8 @@ var PHASES = [
       'Solve the Bayes disease false-positive problem from memory',
       '40+ HackerRank Easy problems solved, Medium tier started',
       'Understand why NumPy is faster than Python loops at the C-extension level',
-      'A2Z: chip away at DP whenever there\u2019s a spare 20 minutes \u2014 no dedicated time needed yet'
+      'A2Z: chip away at DP whenever there\u2019s a spare 20 minutes \u2014 no dedicated time needed yet',
+      'Target list of 25\u201330 companies built; outreach cadence started (2\u20133 messages/week)'
     ]
   },
   {
@@ -230,7 +247,9 @@ var PHASES = [
       'Project 1 on GitHub: SHAP plots + quantified ROC-AUC > 0.92 in README',
       '15+ LeetCode SQL Medium problems including window functions',
       'A2Z DSA is no longer a Phase 2 concern \u2014 already 337 deep, well past any phase target',
-      'Prompt engineering: zero-shot, few-shot, chain-of-thought — know the differences cold'
+      'Prompt engineering: zero-shot, few-shot, chain-of-thought — know the differences cold',
+      'CS fundamentals: OS and DBMS basics reviewed at least once each',
+      'Outreach ongoing at 2\u20133 messages/week; tracking responses'
     ]
   },
   {
@@ -245,7 +264,9 @@ var PHASES = [
       'Built IMDB TF-IDF sentiment classifier at 88%+ accuracy',
       'Can explain why cosine similarity measures semantic closeness in embedding space',
       'Know stratified K-Fold CV, calibration curves, learning curves, AP vs AUC-ROC for imbalanced data',
-      'A2Z: DP section substantially underway (target deep progress, not a raw count)'
+      'A2Z: DP section substantially underway (target deep progress, not a raw count)',
+      'CS fundamentals: networking and OOP/system design primer reviewed at least once each',
+      'Applying to a handful of rolling-admission companies as soon as Project 1 is live \u2014 not waiting for January'
     ]
   },
   {
@@ -260,7 +281,9 @@ var PHASES = [
       'Can explain the full RAG pipeline: embed → retrieve → inject → generate',
       'Project 2 live at a public URL — both projects have quantified metrics in README',
       'HuggingFace profile has at least one public model or Space',
-      'A2Z DP + Tries fully closed \u2014 the sheet complete, not just \u201cenough problems\u201d'
+      'A2Z DP + Tries fully closed \u2014 the sheet complete, not just \u201cenough problems\u201d',
+      'STAR stories prepared for Project 1, Project 2, and LifeQuest OS; at least one mock interview done',
+      'Full application push ready for January \u2014 target list exhausted, not just the 5 named companies'
     ]
   }
 ];
@@ -279,7 +302,9 @@ var ENTRIES_RAW = [
       'Multiply two 3\xd73 matrices by hand, verify with NumPy',
       'Find determinants of 2\xd72 and 3\xd73 matrices, including a linearly dependent case',
       'Write a dot-product function from scratch without np.dot',
-      'No dedicated DSA time needed this week \u2014 focus is linear algebra'
+      'No dedicated DSA time needed this week \u2014 focus is linear algebra',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
+      'Outreach: build your target list of 25\u201330 companies (ML + SWE roles) \u2014 widen past the 5 named ones'
     ]
   },
   { id:'w2', phase:1, weekNums:[2], days:5,
@@ -291,7 +316,9 @@ var ENTRIES_RAW = [
       'Compute eigenvalues/eigenvectors of a 2\xd72 by hand using the characteristic equation, verify with np.linalg.eig()',
       'Bayes problem: 1% disease prevalence, 99% accurate test \u2014 solve on paper, then code it',
       'Plot N(0,1) and shade 1\u03c3 / 2\u03c3 / 3\u03c3 regions with matplotlib',
-      'No dedicated DSA time needed this week \u2014 focus is eigenvectors + probability'
+      'No dedicated DSA time needed this week \u2014 focus is eigenvectors + probability',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
+      'Outreach: send 2\u20133 warm/referral messages this week (LinkedIn or alumni network)'
     ]
   },
   { id:'w3', phase:1, weekNums:[3], days:5,
@@ -305,6 +332,8 @@ var ENTRIES_RAW = [
       'Understand vectorization: why np.sum() is 100\xd7 faster at the C-extension level, not just empirically',
       'File I/O: read a CSV with open() before ever touching Pandas',
       'Target: 40+ HackerRank Easy problems by end of Week 3. Start Medium tier by Day 18.',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
+      'Outreach: send 2\u20133 more messages; log any replies so far'
     ]
   },
   { id:'w4', phase:1, weekNums:[4], days:5,
@@ -317,6 +346,8 @@ var ENTRIES_RAW = [
       'Day 2: isnull(), fillna(), dropna() \u2014 GroupBy split-apply-combine pattern',
       'Day 3: merge, join, concat \u2014 inner/outer/left/right joins',
       'Day 4: apply(), value_counts(), pivot tables. Full loop: load \u2192 clean \u2192 explore \u2192 export',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
+      'Outreach: send 2\u20133 more messages; target list should be fully built by now'
     ]
   },
 
@@ -331,6 +362,8 @@ var ENTRIES_RAW = [
       'Partial derivatives and chain rule \u2014 this is the mathematical core of backpropagation',
       'Derive the GD update rule: \u03b8_j = \u03b8_j \u2212 \u03b1 \u00b7 \u2202J/\u2202\u03b8_j yourself from the definition of a derivative',
       'CRITICAL: Write GD for f(x)=x\xb2 from scratch. Start x=10, lr=0.1, 100 iters, plot convergence.',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
+      'Outreach: 2\u20133 messages this week; keep the cadence going even during heavier math weeks'
     ]
   },
   { id:'w6', phase:2, weekNums:[6], days:6,
@@ -343,6 +376,8 @@ var ENTRIES_RAW = [
       'Derive the Normal Equation: \u03b8 = (X\u1d40X)\u207b\u00b9X\u1d40y \u2014 when does X\u1d40X fail to be invertible?',
       'Implement LR from scratch in NumPy on California Housing; compute R\xb2 manually',
       'Replicate with sklearn.linear_model.LinearRegression \u2014 coefficients must match to several decimals',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w7', phase:2, weekNums:[7], days:6,
@@ -356,7 +391,9 @@ var ENTRIES_RAW = [
       'Derive the gradient of cross-entropy. Implement: sigmoid, log loss, GD update, 0.5-threshold prediction.',
       'Add L2 regularization (Ridge) \u2014 understand what \u03bb does geometrically to the decision boundary',
       'Sklearn replication on Breast Cancer: compute Precision/Recall/F1/ROC-AUC manually. PR tradeoff is in every fintech interview.',
-      'SQL Medium track begins this week \u2014 separate tracker above, not A2Z'
+      'SQL Medium track begins this week \u2014 separate tracker above, not A2Z',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w8', phase:2, weekNums:[8], days:5,
@@ -370,6 +407,8 @@ var ENTRIES_RAW = [
       'Random Forest: bagging + random feature subsets. Why averaging overfit trees works (bias-variance tradeoff).',
       'XGBoost: sequential error correction. Tune: n_estimators, max_depth, learning_rate, subsample, colsample_bytree.',
       'Do NOT derive RF or XGBoost from scratch \u2014 time cost >> interview payoff at this stage',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w9', phase:2, weekNums:[9], days:6,
@@ -382,6 +421,8 @@ var ENTRIES_RAW = [
       'After each LeetCode SQL problem, rewrite the solution using a CTE for practice',
       'Download Kaggle Credit Card Fraud Detection dataset (0.17% fraud rate)',
       'Begin EDA: feature distributions, initial class imbalance analysis, correlation matrix',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
+      'Outreach: 2\u20133 messages this week; check in on any pending replies'
     ]
   },
   { id:'w10', phase:2, weekNums:[10], days:5,
@@ -391,6 +432,8 @@ var ENTRIES_RAW = [
       'Full EDA: feature distributions, correlation matrix, outlier detection, class imbalance (0.17% fraud \u2014 understand why this matters)',
       'Run ydata-profiling auto-report, then replicate key findings manually in a notebook',
       'Feature engineering: create at least 3 new features with documented reasoning for each',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w11', phase:2, weekNums:[11], days:5,
@@ -400,6 +443,8 @@ var ENTRIES_RAW = [
       'Clean dataset: handle missing values, remove duplicates, check for data leakage',
       'Address class imbalance with SMOTE (imbalanced-learn). Understand why accuracy is a useless metric here.',
       'Feature scaling: StandardScaler for logistic regression. Understand why tree-based models do not need it.',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w12', phase:2, weekNums:[12], days:6,
@@ -409,6 +454,8 @@ var ENTRIES_RAW = [
       'Train Logistic Regression, Random Forest, and XGBoost baselines \u2014 compare ROC-AUC',
       'Tune the best model with GridSearchCV or RandomizedSearchCV',
       'Final evaluation: Confusion matrix, Precision-Recall curve, ROC curve \u2014 plot all three',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w13', phase:2, weekNums:[13], days:6,
@@ -422,6 +469,8 @@ var ENTRIES_RAW = [
       'Write a clean, reproducible Jupyter notebook with markdown explaining each step',
       'Write README.md: problem statement, dataset, approach, SHAP findings, ROC-AUC result, how to run',
       'Push to public GitHub repo. Draft the resume line: include ROC-AUC score + SHAP insight.',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
+      'Outreach: once Project 1 is live, start applying to rolling-admission companies now \u2014 do not wait for Project 2'
     ]
   },
   { id:'w14', phase:2, weekNums:[14], days:4,
@@ -436,6 +485,8 @@ var ENTRIES_RAW = [
       'System prompts, temperature, max_tokens \u2014 what each controls and why',
       'Structured output prompting and role-play prompting for production pipelines',
       'If ahead of schedule: add calibration curves to Project 1 (strong fintech bonus)',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
+      'Outreach: 2\u20133 messages this week; log responses from earlier applications'
     ]
   },
 
@@ -452,7 +503,9 @@ var ENTRIES_RAW = [
       'Backward pass: chain rule applied recursively from output \u2192 input',
       'MANDATORY: Clone micrograd. Read it. DELETE the source. Rebuild from memory: Value class, __add__, __mul__, __pow__, relu, tanh, backward()',
       'Train your micrograd MLP on XOR (2 inputs, 1 output). Convergence confirms correct gradients.',
-      'This is the micrograd week \u2014 no DSA time. Protect this block.'
+      'This is the micrograd week \u2014 no DSA time. Protect this block.',
+      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[2],
+      'Outreach: keep the 2\u20133/week cadence even during this heavier sprint \u2014 do not let it lapse'
     ]
   },
   { id:'w17', phase:3, weekNums:[17,18], days:10,
@@ -466,7 +519,9 @@ var ENTRIES_RAW = [
       'nn.Module pattern: __init__ and forward. Training loop: forward \u2192 loss \u2192 zero_grad() \u2192 backward() \u2192 step(). Memorize this.',
       'Build MLP on MNIST: 784\u2192128\u219264\u219210, ReLU, cross-entropy loss, Adam optimizer. Target: 97%+ test accuracy.',
       'Plot training vs validation loss; spot overfitting. Experiment with Dropout and BatchNorm.',
-      'Light A2Z DP practice if energy allows \u2014 PyTorch + MNIST is the priority'
+      'Light A2Z DP practice if energy allows \u2014 PyTorch + MNIST is the priority',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
+      'Outreach: 2\u20133 messages this week'
     ]
   },
   { id:'w19', phase:3, weekNums:[19,20], days:10,
@@ -484,7 +539,9 @@ var ENTRIES_RAW = [
       'NEW \u2014 Calibration curves: is a predicted probability of 0.8 actually correct 80% of the time?',
       'NEW \u2014 Learning curves: diagnose underfitting vs overfitting by varying training set size',
       'NEW \u2014 AP vs AUC-ROC for imbalanced datasets: Average Precision is almost always the better metric for fraud detection',
-      'Good checkpoint to push A2Z DP further \u2014 aim to be deep into DP by end of Phase 3'
+      'Good checkpoint to push A2Z DP further \u2014 aim to be deep into DP by end of Phase 3',
+      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[0],
+      'Outreach: apply to a handful of rolling-admission companies now that Project 1 has been live for a while \u2014 do not wait for January'
     ]
   },
 
@@ -502,6 +559,9 @@ var ENTRIES_RAW = [
       'Positional encoding: sinusoidal \u2014 Transformers have no inherent sense of token position',
       'Encoder-only (BERT) vs Decoder-only (GPT) vs Encoder-Decoder (T5) \u2014 know when each is appropriate',
       'Build: follow Karpathy\u2019s nanoGPT, train character-level GPT on Shakespeare text',
+      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[1],
+      'Outreach: 2\u20133 messages this week',
+      'Behavioral prep: draft a first-pass STAR story for Project 1 (situation, task, action, result)'
     ]
   },
   { id:'w23', phase:4, weekNums:[23,24], days:11,
@@ -519,6 +579,9 @@ var ENTRIES_RAW = [
       'NEW \u2014 Streaming responses: why streaming matters for production UX',
       'NEW \u2014 RAG pipeline: embed a PDF with sentence-transformers + FAISS, call an LLM with retrieved chunks',
       'Understand vector databases: FAISS (in-memory) and ChromaDB (persistent). Chunking strategy.',
+      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[2],
+      'Outreach: 2\u20133 messages this week',
+      'Behavioral prep: draft a STAR story for LifeQuest OS \u2014 a self-built gamified system is a strong \u201cproject you\u2019re proud of\u201d answer'
     ]
   },
   { id:'w25', phase:4, weekNums:[25], days:5,
@@ -529,7 +592,10 @@ var ENTRIES_RAW = [
       'Three tasks minimum: sentiment analysis, NER (company names, dates, amounts), extractive summarization',
       'Dataset options: legal contracts (CUAD on HuggingFace), earnings call transcripts, product reviews',
       'Consider adding RAG-enhanced Q&A using ChromaDB \u2014 strong differentiator per revised roadmap',
-      'A2Z: this is a good week to close out remaining DP/Tries gaps'
+      'A2Z: this is a good week to close out remaining DP/Tries gaps',
+      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
+      'Outreach: 2\u20133 messages this week',
+      'Behavioral prep: draft a STAR story for Project 2, even before it is fully deployed'
     ]
   },
   { id:'w26', phase:4, weekNums:[26], days:6,
@@ -543,7 +609,10 @@ var ENTRIES_RAW = [
       'Measure inference latency (target <500ms), model accuracy, and API uptime',
       'Write README: problem, architecture diagram, live demo URL, results table, how to run locally',
       'Draft resume line: \u201cBuilt NLP pipeline using fine-tuned DistilBERT (91.3% accuracy) with RAG-enhanced Q&A using ChromaDB; deployed as FastAPI service, <400ms p99 latency.\u201d',
-      'A2Z: aim to have DP + Tries fully closed before applications open in January'
+      'A2Z: aim to have DP + Tries fully closed before applications open in January',
+      'CS Fundamentals (1 hr): review your weakest of the four rotating topics',
+      'Outreach: full application push \u2014 exhaust the target list, not just the 5 named companies',
+      'Behavioral prep: record yourself answering \u201cwhy this company\u201d for each of your top 5 targets; run 2\u20133 mock interviews (peers or Pramp)'
     ]
   }
 ];
@@ -584,7 +653,7 @@ function defaultState(){
   var tasks={}, checkins={}, phaseExit={};
   ENTRIES_RAW.forEach(function(e){ tasks[e.id]=e.tasks.map(function(){return false;}); checkins[e.id]={status:null,notes:'',savedAt:null}; });
   PHASES.forEach(function(p){ phaseExit[p.id]=p.exit.map(function(){return false;}); });
-  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:337,hackerrank:0};
+  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:337,hackerrank:0,csFundamentals:0,outreachSent:0,applicationsSent:0};
 }
 
 function hydrateState(raw){
@@ -597,6 +666,9 @@ function hydrateState(raw){
   PHASES.forEach(function(p){ if(raw.phaseExit&&raw.phaseExit[p.id]!=null) for(var i=0;i<base.phaseExit[p.id].length;i++) base.phaseExit[p.id][i]=!!(Array.isArray(raw.phaseExit[p.id])?raw.phaseExit[p.id][i]:raw.phaseExit[p.id][String(i)]); });
   base.leetcode=(typeof raw.leetcode==='number'&&raw.leetcode>=0)?raw.leetcode:0;
   base.hackerrank=(typeof raw.hackerrank==='number'&&raw.hackerrank>=0)?raw.hackerrank:0;
+  base.csFundamentals=(typeof raw.csFundamentals==='number'&&raw.csFundamentals>=0)?raw.csFundamentals:0;
+  base.outreachSent=(typeof raw.outreachSent==='number'&&raw.outreachSent>=0)?raw.outreachSent:0;
+  base.applicationsSent=(typeof raw.applicationsSent==='number'&&raw.applicationsSent>=0)?raw.applicationsSent:0;
   return base;
 }
 
@@ -633,7 +705,7 @@ function renderTitle(entries, state, cur){
     '<div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>'+
     '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:'+pct(ov.done,ov.total)+'%"></div></div>'+
     '<span class="tb-progress-text" id="overalltext">'+ov.done+'/'+ov.total+' \u2022 '+pct(ov.done,ov.total)+'%</span></div>'+
-    '<p class="tb-note">Compressed to your real ~25 hr/week budget (weekday evenings around fixed practicals + a Saturday deep-work block + light Sunday review). <strong>SHAP is core</strong>, <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4, and DSA is rescoped around your existing 337-question A2Z progress \u2014 just DP + Tries left. Start: 6 Jul 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>, with Dec\u2013Mar free for polish.</p></div>';
+    '<p class="tb-note">Compressed to your real ~25 hr/week budget (weekday evenings around fixed practicals + a Saturday deep-work block + light Sunday review). <strong>SHAP is core</strong>, <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4, and DSA is rescoped around your existing 337-question A2Z progress \u2014 just DP + Tries left. This edition also folds in a weekly <strong>CS fundamentals</strong> rotation, an <strong>outreach/applications</strong> track that starts Week 1 instead of waiting for January, and a <strong>behavioral prep</strong> track in the final phase. Start: 6 Jul 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>, with Dec\u2013Mar free for polish.</p></div>';
 }
 
 function renderThisWeek(entries, cur, state){
@@ -676,6 +748,43 @@ function renderDSA(state){
     '<button class="step-btn" type="button" data-action="hr-inc">+</button>'+
     '<span class="dsa-target">/ 15</span></div>'+
     '<div class="progress-track"><div class="progress-fill violet" id="hrfill" style="width:'+sqlPct+'%"></div></div>'+
+    '</div></div>';
+}
+
+function renderGrowthTracks(state){
+  var csPct=pct(state.csFundamentals,26);
+  var outreachPct=pct(state.outreachSent,60);
+  var appsPct=pct(state.applicationsSent,25);
+  return '<div class="growth-panel">'+
+    '<div class="growth-col">'+
+    '<span class="growth-label">CS Fundamentals sessions</span>'+
+    '<p class="dsa-note">Rotates OS \u2192 DBMS \u2192 Networking \u2192 OOP/system design, ~1 hr/week. Not covered anywhere else in this roadmap, but shows up in JPM/Barclays SWE-track interviews.</p>'+
+    '<div class="dsa-controls">'+
+    '<button class="step-btn" type="button" data-action="cs-dec">\u2212</button>'+
+    '<input class="num-input" id="csinput" type="number" min="0" value="'+state.csFundamentals+'" aria-label="CS fundamentals sessions logged" />'+
+    '<button class="step-btn" type="button" data-action="cs-inc">+</button>'+
+    '<span class="dsa-target">/ 26 wks</span></div>'+
+    '<div class="progress-track"><div class="progress-fill violet" id="csfill" style="width:'+csPct+'%"></div></div>'+
+    '</div>'+
+    '<div class="growth-col">'+
+    '<span class="growth-label">Outreach messages sent</span>'+
+    '<p class="dsa-note">2\u20133/week starting Week 1 \u2014 not saved for January. Scale the UBS/Saptarshi pattern to your full target list.</p>'+
+    '<div class="dsa-controls">'+
+    '<button class="step-btn" type="button" data-action="outreach-dec">\u2212</button>'+
+    '<input class="num-input" id="outreachinput" type="number" min="0" value="'+state.outreachSent+'" aria-label="Outreach messages sent" />'+
+    '<button class="step-btn" type="button" data-action="outreach-inc">+</button>'+
+    '<span class="dsa-target">/ ~60</span></div>'+
+    '<div class="progress-track"><div class="progress-fill violet" id="outreachfill" style="width:'+outreachPct+'%"></div></div>'+
+    '</div>'+
+    '<div class="growth-col">'+
+    '<span class="growth-label">Applications submitted</span>'+
+    '<p class="dsa-note">Rolling-admission companies as soon as Project 1 is live; full push in January once both projects are deployed.</p>'+
+    '<div class="dsa-controls">'+
+    '<button class="step-btn" type="button" data-action="apps-dec">\u2212</button>'+
+    '<input class="num-input" id="appsinput" type="number" min="0" value="'+state.applicationsSent+'" aria-label="Applications submitted" />'+
+    '<button class="step-btn" type="button" data-action="apps-inc">+</button>'+
+    '<span class="dsa-target">/ 25\u201330</span></div>'+
+    '<div class="progress-track"><div class="progress-fill violet" id="appsfill" style="width:'+appsPct+'%"></div></div>'+
     '</div></div>';
 }
 
@@ -740,7 +849,7 @@ function renderFooter(){
 
 function renderApp(entries, state){
   var today=todayMid(), cur=findCurrent(entries,today);
-  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state);
+  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state)+renderGrowthTracks(state);
   PHASES.forEach(function(ph){ html+=renderPhase(ph,entries,state,cur); });
   html+=renderFooter();
   return html;
@@ -753,8 +862,11 @@ function updateBadge(id, state){ var el=document.getElementById('badge_'+id); if
 function updatePhaseProg(pid, entries, state){ var p=calcPhase(pid,entries,state); var f=document.getElementById('phasefill_'+pid),t=document.getElementById('phasetext_'+pid); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' tasks'; }
 function updateOverallProg(entries, state){ var p=calcOverall(entries,state); var f=document.getElementById('overallfill'),t=document.getElementById('overalltext'); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' \u2022 '+pct(p.done,p.total)+'%'; }
 function updateEntryUI(id, entries, state){ var el=document.getElementById('taskprog_'+id); if(el){var p=calcEntry(id,state);el.textContent=p.done+'/'+p.total+' tasks done';} var pid=phaseForEntry(id,entries); if(pid)updatePhaseProg(pid,entries,state); updateOverallProg(entries,state); }
-function updateLCUI(state){ var i=document.getElementById('lcinput'),f=document.getElementById('lcfill'); if(i)i.value=state.leetcode; if(f)f.style.width=pct(state.leetcode,120)+'%'; }
-function updateHRUI(state){ var i=document.getElementById('hrinput'),f=document.getElementById('hrfill'); if(i)i.value=state.hackerrank; if(f)f.style.width=pct(state.hackerrank,40)+'%'; }
+function updateLCUI(state){ var i=document.getElementById('lcinput'),f=document.getElementById('lcfill'); if(i)i.value=state.leetcode; if(f)f.style.width=pct(state.leetcode,450)+'%'; }
+function updateHRUI(state){ var i=document.getElementById('hrinput'),f=document.getElementById('hrfill'); if(i)i.value=state.hackerrank; if(f)f.style.width=pct(state.hackerrank,15)+'%'; }
+function updateCSUI(state){ var i=document.getElementById('csinput'),f=document.getElementById('csfill'); if(i)i.value=state.csFundamentals; if(f)f.style.width=pct(state.csFundamentals,26)+'%'; }
+function updateOutreachUI(state){ var i=document.getElementById('outreachinput'),f=document.getElementById('outreachfill'); if(i)i.value=state.outreachSent; if(f)f.style.width=pct(state.outreachSent,60)+'%'; }
+function updateAppsUI(state){ var i=document.getElementById('appsinput'),f=document.getElementById('appsfill'); if(i)i.value=state.applicationsSent; if(f)f.style.width=pct(state.applicationsSent,25)+'%'; }
 function showSaved(id){ var el=document.getElementById('savedmsg_'+id); if(!el)return; el.textContent='Saved \u2713'; el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},2200); }
 function setStatus(text){ var el=document.getElementById('savestatus'); if(el)el.textContent=text; }
 
@@ -797,6 +909,12 @@ function handleClick(el, entriesArg){
     state.leetcode=Math.max(0,state.leetcode+(action==='lc-inc'?1:-1)); updateLCUI(state); scheduleSave();
   } else if(action==='hr-inc'||action==='hr-dec'){
     state.hackerrank=Math.max(0,state.hackerrank+(action==='hr-inc'?1:-1)); updateHRUI(state); scheduleSave();
+  } else if(action==='cs-inc'||action==='cs-dec'){
+    state.csFundamentals=Math.max(0,state.csFundamentals+(action==='cs-inc'?1:-1)); updateCSUI(state); scheduleSave();
+  } else if(action==='outreach-inc'||action==='outreach-dec'){
+    state.outreachSent=Math.max(0,state.outreachSent+(action==='outreach-inc'?1:-1)); updateOutreachUI(state); scheduleSave();
+  } else if(action==='apps-inc'||action==='apps-dec'){
+    state.applicationsSent=Math.max(0,state.applicationsSent+(action==='apps-inc'?1:-1)); updateAppsUI(state); scheduleSave();
   } else if(action==='reset'){
     if(window.confirm('Reset all saved progress? This cannot be undone.')) resetProgress(entriesArg);
   }
@@ -820,6 +938,12 @@ function attachEvents(entriesArg){
       var v=parseInt(t.value,10); state.leetcode=isNaN(v)||v<0?0:v; updateLCUI(state); scheduleSave();
     } else if(t.id==='hrinput'){
       var v2=parseInt(t.value,10); state.hackerrank=isNaN(v2)||v2<0?0:v2; updateHRUI(state); scheduleSave();
+    } else if(t.id==='csinput'){
+      var v3=parseInt(t.value,10); state.csFundamentals=isNaN(v3)||v3<0?0:v3; updateCSUI(state); scheduleSave();
+    } else if(t.id==='outreachinput'){
+      var v4=parseInt(t.value,10); state.outreachSent=isNaN(v4)||v4<0?0:v4; updateOutreachUI(state); scheduleSave();
+    } else if(t.id==='appsinput'){
+      var v5=parseInt(t.value,10); state.applicationsSent=isNaN(v5)||v5<0?0:v5; updateAppsUI(state); scheduleSave();
     }
   });
   appEl.addEventListener('input',function(e){
