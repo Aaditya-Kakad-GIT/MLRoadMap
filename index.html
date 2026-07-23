@@ -647,13 +647,78 @@ function findCurrent(entries, today){
 }
 
 /* ────────────────────────────────
+   RESOURCES
+────────────────────────────────── */
+var RESOURCES = [
+  { group:'Math Foundations', items:[
+    { name:'3Blue1Brown \u2014 Essence of Linear Algebra', url:'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab', meta:'YouTube playlist \u2022 Weeks 1\u20132', phase:1 },
+    { name:'3Blue1Brown \u2014 Essence of Calculus', url:'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr', meta:'YouTube playlist \u2022 Week 5', phase:2 },
+    { name:'Mathematics for Machine Learning (Deisenroth et al.)', url:'https://mml-book.github.io/', meta:'Free book, \u00a72.1\u20132.4 for intuition only \u2022 Week 1', phase:1 },
+    { name:'Khan Academy \u2014 Statistics & Probability', url:'https://www.khanacademy.org/math/statistics-probability', meta:'Bayes\u2019 theorem, Normal distribution \u2022 Week 2', phase:1 }
+  ]},
+  { group:'Python, NumPy & Pandas', items:[
+    { name:'Official Python Tutorial', url:'https://docs.python.org/3/tutorial/', meta:'Ch. 3\u20139 \u2022 Week 3', phase:1 },
+    { name:'Python Data Science Handbook (VanderPlas)', url:'https://jakevdp.github.io/PythonDataScienceHandbook/', meta:'Free online \u2022 Ch. 2 NumPy, Ch. 3 Pandas \u2022 Weeks 3\u20134', phase:1 },
+    { name:'NumPy — Broadcasting & Indexing docs', url:'https://numpy.org/doc/stable/user/basics.broadcasting.html', meta:'Official docs \u2022 Week 3', phase:1 },
+    { name:'Pandas User Guide', url:'https://pandas.pydata.org/docs/user_guide/index.html', meta:'Indexing, GroupBy, Merge, I/O \u2022 Week 4', phase:1 }
+  ]},
+  { group:'Core ML (Phase 2)', items:[
+    { name:'Andrew Ng \u2014 CS229 Lecture Notes', url:'https://cs229.stanford.edu/main_notes.pdf', meta:'Linear + Logistic Regression derivations \u2022 Weeks 5\u20137', phase:2 },
+    { name:'StatQuest with Josh Starmer', url:'https://www.youtube.com/@statquest', meta:'LR, Logistic Regression, Trees, RF, XGBoost \u2022 Weeks 6\u20138', phase:2 },
+    { name:'scikit-learn User Guide', url:'https://scikit-learn.org/stable/user_guide.html', meta:'Trees + Ensembles sections \u2022 Week 8', phase:2 },
+    { name:'Mode Analytics — SQL Tutorial', url:'https://mode.com/sql-tutorial/', meta:'Advanced SQL / window functions \u2022 Week 9', phase:2 },
+    { name:'Kaggle — Credit Card Fraud Detection dataset', url:'https://www.kaggle.com/mlg-ulb/creditcardfraud', meta:'Project 1 dataset \u2022 Weeks 9\u201313', phase:2 },
+    { name:'ydata-profiling', url:'https://github.com/ydataai/ydata-profiling', meta:'Auto EDA report \u2022 Week 10', phase:2 },
+    { name:'SHAP documentation', url:'https://shap.readthedocs.io/', meta:'TreeExplainer, force plots \u2022 Week 13', phase:2 },
+    { name:'Anthropic — Prompt Engineering docs', url:'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering', meta:'Week 14', phase:2 },
+    { name:'OpenAI — Prompt Engineering guide', url:'https://platform.openai.com/docs/guides/prompt-engineering', meta:'Week 14', phase:2 }
+  ]},
+  { group:'Neural Networks & NLP (Phase 3)', items:[
+    { name:'Andrej Karpathy \u2014 \u201cThe spelled-out intro to neural networks: building micrograd\u201d', url:'https://www.youtube.com/watch?v=VMj-3S1tku0', meta:'Watch twice \u2022 Weeks 15\u201316', phase:3 },
+    { name:'micrograd source (GitHub)', url:'https://github.com/karpathy/micrograd', meta:'Read, delete, rebuild from memory \u2022 Weeks 15\u201316', phase:3 },
+    { name:'Michael Nielsen \u2014 Neural Networks and Deep Learning', url:'http://neuralnetworksanddeeplearning.com/', meta:'Free book, Ch. 1\u20132 \u2022 Weeks 15\u201316', phase:3 },
+    { name:'PyTorch — \u201cLearn the Basics\u201d tutorials', url:'https://pytorch.org/tutorials/beginner/basics/intro.html', meta:'Tensors, autograd, nn.Module \u2022 Weeks 17\u201318', phase:3 },
+    { name:'fast.ai — Practical Deep Learning Part 1', url:'https://course.fast.ai/', meta:'Lessons 1\u20134 \u2022 Weeks 17\u201318', phase:3 },
+    { name:'Jurafsky & Martin — Speech and Language Processing (SLP3)', url:'https://web.stanford.edu/~jurafsky/slp3/', meta:'Free draft, Ch. 2, 3, 6 \u2022 Weeks 19\u201320', phase:3 }
+  ]},
+  { group:'Transformers, LLMs & RAG (Phase 4)', items:[
+    { name:'Andrej Karpathy \u2014 \u201cLet\u2019s build GPT\u201d', url:'https://www.youtube.com/watch?v=kCc8FmEb1nY', meta:'Watch before the paper \u2022 Weeks 21\u201322', phase:4 },
+    { name:'Andrej Karpathy \u2014 makemore series', url:'https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ', meta:'All 5 videos \u2022 Weeks 21\u201322', phase:4 },
+    { name:'\u201cAttention Is All You Need\u201d (Vaswani et al.)', url:'https://arxiv.org/abs/1706.03762', meta:'Sections 3 + 3.2 only \u2022 Weeks 21\u201322', phase:4 },
+    { name:'Jay Alammar — The Illustrated Transformer', url:'https://jalammar.github.io/illustrated-transformer/', meta:'Weeks 21\u201322', phase:4 },
+    { name:'Hugging Face Course', url:'https://huggingface.co/course', meta:'Chapters 1\u20134 \u2022 Weeks 23\u201324', phase:4 },
+    { name:'Hugging Face Transformers docs', url:'https://huggingface.co/docs/transformers/index', meta:'pipeline / AutoModel / Trainer \u2022 Weeks 23\u201324', phase:4 },
+    { name:'LangChain — LCEL docs', url:'https://python.langchain.com/docs/concepts/lcel/', meta:'Weeks 23\u201324', phase:4 },
+    { name:'LangChain — RAG tutorial', url:'https://python.langchain.com/docs/tutorials/rag/', meta:'Weeks 23\u201324', phase:4 },
+    { name:'ChromaDB — quickstart', url:'https://docs.trychroma.com/getting-started', meta:'Vector DB for RAG \u2022 Weeks 23\u201324', phase:4 },
+    { name:'sentence-transformers (SBERT)', url:'https://www.sbert.net/', meta:'Embedding models for RAG \u2022 Weeks 23\u201324', phase:4 }
+  ]},
+  { group:'DSA, Outreach & Deployment', items:[
+    { name:'Striver\u2019s A2Z DSA Sheet', url:'https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/', meta:'DP + Tries remaining \u2022 ongoing', phase:0 },
+    { name:'LeetCode — SQL Medium', url:'https://leetcode.com/problemset/database/', meta:'Window functions, CTEs \u2022 Week 9', phase:2 },
+    { name:'HackerRank — Python domain', url:'https://www.hackerrank.com/domains/python', meta:'40+ Easy problems \u2022 Week 3', phase:1 },
+    { name:'HuggingFace Hub', url:'https://huggingface.co/', meta:'Datasets, model hosting, Spaces \u2022 Weeks 23\u201326', phase:4 },
+    { name:'Railway', url:'https://railway.app/', meta:'Project 2 deployment option \u2022 Week 26', phase:4 },
+    { name:'Render', url:'https://render.com/', meta:'Project 2 deployment option \u2022 Week 26', phase:4 }
+  ]}
+];
+
+function flattenResources(){
+  var out=[];
+  RESOURCES.forEach(function(g){ g.items.forEach(function(it){ out.push(Object.assign({group:g.group},it)); }); });
+  return out;
+}
+function resourceKey(it){ return (it.group+'::'+it.name).replace(/[^a-zA-Z0-9]/g,'_'); }
+
+/* ────────────────────────────────
    STATE
 ────────────────────────────────── */
 function defaultState(){
-  var tasks={}, checkins={}, phaseExit={};
+  var tasks={}, checkins={}, phaseExit={}, resourcesUsed={};
   ENTRIES_RAW.forEach(function(e){ tasks[e.id]=e.tasks.map(function(){return false;}); checkins[e.id]={status:null,notes:'',savedAt:null}; });
   PHASES.forEach(function(p){ phaseExit[p.id]=p.exit.map(function(){return false;}); });
-  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,leetcode:337,hackerrank:0,csFundamentals:0,outreachSent:0,applicationsSent:0};
+  flattenResources().forEach(function(it){ resourcesUsed[resourceKey(it)]=false; });
+  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,resourcesUsed:resourcesUsed,leetcode:337,hackerrank:0,csFundamentals:0,outreachSent:0,applicationsSent:0};
 }
 
 function hydrateState(raw){
@@ -664,6 +729,9 @@ function hydrateState(raw){
     if(raw.checkins&&raw.checkins[e.id]){ var c=raw.checkins[e.id]; base.checkins[e.id]={status:c.status||null,notes:typeof c.notes==='string'?c.notes:'',savedAt:c.savedAt||null}; }
   });
   PHASES.forEach(function(p){ if(raw.phaseExit&&raw.phaseExit[p.id]!=null) for(var i=0;i<base.phaseExit[p.id].length;i++) base.phaseExit[p.id][i]=!!(Array.isArray(raw.phaseExit[p.id])?raw.phaseExit[p.id][i]:raw.phaseExit[p.id][String(i)]); });
+  if(raw.resourcesUsed&&typeof raw.resourcesUsed==='object'){
+    Object.keys(base.resourcesUsed).forEach(function(k){ if(raw.resourcesUsed[k]!=null) base.resourcesUsed[k]=!!raw.resourcesUsed[k]; });
+  }
   base.leetcode=(typeof raw.leetcode==='number'&&raw.leetcode>=0)?raw.leetcode:0;
   base.hackerrank=(typeof raw.hackerrank==='number'&&raw.hackerrank>=0)?raw.hackerrank:0;
   base.csFundamentals=(typeof raw.csFundamentals==='number'&&raw.csFundamentals>=0)?raw.csFundamentals:0;
@@ -678,6 +746,7 @@ function hydrateState(raw){
 function calcEntry(id, state){ var a=state.tasks[id]||[]; return{done:a.filter(Boolean).length,total:a.length}; }
 function calcPhase(pid, entries, state){ var d=0,t=0; entries.forEach(function(e){if(e.phase===pid){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}}); return{done:d,total:t}; }
 function calcOverall(entries, state){ var d=0,t=0; entries.forEach(function(e){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}); return{done:d,total:t}; }
+function calcResources(state){ var keys=Object.keys(state.resourcesUsed); var done=keys.filter(function(k){return state.resourcesUsed[k];}).length; return{done:done,total:keys.length}; }
 function pct(d,t){ return t>0?Math.round((d/t)*100):0; }
 function statusMeta(s){ if(s==='ontrack') return{label:'On track',cls:'st-ontrack'}; if(s==='behind') return{label:'Behind',cls:'st-behind'}; if(s==='skipped') return{label:'Skipped',cls:'st-skipped'}; return{label:'No check-in',cls:'st-none'}; }
 function phaseForEntry(id, entries){ for(var i=0;i<entries.length;i++) if(entries[i].id===id) return entries[i].phase; return null; }
@@ -788,6 +857,31 @@ function renderGrowthTracks(state){
     '</div></div>';
 }
 
+function renderResources(state){
+  var rp=calcResources(state);
+  var groupsHtml=RESOURCES.map(function(g){
+    var itemsHtml=g.items.map(function(it){
+      var key=resourceKey(Object.assign({group:g.group},it));
+      var checked=state.resourcesUsed[key]?' checked="checked"':'';
+      var doneCls=state.resourcesUsed[key]?' done':'';
+      return '<label class="res-item'+doneCls+'" data-res-name="'+esc((it.name+' '+it.meta).toLowerCase())+'">'+
+        '<input type="checkbox" data-action="resource" data-key="'+key+'"'+checked+' />'+
+        '<span class="res-item-body"><a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.name)+'</a>'+
+        '<div class="res-item-meta">'+esc(it.meta)+'</div></span></label>';
+    }).join('');
+    return '<div class="res-group"><div class="res-group-title">'+esc(g.group)+'</div>'+itemsHtml+'</div>';
+  }).join('');
+  return '<div class="resources-panel">'+
+    '<div class="resources-toggle" data-action="toggle-resources" role="button" tabindex="0" aria-expanded="false">'+
+    '<h2>\ud83d\udcda Resources \u2014 everything the roadmap references</h2>'+
+    '<span class="resources-toggle-meta" id="resmeta">'+rp.done+'/'+rp.total+' used <span class="chevron" id="reschevron">\u203a</span></span></div>'+
+    '<div class="resources-body" id="resourcesbody">'+
+    '<input class="res-search" type="text" id="ressearch" placeholder="Search resources by name, topic, or week\u2026" />'+
+    '<div id="resgroups">'+groupsHtml+'</div>'+
+    '<p class="res-summary">Tick a resource off once you\u2019ve actually gone through it \u2014 separate from the weekly task checkboxes above, this is just so you can see at a glance what\u2019s left across the whole roadmap.</p>'+
+    '</div></div>';
+}
+
 var NEW_TASK_PREFIXES=['NEW \u2014','NEW\u00a0\u2014'];
 function isNewTask(t){ return NEW_TASK_PREFIXES.some(function(p){return t.indexOf(p)===0;}); }
 
@@ -849,7 +943,7 @@ function renderFooter(){
 
 function renderApp(entries, state){
   var today=todayMid(), cur=findCurrent(entries,today);
-  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state)+renderGrowthTracks(state);
+  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state)+renderGrowthTracks(state)+renderResources(state);
   PHASES.forEach(function(ph){ html+=renderPhase(ph,entries,state,cur); });
   html+=renderFooter();
   return html;
@@ -867,6 +961,10 @@ function updateHRUI(state){ var i=document.getElementById('hrinput'),f=document.
 function updateCSUI(state){ var i=document.getElementById('csinput'),f=document.getElementById('csfill'); if(i)i.value=state.csFundamentals; if(f)f.style.width=pct(state.csFundamentals,26)+'%'; }
 function updateOutreachUI(state){ var i=document.getElementById('outreachinput'),f=document.getElementById('outreachfill'); if(i)i.value=state.outreachSent; if(f)f.style.width=pct(state.outreachSent,60)+'%'; }
 function updateAppsUI(state){ var i=document.getElementById('appsinput'),f=document.getElementById('appsfill'); if(i)i.value=state.applicationsSent; if(f)f.style.width=pct(state.applicationsSent,25)+'%'; }
+function updateResourcesUI(state){
+  var rp=calcResources(state); var el=document.getElementById('resmeta');
+  if(el) el.innerHTML=rp.done+'/'+rp.total+' used <span class="chevron" id="reschevron">\u203a</span>';
+}
 function showSaved(id){ var el=document.getElementById('savedmsg_'+id); if(!el)return; el.textContent='Saved \u2713'; el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},2200); }
 function setStatus(text){ var el=document.getElementById('savestatus'); if(el)el.textContent=text; }
 
@@ -893,6 +991,9 @@ function handleClick(el, entriesArg){
   } else if(action==='toggle-exit'){
     var pid=el.getAttribute('data-phase'), p=document.getElementById('exitpanel_'+pid);
     if(p){var op=p.classList.toggle('open'); el.setAttribute('aria-expanded',op?'true':'false');}
+  } else if(action==='toggle-resources'){
+    var rb=document.getElementById('resourcesbody');
+    if(rb){var ro=rb.classList.toggle('open'); el.setAttribute('aria-expanded',ro?'true':'false');}
   } else if(action==='jump'){
     var eid=el.getAttribute('data-entry'), tgt=document.getElementById('entry_'+eid);
     if(tgt){tgt.classList.add('open'); tgt.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -924,7 +1025,7 @@ function attachEvents(entriesArg){
   appEl.addEventListener('click',function(e){handleClick(e.target.closest('[data-action]'),entriesArg);});
   appEl.addEventListener('keydown',function(e){
     if(e.key!=='Enter'&&e.key!==' ') return;
-    var el=e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit"]');
+    var el=e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit"],[data-action="toggle-resources"]');
     if(el){e.preventDefault();handleClick(el,entriesArg);}
   });
   appEl.addEventListener('change',function(e){
@@ -934,6 +1035,10 @@ function attachEvents(entriesArg){
       state.tasks[eid][idx]=t.checked; updateEntryUI(eid,entriesArg,state); scheduleSave();
     } else if(t.matches('input[type="checkbox"][data-action="exit"]')){
       state.phaseExit[t.getAttribute('data-phase')][parseInt(t.getAttribute('data-idx'),10)]=t.checked; scheduleSave();
+    } else if(t.matches('input[type="checkbox"][data-action="resource"]')){
+      var rkey=t.getAttribute('data-key'); state.resourcesUsed[rkey]=t.checked;
+      var lbl=t.closest('.res-item'); if(lbl) lbl.classList.toggle('done',t.checked);
+      updateResourcesUI(state); scheduleSave();
     } else if(t.id==='lcinput'){
       var v=parseInt(t.value,10); state.leetcode=isNaN(v)||v<0?0:v; updateLCUI(state); scheduleSave();
     } else if(t.id==='hrinput'){
@@ -949,6 +1054,19 @@ function attachEvents(entriesArg){
   appEl.addEventListener('input',function(e){
     var t=e.target;
     if(t.matches&&t.matches('textarea[data-action="notes"]')){ state.checkins[t.getAttribute('data-entry')].notes=t.value; scheduleSave(); }
+    if(t.matches&&t.id==='ressearch'){
+      var q=t.value.trim().toLowerCase();
+      var items=appEl.querySelectorAll('.res-item');
+      Array.prototype.forEach.call(items,function(it){
+        var name=it.getAttribute('data-res-name')||'';
+        it.classList.toggle('res-hidden', q.length>0 && name.indexOf(q)===-1);
+      });
+      var groups=appEl.querySelectorAll('.res-group');
+      Array.prototype.forEach.call(groups,function(g){
+        var visible=g.querySelectorAll('.res-item:not(.res-hidden)').length;
+        g.classList.toggle('res-hidden', q.length>0 && visible===0);
+      });
+    }
   });
 }
 
