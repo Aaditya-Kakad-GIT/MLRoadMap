@@ -15,13 +15,13 @@
     --paper-dim:#e8e8e8;
     --ink:#ffffff;
     --ink-soft:#b0b0b0;
-    --accent-teal:#ffffff;
-    --accent-dark:#cccccc;
-    --accent-light:rgba(255,255,255,0.1);
+    --accent-teal:#00d9ff;
+    --accent-dark:#00a8cc;
+    --accent-light:rgba(0, 217, 255, 0.1);
     --line:rgba(255,255,255,0.15);
     --line-soft:rgba(255,255,255,0.08);
-    --success:#ffffff;
-    --alert:#ffffff;
+    --success:#10b981;
+    --alert:#f59e0b;
     --font-mono:'JetBrains Mono', monospace;
     --font-display:'Space Mono', monospace;
   }
@@ -243,9 +243,8 @@
 </head>
 <body>
 <div class="app-shell">
-<!-- PERSONALIZED ROADMAP DASHBOARD - DARK MONOCHROME -->
+<!-- PERSONALIZED ROADMAP DASHBOARD - ENHANCED WITH CYAN ACCENT & PROGRESSIVE DISCLOSURE -->
 <style>
-  /* Dark monochrome color scheme */
   body { background-color: #0f0f0f; background-image: none; color: #ffffff; }
   
   .dashboard { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid #333333; }
@@ -253,35 +252,55 @@
   .dashboard-subtitle { font-size: 12px; color: #808080; margin-bottom: 32px; }
   
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-  .stat-card { background: #1a1a1a; border: 1px solid #333333; padding: 20px; }
-  .stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #ffffff; }
+  .stat-card { background: #1a1a1a; border: 1px solid #333333; padding: 20px; transition: all 200ms ease; }
+  .stat-card:hover { border-color: #00d9ff; box-shadow: 0 0 12px rgba(0, 217, 255, 0.15); }
+  .stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #00d9ff; }
   .stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #808080; margin-top: 8px; }
   
-  .section-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #cccccc; margin-bottom: 16px; font-weight: 600; }
+  .section-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #00d9ff; margin-bottom: 16px; font-weight: 600; }
   
-  .progress-bar-container { background: #1a1a1a; border: 1px solid #333333; padding: 16px; margin-bottom: 32px; }
+  .progress-bar-container { background: #1a1a1a; border: 1px solid #333333; padding: 16px; margin-bottom: 32px; transition: border 200ms ease; }
+  .progress-bar-container:hover { border-color: #00d9ff; }
   .progress-bar-label { font-size: 12px; color: #ffffff; margin-bottom: 10px; font-weight: 500; }
   .progress-bar { width: 100%; height: 6px; background: #333333; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: #ffffff; width: 19%; }
+  .progress-bar-fill { height: 100%; background: #00d9ff; width: 19%; transition: width 300ms ease; }
   .progress-info { display: flex; justify-content: space-between; margin-top: 10px; font-size: 10px; color: #808080; }
   
-  .timeline-item { background: #1a1a1a; border: 1px solid #333333; padding: 16px; margin-bottom: 8px; border-left: 3px solid #ffffff; }
-  .timeline-item.break { border-left-color: #808080; background: #151515; }
-  .timeline-item.past { opacity: 0.6; }
+  .timeline-item { 
+    background: #1a1a1a; border: 1px solid #333333; padding: 16px; margin-bottom: 8px; 
+    border-left: 3px solid #555555; cursor: pointer; transition: all 200ms ease;
+  }
+  .timeline-item:hover { border-left-color: #00d9ff; }
+  .timeline-item.active { border-left-color: #00d9ff; background: rgba(0, 217, 255, 0.05); }
+  .timeline-item.break { border-left-color: #f59e0b; background: #1a1a1a; }
+  .timeline-item.break:hover { background: rgba(245, 158, 11, 0.05); }
+  .timeline-item.past { opacity: 0.5; }
   
+  .timeline-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
   .timeline-label { font-weight: 600; color: #ffffff; font-size: 13px; margin-bottom: 4px; }
   .timeline-dates { font-family: var(--font-mono); font-size: 10px; color: #808080; margin-bottom: 4px; }
-  .timeline-detail { font-size: 11px; color: #b0b0b0; }
+  .timeline-detail { font-size: 11px; color: #b0b0b0; margin-top: 8px; }
+  .timeline-toggle { font-size: 10px; color: #00d9ff; font-weight: 600; }
+  
+  .timeline-expanded { max-height: 500px; overflow: hidden; }
+  .timeline-collapsed { max-height: 0; overflow: hidden; }
   
   .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 16px; }
-  .calendar-week { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 600; border: 1px solid #333333; background: #1a1a1a; color: #ffffff; }
-  .calendar-week.break { background: #2a2a2a; color: #b0b0b0; border-color: #555555; }
+  .calendar-week { 
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600; 
+    border: 1px solid #333333; background: #1a1a1a; color: #ffffff; 
+    transition: all 200ms ease; cursor: default;
+  }
+  .calendar-week:hover { border-color: #00d9ff; }
+  .calendar-week.current { background: #00d9ff; color: #0f0f0f; border-color: #00d9ff; box-shadow: 0 0 12px rgba(0, 217, 255, 0.3); }
+  .calendar-week.break { background: #f59e0b; color: #0f0f0f; border-color: #f59e0b; }
   
   .calendar-legend { display: flex; gap: 20px; font-size: 11px; margin-top: 16px; }
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .legend-box { width: 14px; height: 14px; border: 1px solid #333333; }
-  .legend-box.active { background: #666666; }
-  .legend-box.break { background: #444444; }
+  .legend-box.current { background: #00d9ff; border-color: #00d9ff; }
+  .legend-box.break { background: #f59e0b; border-color: #f59e0b; }
   
   @media (max-width: 768px) {
     .stats-grid { grid-template-columns: 1fr; }
@@ -322,57 +341,113 @@
   <div style="margin-bottom: 40px;">
     <div class="section-title">Timeline with exam breaks</div>
     
-    <div class="timeline-item past">
-      <div class="timeline-label">Weeks 1-5 (COMPLETED)</div>
-      <div class="timeline-dates">Jul 6 - Aug 1</div>
-      <div class="timeline-detail">Foundation Sprint: Linear algebra, Python, NumPy, Pandas, DSA</div>
+    <div class="timeline-item past" id="week1-5">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">✓ Weeks 1-5 (COMPLETED)</div>
+          <div class="timeline-dates">Jul 6 - Aug 1</div>
+        </div>
+        <div class="timeline-toggle">−</div>
+      </div>
+      <div class="timeline-expanded" style="display: block;">
+        <div class="timeline-detail">Foundation Sprint: Linear algebra, Python, NumPy, Pandas, DSA</div>
+      </div>
     </div>
     
-    <div class="timeline-item">
-      <div class="timeline-label">Weeks 6-12 (ACTIVE)</div>
-      <div class="timeline-dates">Aug 15 - Oct 2 • 7 weeks</div>
-      <div class="timeline-detail">Continue foundations + Core ML basics</div>
+    <div class="timeline-item active" id="week6-12">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">→ Weeks 6-12 (ACTIVE NOW)</div>
+          <div class="timeline-dates">Aug 15 - Oct 2 • 7 weeks</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">Continue foundations + Core ML basics. Focus: supervised learning, model evaluation, scikit-learn projects</div>
+      </div>
     </div>
     
-    <div class="timeline-item break">
-      <div class="timeline-label">PT1 EXAM BREAK</div>
-      <div class="timeline-dates">Oct 3-14 • 2 weeks</div>
-      <div class="timeline-detail">1 week study + exam week (Oct 10-14)</div>
+    <div class="timeline-item break" id="pt1-break">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">⊘ PT1 EXAM BREAK</div>
+          <div class="timeline-dates">Oct 3-14 • 2 weeks</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">1 week study + exam week (Oct 10-14). Resume ML on Oct 15.</div>
+      </div>
     </div>
     
-    <div class="timeline-item">
-      <div class="timeline-label">Weeks 13-15 (ACTIVE)</div>
-      <div class="timeline-dates">Oct 15 - Nov 4 • 3 weeks</div>
-      <div class="timeline-detail">Core ML + First Project (Credit Card Fraud)</div>
+    <div class="timeline-item" id="week13-15">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">Weeks 13-15 (UPCOMING)</div>
+          <div class="timeline-dates">Oct 15 - Nov 4 • 3 weeks</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">Core ML + First Project (Credit Card Fraud Detection). Build end-to-end pipeline.</div>
+      </div>
     </div>
     
-    <div class="timeline-item break">
-      <div class="timeline-label">PRACTICAL EXAMS</div>
-      <div class="timeline-dates">Nov 1-7 • 1 week</div>
-      <div class="timeline-detail">Exam week only - no ML work</div>
+    <div class="timeline-item break" id="pe">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">⊘ PRACTICAL EXAMS</div>
+          <div class="timeline-dates">Nov 1-7 • 1 week</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">Exam week only - no ML work. Focus on lab practicals and coding assessments.</div>
+      </div>
     </div>
     
-    <div class="timeline-item">
-      <div class="timeline-label">Week 16 (ACTIVE)</div>
-      <div class="timeline-dates">Nov 8-14 • 1 week</div>
-      <div class="timeline-detail">Continue Core ML</div>
+    <div class="timeline-item" id="week16">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">Week 16 (UPCOMING)</div>
+          <div class="timeline-dates">Nov 8-14 • 1 week</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">Continue Core ML. Unsupervised learning: clustering, dimensionality reduction.</div>
+      </div>
     </div>
     
-    <div class="timeline-item break">
-      <div class="timeline-label">TERM-END EXAM PERIOD</div>
-      <div class="timeline-dates">Nov 15 - Dec 2 • 3 weeks</div>
-      <div class="timeline-detail">PT2 exam (Nov 22-29) + College exams - no ML work</div>
+    <div class="timeline-item break" id="term-end">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">⊘ TERM-END EXAM PERIOD</div>
+          <div class="timeline-dates">Nov 15 - Dec 2 • 3 weeks</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">PT2 exam (Nov 22-29) + College exams - no ML work. Final revision period.</div>
+      </div>
     </div>
     
-    <div class="timeline-item">
-      <div class="timeline-label">Weeks 17-21 (ACTIVE)</div>
-      <div class="timeline-dates">Dec 3 - Jan 7 • 5 weeks</div>
-      <div class="timeline-detail">Neural Networks, Transformers, Project 2 - FINISH</div>
+    <div class="timeline-item" id="week17-21">
+      <div class="timeline-header">
+        <div>
+          <div class="timeline-label">🎯 Weeks 17-21 (FINAL SPRINT)</div>
+          <div class="timeline-dates">Dec 3 - Jan 7 • 5 weeks</div>
+        </div>
+        <div class="timeline-toggle">+</div>
+      </div>
+      <div class="timeline-collapsed">
+        <div class="timeline-detail">Neural Networks, Transformers, LLMs. Complete Project 2. Finish roadmap strong!</div>
+      </div>
     </div>
   </div>
   
   <div>
-    <div class="section-title">Visual calendar</div>
+    <div class="section-title">Visual timeline</div>
     <div class="calendar-grid">
       <div class="calendar-week">W6</div>
       <div class="calendar-week">W7</div>
@@ -398,7 +473,7 @@
     </div>
     <div class="calendar-legend">
       <div class="legend-item">
-        <div class="legend-box active"></div>
+        <div class="legend-box current"></div>
         <span>Active ML weeks</span>
       </div>
       <div class="legend-item">
@@ -408,6 +483,34 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Progressive disclosure: click to expand/collapse timeline items
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    const header = item.querySelector('.timeline-header');
+    const expanded = item.querySelector('.timeline-expanded');
+    const collapsed = item.querySelector('.timeline-collapsed');
+    const toggle = item.querySelector('.timeline-toggle');
+    
+    if (!header || !toggle) return;
+    
+    header.addEventListener('click', function() {
+      const isExpanded = expanded && expanded.style.display !== 'none';
+      
+      if (expanded && collapsed) {
+        if (isExpanded) {
+          expanded.style.display = 'none';
+          collapsed.style.display = 'block';
+          toggle.textContent = '+';
+        } else {
+          expanded.style.display = 'block';
+          collapsed.style.display = 'none';
+          toggle.textContent = '−';
+        }
+      }
+    });
+  });
+</script>
 
   <div id="app"><p class="loading-note">Loading your roadmap…</p></div>
 </div>
