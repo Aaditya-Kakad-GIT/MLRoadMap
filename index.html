@@ -9,19 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy-base:#0d1117;
-    --navy-surface:#161b22;
-    --paper:#f0efe9;
-    --paper-dim:#d8dcd2;
-    --ink:#14202b;
-    --ink-soft:#3c4a56;
-    --accent-teal:#2dd4bf;
-    --accent-dark:#0d9488;
-    --accent-light:rgba(13,148,136,0.14);
-    --line:rgba(255,255,255,0.10);
-    --line-soft:rgba(20,32,43,0.14);
-    --success:#34d399;
-    --alert:#f87171;
+    --navy-base:#ffffff;
+    --navy-surface:#f5f5f5;
+    --paper:#000000;
+    --paper-dim:#333333;
+    --ink:#000000;
+    --ink-soft:#666666;
+    --accent-teal:#000000;
+    --accent-dark:#333333;
+    --accent-light:rgba(0,0,0,0.1);
+    --line:rgba(0,0,0,0.15);
+    --line-soft:rgba(0,0,0,0.08);
+    --success:#000000;
+    --alert:#000000;
     --font-mono:'JetBrains Mono', monospace;
     --font-display:'Space Mono', monospace;
   }
@@ -31,11 +31,7 @@
 
   body{
     background-color:var(--navy-base);
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:20px 20px;
-    background-attachment:fixed;
+    background-image:none;
     color:var(--paper);
     font-family:var(--font-mono);
     font-size:14px;
@@ -247,45 +243,45 @@
 </head>
 <body>
 <div class="app-shell">
-<!-- PERSONALIZED ROADMAP DASHBOARD - CLEAN VERSION -->
+<!-- PERSONALIZED ROADMAP DASHBOARD - MONOCHROME -->
 <style>
-  /* Remove background grid - clean slate */
-  body { background-color: var(--navy-base); background-image: none; }
+  /* Monochrome color scheme */
+  body { background-color: #ffffff; background-image: none; color: #000000; }
   
-  .dashboard { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
-  .dashboard-title { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--paper); margin-bottom: 4px; }
-  .dashboard-subtitle { font-size: 12px; color: #8b949e; margin-bottom: 32px; }
+  .dashboard { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid #ddd; }
+  .dashboard-title { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: #000000; margin-bottom: 4px; }
+  .dashboard-subtitle { font-size: 12px; color: #999999; margin-bottom: 32px; }
   
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
-  .stat-card { background: var(--navy-surface); border: 1px solid var(--line); padding: 20px; }
-  .stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--accent-teal); }
-  .stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #8b949e; margin-top: 8px; }
+  .stat-card { background: #f9f9f9; border: 1px solid #e0e0e0; padding: 20px; }
+  .stat-value { font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #000000; }
+  .stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #999999; margin-top: 8px; }
   
-  .section-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 16px; font-weight: 600; }
+  .section-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #333333; margin-bottom: 16px; font-weight: 600; }
   
-  .progress-bar-container { background: var(--navy-surface); border: 1px solid var(--line); padding: 16px; margin-bottom: 32px; }
-  .progress-bar-label { font-size: 12px; color: var(--paper); margin-bottom: 10px; font-weight: 500; }
-  .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.08); overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: var(--accent-teal); width: 19%; }
-  .progress-info { display: flex; justify-content: space-between; margin-top: 10px; font-size: 10px; color: #8b949e; }
+  .progress-bar-container { background: #f9f9f9; border: 1px solid #e0e0e0; padding: 16px; margin-bottom: 32px; }
+  .progress-bar-label { font-size: 12px; color: #000000; margin-bottom: 10px; font-weight: 500; }
+  .progress-bar { width: 100%; height: 6px; background: #e0e0e0; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: #000000; width: 19%; }
+  .progress-info { display: flex; justify-content: space-between; margin-top: 10px; font-size: 10px; color: #999999; }
   
-  .timeline-item { background: var(--navy-surface); border: 1px solid var(--line); padding: 16px; margin-bottom: 8px; border-left: 3px solid var(--accent-teal); }
-  .timeline-item.break { border-left-color: var(--alert); background: rgba(248,113,113,0.05); }
+  .timeline-item { background: #f9f9f9; border: 1px solid #e0e0e0; padding: 16px; margin-bottom: 8px; border-left: 3px solid #000000; }
+  .timeline-item.break { border-left-color: #666666; background: #f0f0f0; }
   .timeline-item.past { opacity: 0.6; }
   
-  .timeline-label { font-weight: 600; color: var(--paper); font-size: 13px; margin-bottom: 4px; }
-  .timeline-dates { font-family: var(--font-mono); font-size: 10px; color: #8b949e; margin-bottom: 4px; }
-  .timeline-detail { font-size: 11px; color: #8b949e; }
+  .timeline-label { font-weight: 600; color: #000000; font-size: 13px; margin-bottom: 4px; }
+  .timeline-dates { font-family: var(--font-mono); font-size: 10px; color: #999999; margin-bottom: 4px; }
+  .timeline-detail { font-size: 11px; color: #999999; }
   
   .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 16px; }
-  .calendar-week { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 600; border: 1px solid var(--line); background: rgba(45,212,191,0.1); color: var(--accent-teal); }
-  .calendar-week.break { background: rgba(248,113,113,0.1); color: var(--alert); border-color: var(--alert); }
+  .calendar-week { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 600; border: 1px solid #ddd; background: #f9f9f9; color: #000000; }
+  .calendar-week.break { background: #e8e8e8; color: #333333; border-color: #999999; }
   
   .calendar-legend { display: flex; gap: 20px; font-size: 11px; margin-top: 16px; }
   .legend-item { display: flex; align-items: center; gap: 6px; }
-  .legend-box { width: 14px; height: 14px; border: 1px solid var(--line); }
-  .legend-box.active { background: rgba(45,212,191,0.2); }
-  .legend-box.break { background: rgba(248,113,113,0.2); }
+  .legend-box { width: 14px; height: 14px; border: 1px solid #ddd; }
+  .legend-box.active { background: #cccccc; }
+  .legend-box.break { background: #999999; }
   
   @media (max-width: 768px) {
     .stats-grid { grid-template-columns: 1fr; }
@@ -413,7 +409,6 @@
   </div>
 </div>
 
-<div class="app-shell">
   <div id="app"><p class="loading-note">Loading your roadmap…</p></div>
 </div>
 <script>
