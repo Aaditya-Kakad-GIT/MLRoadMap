@@ -55,207 +55,209 @@
   ::-webkit-scrollbar-track{ background:var(--navy-base); }
   ::-webkit-scrollbar-thumb{ background:var(--navy-surface); border-radius:0px; }
   ::-webkit-scrollbar-thumb:hover{ background:var(--accent-dark); }
-
-  /* ── progress ── */
-  .progress-track{ flex:1; height:6px; background:rgba(255,255,255,0.08); border-radius:0px; overflow:hidden; min-width:80px; }
-  .progress-fill{ height:100%; background:var(--accent-teal); border-radius:0px; transition:width 0.2s linear; }
-  .progress-fill.green{ background:var(--success); }
-
-  /* ── title block ── */
-  .titleblock{ border:1px solid var(--line); background:var(--navy-surface); border-radius:0px; padding:20px; margin-bottom:20px; }
-  .rev-badge{ display:inline-block; font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; background:var(--accent-teal); color:var(--navy-base); padding:4px 8px; border-radius:0px; margin-bottom:12px; }
-  .tb-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; padding-bottom:16px; border-bottom:1px solid var(--line); }
-  .tb-cell{ display:flex; flex-direction:column; gap:4px; }
-  .tb-label{ font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8b949e; }
-  .tb-value{ font-family:var(--font-display); font-weight:700; font-size:18px; color:var(--paper); }
-  .tb-progress-row{ display:flex; align-items:center; gap:12px; margin-top:16px; }
-  .tb-progress-label{ font-family:var(--font-mono); font-size:10px; color:#8b949e; white-space:nowrap; }
-  .tb-progress-text{ font-family:var(--font-mono); font-size:11px; color:var(--paper); white-space:nowrap; }
-  .tb-note{ margin:12px 0 0; font-size:12px; color:#8b949e; line-height:1.6; }
-  .tb-note strong{ color:var(--accent-teal); }
-
-  /* ── panels ── */
-  .panel{ background:var(--navy-surface); color:var(--paper); border-radius:0px; padding:18px; margin-bottom:16px; border-left:3px solid var(--accent-teal); }
-  .panel.green-border{ border-left-color:var(--success); }
-  .eyebrow{ display:block; font-family:var(--font-mono); font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:8px; }
-
-  /* ── this week panel ── */
-  .thisweek h2{ font-size:18px; color:var(--paper); margin-bottom:8px; }
-  .thisweek.complete{ border-left-color:var(--success); }
-  .thisweek-tags{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
-  .tag{ font-family:var(--font-mono); font-size:10px; background:rgba(255,255,255,0.08); color:var(--paper); padding:3px 6px; border-radius:0px; border:1px solid var(--line); }
-  .tag.new-tag{ background:rgba(45,212,191,0.12); color:var(--accent-teal); border:1px solid var(--accent-teal); }
-  .deliverable{ font-size:13px; color:#8b949e; margin:0 0 12px; }
-  .thisweek-bottom{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-  .mini-stat{ font-family:var(--font-mono); font-size:11px; color:#8b949e; }
-
-  /* ── badges ── */
-  .badge{ font-family:var(--font-mono); font-size:10px; padding:3px 8px; border-radius:0px; white-space:nowrap; border:1px solid; }
-  .badge.st-ontrack{ background:rgba(52,211,153,0.12); color:var(--success); border-color:var(--success); }
-  .badge.st-behind{ background:rgba(248,113,113,0.12); color:var(--alert); border-color:var(--alert); }
-  .badge.st-skipped{ background:rgba(248,113,113,0.12); color:var(--alert); border-color:var(--alert); }
-  .badge.st-none{ background:rgba(255,255,255,0.05); color:#8b949e; border-color:var(--line); }
-
-  /* ── buttons ── */
-  .btn-primary{ border:1px solid var(--accent-teal); background:var(--accent-teal); color:var(--navy-base); font-size:12px; font-weight:600; padding:8px 14px; border-radius:0px; margin-left:auto; transition:background 0.1s linear, border-color 0.1s linear; }
-  .btn-primary:hover{ background:var(--accent-dark); border-color:var(--accent-dark); }
-  .btn-primary:active{ transform:scale(0.98); }
-  .btn-secondary{ border:1px solid var(--line); background:transparent; color:var(--paper); font-size:11px; font-weight:600; padding:6px 12px; border-radius:0px; transition:background 0.1s linear, border-color 0.1s linear; }
-  .btn-secondary:hover{ background:rgba(255,255,255,0.08); border-color:var(--accent-teal); }
-
-  /* ── DSA parallel track ── */
-  .dsa-panel{ background:var(--navy-surface); color:var(--paper); border-radius:0px; padding:16px; margin-bottom:16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; border-left:3px solid var(--success); border-radius:0px; }
-  .dsa-col{ display:flex; flex-direction:column; gap:8px; }
-  .dsa-col + .dsa-col{ border-left:1px solid var(--line); padding-left:16px; }
-  .dsa-label{ font-family:var(--font-mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:4px; }
-  .dsa-controls{ display:flex; align-items:center; gap:8px; }
-  .step-btn{ width:28px; height:28px; border:1px solid var(--line); background:transparent; color:var(--paper); border-radius:0px; font-size:14px; line-height:1; transition:background 0.1s linear, border-color 0.1s linear; }
-  .step-btn:hover{ background:rgba(255,255,255,0.08); border-color:var(--accent-teal); }
-  .num-input{ width:64px; text-align:center; font-family:var(--font-mono); font-size:14px; font-weight:600; border:1px solid var(--line); border-radius:0px; padding:6px 4px; background:transparent; color:var(--paper); }
-  .num-input:focus{ border-color:var(--accent-teal); outline:none; }
-  .dsa-target{ font-family:var(--font-mono); font-size:11px; color:#8b949e; }
-  .dsa-note{ font-size:12px; color:#8b949e; line-height:1.5; }
-
-  /* ── growth track (CS fundamentals / outreach / applications) ── */
-  .growth-panel{ background:var(--navy-surface); color:var(--paper); border-radius:0px; padding:16px; margin-bottom:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; border-left:3px solid var(--accent-teal); }
-  .growth-col{ display:flex; flex-direction:column; gap:8px; }
-  .growth-col + .growth-col{ border-left:1px solid var(--line); padding-left:16px; }
-  .growth-label{ font-family:var(--font-mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:4px; }
-
-  /* ── resources panel ── */
-  .resources-panel{ background:var(--navy-surface); color:var(--paper); border-radius:0px; margin-bottom:16px; border-left:3px solid var(--accent-teal); overflow:hidden; }
-  .resources-toggle{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; cursor:pointer; user-select:none; transition:background 0.1s linear; }
-  .resources-toggle:hover{ background:rgba(255,255,255,0.05); }
-  .resources-toggle h2{ font-size:15px; color:var(--paper); font-weight:700; letter-spacing:-0.01em; }
-  .resources-toggle-meta{ display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; color:#8b949e; white-space:nowrap; flex-shrink:0; }
-  .resources-toggle-meta .chevron{ color:#8b949e; transition:transform 0.15s linear; }
-  .resources-toggle[aria-expanded="true"] .chevron{ transform:rotate(90deg); }
-  .resources-body{ display:none; padding:0 18px 18px; border-top:1px solid var(--line); }
-  .resources-body.open{ display:block; padding-top:16px; }
-
-  .res-search-wrap{ position:relative; margin-bottom:16px; }
-  .res-search-icon{ position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:12px; color:#8b949e; pointer-events:none; }
-  .res-search{ width:100%; padding:8px 10px 8px 28px; border:1px solid var(--line); border-radius:0px; font-size:12px; color:var(--paper); background:transparent; transition:border-color 0.1s linear; }
-  .res-search:focus{ border-color:var(--accent-teal); outline:none; box-shadow:0 0 0 2px var(--accent-light); }
-
-  .res-group{ margin-bottom:16px; }
-  .res-group:last-child{ margin-bottom:0; }
-  .res-group.res-hidden{ display:none; }
-  .res-group-title{ display:flex; align-items:center; justify-content:space-between; gap:10px; font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent-teal); padding-bottom:6px; margin-bottom:8px; border-bottom:1px solid var(--line); }
-  .res-group-count{ font-family:var(--font-mono); font-size:10px; font-weight:600; letter-spacing:0; text-transform:none; color:#8b949e; background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:0px; border:1px solid var(--line); }
-  .res-group-items{ display:flex; flex-direction:column; gap:6px; }
-
-  .res-item{ display:flex; align-items:flex-start; gap:10px; padding:8px; border-radius:0px; cursor:pointer; transition:background 0.1s linear; border:1px solid transparent; }
-  .res-item:hover{ background:rgba(255,255,255,0.05); border-color:var(--line); }
-  .res-item.res-hidden{ display:none; }
-  .res-item input{ margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--accent-teal); cursor:pointer; }
-  .res-item-body{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-  .res-item-body a{ font-size:12px; font-weight:600; color:var(--accent-teal); text-decoration:none; word-break:break-word; }
-  .res-item-body a:hover{ text-decoration:underline; }
-  .res-link-icon{ font-size:10px; color:#8b949e; margin-left:3px; display:inline-block; }
-  .res-item-meta{ font-family:var(--font-mono); font-size:10px; color:#8b949e; }
-  .res-item.done .res-item-body a{ color:#8b949e; text-decoration:line-through; text-decoration-color:var(--line); }
-  .res-item.done .res-item-meta{ color:#8b949e; }
-  .res-item.done{ background:rgba(52,211,153,0.08); border-color:rgba(52,211,153,0.2); }
-
-  .res-empty{ display:none; text-align:center; font-size:12px; color:#8b949e; padding:16px 0; }
-  .res-empty.show{ display:block; }
-  .res-summary{ font-size:11px; color:#8b949e; line-height:1.6; margin:16px 0 0; padding-top:12px; border-top:1px solid var(--line); }
-
-  /* ── phase sections ── */
-  .phase-section{ margin-top:32px; margin-bottom:16px; }
-  .phase-header{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; border-bottom:1px solid var(--line); padding-bottom:12px; }
-  .phase-heading{ display:flex; align-items:baseline; gap:8px; }
-  .phase-code{ font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; color:var(--accent-teal); }
-  .phase-header h3{ font-size:16px; color:var(--paper); }
-  .phase-time{ font-family:var(--font-mono); font-size:11px; color:#8b949e; }
-  .phase-goal{ font-size:12px; color:#8b949e; max-width:700px; margin:10px 0 12px; line-height:1.6; }
-  .phase-progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  .phase-progress-text{ font-family:var(--font-mono); font-size:10px; color:#8b949e; white-space:nowrap; }
-
-  /* ── exit panel ── */
-  .exit-toggle{ display:inline-block; background:transparent; border:1px solid var(--line); color:var(--paper); font-size:11px; padding:6px 10px; border-radius:0px; margin-bottom:6px; transition:border-color 0.1s linear; }
-  .exit-toggle:hover{ border-color:var(--accent-teal); }
-  .exit-panel{ display:none; margin:10px 0 16px; padding:12px; background:rgba(255,255,255,0.02); border:1px solid var(--line); border-radius:0px; }
-  .exit-panel.open{ display:block; }
-  .exit-item{ display:flex; align-items:flex-start; gap:10px; padding:6px 0; font-size:12px; color:var(--paper); }
-  .exit-item input{ margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:var(--accent-teal); }
-
-  /* ── entry cards ── */
-  .entry-list{ display:flex; flex-direction:column; gap:8px; }
-  .entry{ background:transparent; color:var(--paper); border-radius:0px; overflow:hidden; border:1px solid var(--line); transition:border-color 0.1s linear, background 0.1s linear; }
-  .entry.open{ border-color:var(--accent-teal); background:rgba(45,212,191,0.08); }
-  .entry-header{ display:flex; align-items:center; gap:12px; padding:12px; cursor:pointer; }
-  .entry-header:hover{ background:rgba(255,255,255,0.03); }
-  .entry-code{ font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--accent-teal); flex-shrink:0; width:60px; }
-  .entry-titlewrap{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
-  .entry-date{ font-family:var(--font-mono); font-size:10px; color:#8b949e; }
-  .entry-title{ font-family:var(--font-display); font-weight:700; font-size:13px; color:var(--paper); }
-  .now-tag{ font-family:var(--font-mono); font-size:8px; background:var(--accent-teal); color:var(--navy-base); padding:2px 6px; border-radius:0px; margin-left:6px; letter-spacing:0.08em; text-transform:uppercase; font-weight:700; vertical-align:middle; }
-  .new-feature-tag{ font-family:var(--font-mono); font-size:8px; background:rgba(45,212,191,0.2); color:var(--accent-teal); border:1px solid var(--accent-teal); padding:2px 5px; border-radius:0px; margin-left:5px; vertical-align:middle; }
-  .chevron{ font-size:16px; color:#8b949e; transition:transform 0.15s linear; flex-shrink:0; }
-  .entry.open .chevron{ transform:rotate(90deg); }
-  .entry-body{ display:none; padding:0 12px 12px; border-top:1px solid var(--line); }
-  .entry.open .entry-body{ display:block; padding-top:12px; }
-  .entry-note{ font-size:11px; border-left:2px solid var(--accent-teal); padding-left:10px; background:rgba(45,212,191,0.08); padding:8px 10px; border-radius:0px; margin:0 0 12px; color:#8b949e; }
-  .entry-note.warn{ border-left-color:var(--alert); background:rgba(248,113,113,0.08); }
-  .entry-deliverable{ font-size:12px; color:#8b949e; margin:0 0 12px; }
-
-  /* ── task list ── */
-  .task-list{ display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-  .task-item{ display:flex; align-items:flex-start; gap:10px; font-size:12px; }
-  .task-item input{ margin-top:2px; flex-shrink:0; width:16px; height:16px; accent-color:var(--accent-teal); }
-  .task-item span.new-item{ color:var(--accent-teal); font-style:italic; }
-  .task-progress{ font-family:var(--font-mono); font-size:10px; color:#8b949e; margin:0 0 16px; }
-
-  /* ── check-in ── */
-  .checkin{ border-top:1px solid var(--line); padding-top:12px; }
-  .checkin-label{ display:block; font-family:var(--font-mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:#8b949e; margin-bottom:8px; }
-  .pill-group{ display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
-  .pill{ border:1px solid var(--line); background:transparent; color:var(--paper); font-size:11px; padding:6px 11px; border-radius:0px; cursor:pointer; transition:border-color 0.1s linear, background 0.1s linear; }
-  .pill:hover{ border-color:var(--accent-teal); background:rgba(45,212,191,0.08); }
-  .pill.active{ background:var(--accent-teal); color:var(--navy-base); border-color:var(--accent-teal); font-weight:600; }
-  textarea[data-action="notes"]{ width:100%; min-height:64px; resize:vertical; border:1px solid var(--line); border-radius:0px; padding:8px 10px; font-size:12px; color:var(--paper); background:transparent; margin-bottom:10px; }
-  textarea[data-action="notes"]:focus{ border-color:var(--accent-teal); box-shadow:0 0 0 2px var(--accent-light); outline:none; }
-  .save-row{ display:flex; align-items:center; gap:10px; }
-  .saved-msg{ font-family:var(--font-mono); font-size:10px; color:var(--success); opacity:0; transition:opacity 0.2s ease; }
-  .saved-msg.show{ opacity:1; }
-
-  /* ── footer ── */
-  .footer-row{ display:flex; justify-content:space-between; align-items:center; margin-top:40px; padding-top:16px; border-top:1px solid var(--line); }
-  .save-status{ font-family:var(--font-mono); font-size:10px; color:#8b949e; }
-  .reset-btn{ background:transparent; border:1px solid var(--line); color:#8b949e; font-size:11px; padding:6px 11px; border-radius:0px; transition:border-color 0.1s linear, color 0.1s linear; }
-  .reset-btn:hover{ border-color:var(--alert); color:var(--alert); }
-  .loading-note{ font-family:var(--font-mono); font-size:12px; color:#8b949e; padding:40px 0; text-align:center; }
-
-  /* ── responsive ── */
-  @media (max-width:768px){
-    .app-shell{ padding:24px 16px 56px; }
-    .tb-grid{ grid-template-columns:repeat(2, 1fr); }
-    .dsa-panel{ grid-template-columns:1fr; }
-    .dsa-col + .dsa-col{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; }
-    .growth-panel{ grid-template-columns:1fr; }
-    .growth-col + .growth-col{ border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:12px; }
-    .entry-header{ flex-wrap:wrap; }
-    .entry-code{ width:auto; }
-    .resources-toggle{ padding:14px 16px; }
-    .resources-body{ padding:0 16px 16px; }
-    .resources-body.open{ padding-top:14px; }
-  }
-  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
-</style>
-</head>
 <body>
 <div class="app-shell">
-  <div id="app"><p class="loading-note">Loading your roadmap…</p></div>
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- PERSONALIZED ROADMAP DASHBOARD (Added Aug 9, 2026) -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+
+<style>
+  /* ── personalized dashboard ── */
+  .dashboard { margin-bottom:40px; border-bottom:1px solid var(--line); padding-bottom:40px; }
+  
+  .dashboard-title { font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--paper); margin-bottom:8px; }
+  .dashboard-subtitle { font-size:13px; color:#8b949e; margin-bottom:32px; }
+  
+  /* stats grid */
+  .stats-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:32px; }
+  .stat-card { background:var(--navy-surface); border:1px solid var(--line); padding:16px; border-left:3px solid var(--accent-teal); }
+  .stat-value { font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--accent-teal); margin-bottom:4px; }
+  .stat-label { font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8b949e; }
+  
+  /* progress tracker */
+  .progress-section { margin-bottom:32px; }
+  .progress-section-title { font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent-teal); margin-bottom:12px; }
+  
+  .progress-item { background:var(--navy-surface); border:1px solid var(--line); padding:12px; margin-bottom:10px; }
+  .progress-item-label { font-size:12px; color:var(--paper); margin-bottom:6px; font-weight:500; }
+  .progress-bar { width:100%; height:6px; background:rgba(255,255,255,0.08); border-radius:0; overflow:hidden; }
+  .progress-bar-fill { height:100%; background:var(--accent-teal); }
+  .progress-info { display:flex; justify-content:space-between; margin-top:6px; font-size:10px; color:#8b949e; }
+  
+  /* timeline */
+  .timeline { margin-bottom:32px; }
+  .timeline-item { background:var(--navy-surface); border:1px solid var(--line); padding:16px 16px 16px 20px; margin-bottom:8px; border-left:3px solid var(--accent-teal); display:flex; gap:12px; }
+  .timeline-item.break { border-left-color:var(--alert); background:rgba(248,113,113,0.08); }
+  .timeline-item.completed { opacity:0.7; }
+  
+  .timeline-marker { width:32px; height:32px; background:var(--accent-teal); color:var(--navy-base); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:11px; flex-shrink:0; }
+  .timeline-item.break .timeline-marker { background:var(--alert); }
+  
+  .timeline-content { flex:1; min-width:0; }
+  .timeline-label { font-weight:600; color:var(--paper); font-size:13px; margin-bottom:2px; }
+  .timeline-dates { font-family:var(--font-mono); font-size:11px; color:#8b949e; margin-bottom:4px; }
+  .timeline-detail { font-size:12px; color:#8b949e; line-height:1.5; }
+  
+  /* calendar */
+  .calendar-grid { display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; margin-bottom:12px; }
+  .calendar-week { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:10px; font-weight:600; border:0.5px solid var(--line); background:rgba(45,212,191,0.12); color:var(--accent-teal); }
+  .calendar-week.break { background:rgba(248,113,113,0.12); color:var(--alert); }
+  .calendar-week.future { background:rgba(255,255,255,0.03); color:#8b949e; }
+  
+  .calendar-legend { display:flex; gap:16px; font-size:11px; flex-wrap:wrap; }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .legend-box { width:12px; height:12px; border:0.5px solid var(--line); }
+  .legend-box.active { background:rgba(45,212,191,0.3); }
+  .legend-box.break { background:rgba(248,113,113,0.2); }
+  
+  @media (max-width:768px) {
+    .stats-grid { grid-template-columns:1fr; }
+    .timeline-item { padding:12px; }
+  }
+</style>
+
+<div class="dashboard">
+  <div class="dashboard-title">Your ML Roadmap</div>
+  <div class="dashboard-subtitle">Personalized timeline with exam breaks • Aug 9, 2026</div>
+  
+  <!-- stats grid -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">5/26</div>
+      <div class="stat-label">Weeks completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">21</div>
+      <div class="stat-label">Weeks remaining</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">Jan 7</div>
+      <div class="stat-label">Completion date</div>
+    </div>
+  </div>
+  
+  <!-- progress tracker -->
+  <div class="progress-section">
+    <div class="progress-section-title">Overall progress</div>
+    <div class="progress-item">
+      <div class="progress-item-label">Roadmap completion</div>
+      <div class="progress-bar">
+        <div class="progress-bar-fill" style="width:19%"></div>
+      </div>
+      <div class="progress-info">
+        <span>~110 hours completed</span>
+        <span>~410 hours remaining</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- timeline -->
+  <div class="progress-section">
+    <div class="progress-section-title">Your timeline</div>
+    <div class="timeline">
+      <div class="timeline-item completed">
+        <div class="timeline-marker">✓</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Weeks 1-5: Foundation Sprint (COMPLETED)</div>
+          <div class="timeline-dates">Jul 6 - Aug 1</div>
+          <div class="timeline-detail">Linear algebra, Python, NumPy, Pandas, DSA basics</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker">6-12</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Active learning</div>
+          <div class="timeline-dates">Aug 9 - Sep 27 • 7 weeks active</div>
+          <div class="timeline-detail">Continue Foundation Sprint + Start Core ML</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item break">
+        <div class="timeline-marker">✕</div>
+        <div class="timeline-content">
+          <div class="timeline-label">PT1 Exam Break</div>
+          <div class="timeline-dates">Sep 30 - Oct 14 • 2 weeks</div>
+          <div class="timeline-detail">1 week before + 1 week exam. No ML work.</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker">13-16</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Core ML + First Project</div>
+          <div class="timeline-dates">Oct 15 - Nov 14 • 4 weeks active</div>
+          <div class="timeline-detail">Gradient descent, Regression, Trees, Credit Card Fraud Project</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item break">
+        <div class="timeline-marker">✕</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Practical Exams</div>
+          <div class="timeline-dates">Nov 1-7 • 1 week</div>
+          <div class="timeline-detail">Exam week only. No ML work.</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item break">
+        <div class="timeline-marker">✕</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Term-End Exam Period</div>
+          <div class="timeline-dates">Nov 15 - Dec 2 • 3 weeks</div>
+          <div class="timeline-detail">PT2 + College exams. No ML work.</div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-marker">17-21</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Final weeks & completion</div>
+          <div class="timeline-dates">Dec 3 - Jan 7 • 5 weeks active</div>
+          <div class="timeline-detail">Complete Neural Networks, Transformers, Project 2, finish roadmap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- calendar -->
+  <div class="progress-section">
+    <div class="progress-section-title">Visual calendar (Aug 2026 - Jan 2027)</div>
+    <div class="calendar-grid">
+      <div class="calendar-week">W6</div>
+      <div class="calendar-week">W7</div>
+      <div class="calendar-week">W8</div>
+      <div class="calendar-week">W9</div>
+      <div class="calendar-week">W10</div>
+      <div class="calendar-week">W11</div>
+      <div class="calendar-week">W12</div>
+      <div class="calendar-week break">BR</div>
+      <div class="calendar-week break">PT1</div>
+      <div class="calendar-week">W13</div>
+      <div class="calendar-week">W14</div>
+      <div class="calendar-week">W15</div>
+      <div class="calendar-week break">PE</div>
+      <div class="calendar-week">W16</div>
+      <div class="calendar-week break">TR</div>
+      <div class="calendar-week break">EX</div>
+      <div class="calendar-week">W17</div>
+      <div class="calendar-week">W18</div>
+      <div class="calendar-week">W19</div>
+      <div class="calendar-week">W20</div>
+      <div class="calendar-week">W21</div>
+    </div>
+    <div class="calendar-legend">
+      <div class="legend-item">
+        <div class="legend-box active"></div>
+        <span>Active ML weeks</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box break"></div>
+        <span>Exam breaks</span>
+      </div>
+    </div>
+  </div>
 </div>
-<script>
-/* ──────────────────────────────────────────────
-   REVISED EDITION TRACKER · Compressed to real schedule
-   Start: Mon 6 Jul 2026 · ~25 hrs/week · ~20 calendar weeks
-   ────────────────────────────────────────────── */
-var STORAGE_KEY = 'adi-ml-roadmap-v2-progress';
-var START_DATE  = (function(){ var d=new Date(2026,6,6); d.setHours(0,0,0,0); return d; })(); // Mon 6 Jul 2026 — term + timetable start
 var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
 /* ── CS FUNDAMENTALS ROTATION ── */
