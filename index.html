@@ -244,7 +244,7 @@
 </head>
 <body>
 <div class="app-shell">
-<!-- PERSONALIZED ROADMAP DASHBOARD - CLEAN & MODERN UI/UX -->
+<!-- PERSONALIZED ROADMAP DASHBOARD - DYNAMIC DATES -->
 <style>
   .dashboard { 
     margin-bottom: 64px; 
@@ -256,6 +256,13 @@
     margin-bottom: 48px;
     padding-bottom: 24px;
     border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .dashboard-title-group {
+    flex: 1;
   }
   
   .dashboard-title { 
@@ -274,6 +281,31 @@
     font-family: var(--font-mono);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+  }
+  
+  .skip-day-btn {
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(0, 217, 255, 0.1) 100%);
+    border: 1px solid rgba(0, 217, 255, 0.4);
+    color: #00d9ff;
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms ease;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  
+  .skip-day-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 217, 255, 0.3) 0%, rgba(0, 217, 255, 0.2) 100%);
+    border-color: rgba(0, 217, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
+  }
+  
+  .skip-day-btn:active {
+    transform: translateY(0);
   }
   
   /* Stats Section */
@@ -606,7 +638,7 @@
   
   /* Responsive */
   @media (prefers-reduced-motion: reduce) {
-    .stat-card:hover {
+    .stat-card:hover, .skip-day-btn:hover {
       transition: none;
       transform: none;
     }
@@ -619,6 +651,10 @@
   }
   
   @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      gap: 16px;
+    }
     .stats-grid { grid-template-columns: 1fr; }
     .calendar-grid { grid-template-columns: repeat(7, 1fr); }
     .stat-card { padding: 24px; }
@@ -630,21 +666,24 @@
 
 <div class="dashboard">
   <div class="dashboard-header">
-    <div class="dashboard-title">ML Internship</div>
-    <div class="dashboard-subtitle">26-week learning journey</div>
+    <div class="dashboard-title-group">
+      <div class="dashboard-title">ML Internship</div>
+      <div class="dashboard-subtitle">26-week learning journey</div>
+    </div>
+    <button class="skip-day-btn" id="skipDayBtn">Skip Day</button>
   </div>
   
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-value">5/26</div>
+      <div class="stat-value" id="completedWeeks">5/26</div>
       <div class="stat-label">Completed</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">21</div>
+      <div class="stat-value" id="remainingWeeks">21</div>
       <div class="stat-label">Remaining</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">Jan 7</div>
+      <div class="stat-value" id="finishDate">Jan 12</div>
       <div class="stat-label">Target Date</div>
     </div>
   </div>
@@ -662,121 +701,15 @@
   
   <div style="margin-bottom: 48px;">
     <div class="section-title">Learning Timeline</div>
-    <div class="timeline-container">
-      <div class="timeline-item past">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">✓ Weeks 1–5</div>
-            <div class="timeline-dates">Jul 6 — Aug 1</div>
-          </div>
-          <div class="timeline-toggle rotated">+</div>
-        </div>
-        <div class="timeline-detail open">Foundation Sprint: Linear algebra, Python, NumPy, Pandas, DSA. Strong base for ML.</div>
-      </div>
-      
-      <div class="timeline-item active">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">→ Weeks 6–12 • Active Now</div>
-            <div class="timeline-dates">Aug 15 — Oct 2 (7 weeks)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">Core ML fundamentals: Supervised learning, model evaluation, scikit-learn projects. Building real skills.</div>
-      </div>
-      
-      <div class="timeline-item break">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">⊘ PT1 Exam Break</div>
-            <div class="timeline-dates">Oct 3–14 (2 weeks)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">1 week review + exam week (Oct 10–14). Resume ML on Oct 15.</div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">Weeks 13–15</div>
-            <div class="timeline-dates">Oct 15 — Nov 4 (3 weeks)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">Core ML + Project 1: Credit Card Fraud Detection. End-to-end pipeline with real data.</div>
-      </div>
-      
-      <div class="timeline-item break">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">⊘ Practical Exams</div>
-            <div class="timeline-dates">Nov 1–7 (1 week)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">Hands-on lab assessments. No ML coursework this week—focus on exams.</div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">Week 16</div>
-            <div class="timeline-dates">Nov 8–14 (1 week)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">Unsupervised learning: Clustering, dimensionality reduction, anomaly detection.</div>
-      </div>
-      
-      <div class="timeline-item break">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">⊘ Term-End Exams</div>
-            <div class="timeline-dates">Nov 15 — Dec 2 (3 weeks)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">PT2 exam (Nov 22–29) + college finals. Full review period—no new ML content.</div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-header">
-          <div class="timeline-content">
-            <div class="timeline-label">🎯 Weeks 17–21 • Sprint</div>
-            <div class="timeline-dates">Dec 3 — Jan 7 (5 weeks)</div>
-          </div>
-          <div class="timeline-toggle">+</div>
-        </div>
-        <div class="timeline-detail">Neural Networks, Transformers, LLMs. Complete Project 2. Strong finish to roadmap.</div>
-      </div>
+    <div class="timeline-container" id="timelineContainer">
+      <!-- Generated by JavaScript -->
     </div>
   </div>
   
   <div>
     <div class="section-title">Week Overview</div>
-    <div class="calendar-grid">
-      <div class="calendar-week current">W6</div>
-      <div class="calendar-week">W7</div>
-      <div class="calendar-week">W8</div>
-      <div class="calendar-week">W9</div>
-      <div class="calendar-week">W10</div>
-      <div class="calendar-week">W11</div>
-      <div class="calendar-week">W12</div>
-      <div class="calendar-week past break">BR</div>
-      <div class="calendar-week past break">PT1</div>
-      <div class="calendar-week">W13</div>
-      <div class="calendar-week">W14</div>
-      <div class="calendar-week">W15</div>
-      <div class="calendar-week break">PE</div>
-      <div class="calendar-week">W16</div>
-      <div class="calendar-week break">TR</div>
-      <div class="calendar-week break">EX</div>
-      <div class="calendar-week">W17</div>
-      <div class="calendar-week">W18</div>
-      <div class="calendar-week">W19</div>
-      <div class="calendar-week">W20</div>
-      <div class="calendar-week">W21</div>
+    <div class="calendar-grid" id="calendarGrid">
+      <!-- Generated by JavaScript -->
     </div>
     <div class="calendar-legend">
       <div class="legend-item">
@@ -792,959 +725,192 @@
 </div>
 
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const progressFill = document.querySelector('.progress-bar-fill');
-    let width = 0;
-    const targetWidth = 19;
-    const duration = 900;
-    const startTime = Date.now();
-    
-    function easeOutQuad(t) {
-      return t * (2 - t);
+  class RoadmapTracker {
+    constructor() {
+      this.baseStartDate = new Date(2026, 7, 20); // Aug 20, 2026
+      this.loadSkipDays();
+      this.setupPhases();
+      this.render();
+      this.setupEventListeners();
     }
     
-    function animate() {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      width = targetWidth * easeOutQuad(progress);
-      progressFill.style.width = width + '%';
+    loadSkipDays() {
+      const saved = localStorage.getItem('roadmapSkipDays');
+      this.skipDays = saved ? parseInt(saved) : 0;
+    }
+    
+    saveSkipDays() {
+      localStorage.setItem('roadmapSkipDays', this.skipDays);
+    }
+    
+    getStartDate() {
+      const date = new Date(this.baseStartDate);
+      date.setDate(date.getDate() + this.skipDays);
+      return date;
+    }
+    
+    addDays(date, days) {
+      const result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+    
+    formatDate(date) {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[date.getMonth()] + ' ' + date.getDate();
+    }
+    
+    setupPhases() {
+      const start = this.getStartDate();
       
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
+      this.phases = [
+        { name: 'Weeks 1–5', weeks: 5, startOffset: -35, label: '✓ Weeks 1–5', type: 'past', detail: 'Foundation Sprint: Linear algebra, Python, NumPy, Pandas, DSA. Strong base for ML.' },
+        { name: 'Weeks 6–12', weeks: 7, startOffset: 0, label: '→ Weeks 6–12 • Active Now', type: 'active', detail: 'Core ML fundamentals: Supervised learning, model evaluation, scikit-learn projects. Building real skills.' },
+        { name: 'PT1 Break', weeks: 2, startOffset: 49, label: '⊘ PT1 Exam Break', type: 'break', detail: '1 week review + exam week (Oct 15–19). Resume ML on Oct 20.' },
+        { name: 'Weeks 13–15', weeks: 3, startOffset: 63, label: 'Weeks 13–15', type: 'normal', detail: 'Core ML + Project 1: Credit Card Fraud Detection. End-to-end pipeline with real data.' },
+        { name: 'Practical Exams', weeks: 1, startOffset: 84, label: '⊘ Practical Exams', type: 'break', detail: 'Hands-on lab assessments. No ML coursework this week—focus on exams.' },
+        { name: 'Week 16', weeks: 1, startOffset: 91, label: 'Week 16', type: 'normal', detail: 'Unsupervised learning: Clustering, dimensionality reduction, anomaly detection.' },
+        { name: 'Term-End', weeks: 3, startOffset: 98, label: '⊘ Term-End Exams', type: 'break', detail: 'PT2 exam (Dec 1–8) + college finals. Full review period—no new ML content.' },
+        { name: 'Weeks 17–21', weeks: 5, startOffset: 119, label: '🎯 Weeks 17–21 • Sprint', type: 'normal', detail: 'Neural Networks, Transformers, LLMs. Complete Project 2. Strong finish to roadmap.' }
+      ];
+      
+      this.phases.forEach(phase => {
+        phase.startDate = this.addDays(start, phase.startOffset);
+        phase.endDate = this.addDays(phase.startDate, phase.weeks * 7 - 1);
+      });
+      
+      const finalEnd = this.phases[this.phases.length - 1].endDate;
+      this.finishDate = finalEnd;
     }
     
-    animate();
-  });
+    render() {
+      this.renderTimeline();
+      this.renderCalendar();
+      this.updateStats();
+      this.animateProgressBar();
+    }
+    
+    renderTimeline() {
+      const container = document.getElementById('timelineContainer');
+      container.innerHTML = '';
+      
+      const now = this.getStartDate();
+      
+      this.phases.forEach(phase => {
+        const isCompleted = now > phase.endDate;
+        const isActive = now >= phase.startDate && now <= phase.endDate;
+        
+        const item = document.createElement('div');
+        item.className = `timeline-item ${phase.type} ${isActive ? 'active' : ''} ${isCompleted ? 'past' : ''}`;
+        
+        const dateStr = `${this.formatDate(phase.startDate)} — ${this.formatDate(phase.endDate)}`;
+        const weekStr = phase.weeks > 1 ? `(${phase.weeks} weeks)` : '(1 week)';
+        
+        item.innerHTML = `
+          <div class="timeline-header">
+            <div class="timeline-content">
+              <div class="timeline-label">${phase.label}</div>
+              <div class="timeline-dates">${dateStr} ${weekStr}</div>
+            </div>
+            <div class="timeline-toggle">+</div>
+          </div>
+          <div class="timeline-detail">${phase.detail}</div>
+        `;
+        
+        const toggle = item.querySelector('.timeline-toggle');
+        const detail = item.querySelector('.timeline-detail');
+        
+        if (phase.type === 'past' || isActive) {
+          detail.classList.add('open');
+          toggle.classList.add('rotated');
+        }
+        
+        item.querySelector('.timeline-header').addEventListener('click', () => {
+          detail.classList.toggle('open');
+          toggle.classList.toggle('rotated');
+        });
+        
+        container.appendChild(item);
+      });
+    }
+    
+    renderCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      
+      const now = this.getStartDate();
+      let weekNum = 6;
+      
+      this.phases.forEach(phase => {
+        const daysInPhase = phase.weeks * 7;
+        
+        for (let i = 0; i < daysInPhase; i += 7) {
+          const weekStart = this.addDays(phase.startDate, i);
+          const isCompleted = now > weekStart;
+          const isCurrent = now.toDateString() === weekStart.toDateString() || 
+                           (now > weekStart && now < this.addDays(weekStart, 7));
+          
+          const week = document.createElement('div');
+          week.className = `calendar-week ${phase.type === 'break' ? 'break' : ''} ${isCurrent ? 'current' : ''} ${isCompleted ? 'past' : ''}`;
+          week.textContent = phase.type === 'break' ? (weekNum === 6 ? 'BR' : 'PT1' || 'PE' || 'TR' || 'EX') : 'W' + weekNum;
+          
+          grid.appendChild(week);
+          if (phase.type !== 'break') weekNum++;
+        }
+      });
+    }
+    
+    updateStats() {
+      const now = this.getStartDate();
+      let completed = 0;
+      let remaining = 26;
+      
+      this.phases.forEach(phase => {
+        if (phase.type !== 'break' && now > phase.endDate) {
+          completed += phase.weeks;
+          remaining -= phase.weeks;
+        }
+      });
+      
+      document.getElementById('completedWeeks').textContent = completed + '/26';
+      document.getElementById('remainingWeeks').textContent = remaining;
+      document.getElementById('finishDate').textContent = this.formatDate(this.finishDate);
+    }
+    
+    animateProgressBar() {
+      const now = this.getStartDate();
+      let progressPercent = 0;
+      
+      this.phases.forEach(phase => {
+        if (phase.type !== 'break') {
+          if (now > phase.endDate) {
+            progressPercent += (phase.weeks / 26) * 100;
+          }
+        }
+      });
+      
+      const progressFill = document.querySelector('.progress-bar-fill');
+      progressFill.style.width = progressPercent + '%';
+    }
+    
+    skipDay() {
+      this.skipDays++;
+      this.saveSkipDays();
+      this.setupPhases();
+      this.render();
+    }
+    
+    setupEventListeners() {
+      document.getElementById('skipDayBtn').addEventListener('click', () => {
+        this.skipDay();
+      });
+    }
+  }
   
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    const header = item.querySelector('.timeline-header');
-    const detail = item.querySelector('.timeline-detail');
-    const toggle = item.querySelector('.timeline-toggle');
-    
-    if (!header || !detail || !toggle) return;
-    
-    header.addEventListener('click', () => {
-      const isOpen = detail.classList.contains('open');
-      
-      if (isOpen) {
-        detail.classList.remove('open');
-        toggle.classList.remove('rotated');
-      } else {
-        detail.classList.add('open');
-        toggle.classList.add('rotated');
-      }
-    });
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', () => {
+    new RoadmapTracker();
   });
-</script>
-
-  <div id="app"><p class="loading-note">Loading your roadmap…</p></div>
-</div>
-<script>
-/* ──────────────────────────────────────────────
-   REVISED EDITION TRACKER · Compressed to real schedule
-   Start: Mon 6 Jul 2026 · ~25 hrs/week · ~20 calendar weeks
-   ────────────────────────────────────────────── */
-var STORAGE_KEY = 'adi-ml-roadmap-v2-progress';
-var START_DATE  = (function(){ var d=new Date(2026,6,6); d.setHours(0,0,0,0); return d; })(); // Mon 6 Jul 2026 — term + timetable start
-var MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-
-/* ── CS FUNDAMENTALS ROTATION ── */
-var CS_TOPICS = [
-  'OS: processes vs threads, scheduling basics',
-  'DBMS: normalization, indexing, ACID transactions',
-  'Networking: TCP/IP, HTTP request lifecycle, DNS',
-  'OOP + one system design primer (how to scale a simple API)'
-];
-
-/* ── PHASES ── */
-var PHASES = [
-  {
-    id:1, code:'SECTION 01', name:'Foundation Sprint',
-    dailyTime:'4 hrs / day',
-    goal:'Build linear algebra and probability intuition, get Python/NumPy/Pandas functional. DSA habit is already established (337 on A2Z) \u2014 this phase is about the math, not building that habit from scratch.',
-    exit:[
-      'Load, clean, and summarise any raw CSV without Googling',
-      'Explain eigenvectors geometrically — not just mathematically',
-      'Solve the Bayes disease false-positive problem from memory',
-      '40+ HackerRank Easy problems solved, Medium tier started',
-      'Understand why NumPy is faster than Python loops at the C-extension level',
-      'A2Z: chip away at DP whenever there\u2019s a spare 20 minutes \u2014 no dedicated time needed yet',
-      'Target list of 25\u201330 companies built; outreach cadence started (2\u20133 messages/week)'
-    ]
-  },
-  {
-    id:2, code:'SECTION 02', name:'Core ML + First Project',
-    dailyTime:'2–2.5 hrs / day',
-    goal:'Understand three core ML algorithms at the mathematical level. Derive, implement from scratch, then use sklearn. Ship Project 1 with SHAP explainability as a core deliverable.',
-    exit:[
-      'Can derive the gradient descent update rule for MSE loss without notes',
-      'Can explain the Precision–Recall tradeoff and when each metric matters',
-      'Can explain why Random Forest reduces variance but not bias',
-      'Project 1 on GitHub: SHAP plots + quantified ROC-AUC > 0.92 in README',
-      '15+ LeetCode SQL Medium problems including window functions',
-      'A2Z DSA is no longer a Phase 2 concern \u2014 already 337 deep, well past any phase target',
-      'Prompt engineering: zero-shot, few-shot, chain-of-thought — know the differences cold',
-      'CS fundamentals: OS and DBMS basics reviewed at least once each',
-      'Outreach ongoing at 2\u20133 messages/week; tracking responses'
-    ]
-  },
-  {
-    id:3, code:'SECTION 03', name:'Neural Networks & NLP Foundations',
-    dailyTime:'2 hrs / day',
-    goal:'Build the neural network foundations Phase 4 requires. Backprop, PyTorch, and traditional NLP are the mandatory middle section between sklearn and Transformers.',
-    exit:[
-      'Can explain backpropagation using the computational-graph metaphor without notes',
-      'Built micrograd from scratch and trained it on XOR',
-      'Can write a full PyTorch training loop from memory (forward, loss, zero_grad, backward, step)',
-      'Built MNIST classifier in PyTorch at 97%+ test accuracy',
-      'Built IMDB TF-IDF sentiment classifier at 88%+ accuracy',
-      'Can explain why cosine similarity measures semantic closeness in embedding space',
-      'Know stratified K-Fold CV, calibration curves, learning curves, AP vs AUC-ROC for imbalanced data',
-      'A2Z: DP section substantially underway (target deep progress, not a raw count)',
-      'CS fundamentals: networking and OOP/system design primer reviewed at least once each',
-      'Applying to a handful of rolling-admission companies as soon as Project 1 is live \u2014 not waiting for January'
-    ]
-  },
-  {
-    id:4, code:'SECTION 04', name:'Transformers, LLMs & Project 2',
-    dailyTime:'2 hrs / day',
-    goal:'With Phase 3 foundations, Transformers now make sense. This phase adds LLM APIs, LangChain, and RAG. By December 31: two live projects with public URLs.',
-    exit:[
-      'Can explain self-attention with Q/K/V formulation and derive scaled dot-product attention',
-      'Can explain BERT vs GPT vs T5 architectural differences without notes',
-      'Fine-tuned at least one HuggingFace model on a real task',
-      'Made a real API call to OpenAI or Anthropic in Python (not just read the docs)',
-      'Can explain the full RAG pipeline: embed → retrieve → inject → generate',
-      'Project 2 live at a public URL — both projects have quantified metrics in README',
-      'HuggingFace profile has at least one public model or Space',
-      'A2Z DP + Tries fully closed \u2014 the sheet complete, not just \u201cenough problems\u201d',
-      'STAR stories prepared for Project 1, Project 2, and LifeQuest OS; at least one mock interview done',
-      'Full application push ready for January \u2014 target list exhausted, not just the 5 named companies'
-    ]
-  }
-];
-
-/* ── ENTRIES ── */
-/* isNew marks tasks added in the revised edition */
-var ENTRIES_RAW = [
-  /* ── PHASE 1 ── */
-  { id:'w1', phase:1, weekNums:[1], days:6,
-    title:'Linear Algebra \u2014 Vectors & Matrix Operations',
-    deliverable:'NumPy matrix exercises',
-    tasks:[
-      '3Blue1Brown \u2014 Essence of Linear Algebra, episodes 1\u20135',
-      'MML Book sections 2.1\u20132.4 \u2014 skim for intuition only, do not grind every exercise',
-      'Recreate each video\u2019s visuals in NumPy + Matplotlib',
-      'Multiply two 3\xd73 matrices by hand, verify with NumPy',
-      'Find determinants of 2\xd72 and 3\xd73 matrices, including a linearly dependent case',
-      'Write a dot-product function from scratch without np.dot',
-      'No dedicated DSA time needed this week \u2014 focus is linear algebra',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
-      'Outreach: build your target list of 25\u201330 companies (ML + SWE roles) \u2014 widen past the 5 named ones'
-    ]
-  },
-  { id:'w2', phase:1, weekNums:[2], days:5,
-    title:'Eigenvalues, Eigenvectors & Probability',
-    deliverable:'Eigen derivation + Bayes problem',
-    tasks:[
-      '3Blue1Brown \u2014 Essence of Linear Algebra, episodes 6\u201311',
-      'Khan Academy Stats & Probability: Bayes\u2019 theorem, Normal distribution, Expected value (3\u20134 days)',
-      'Compute eigenvalues/eigenvectors of a 2\xd72 by hand using the characteristic equation, verify with np.linalg.eig()',
-      'Bayes problem: 1% disease prevalence, 99% accurate test \u2014 solve on paper, then code it',
-      'Plot N(0,1) and shade 1\u03c3 / 2\u03c3 / 3\u03c3 regions with matplotlib',
-      'No dedicated DSA time needed this week \u2014 focus is eigenvectors + probability',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
-      'Outreach: send 2\u20133 warm/referral messages this week (LinkedIn or alumni network)'
-    ]
-  },
-  { id:'w3', phase:1, weekNums:[3], days:5,
-    title:'Python Deep Dive + NumPy Vectorization',
-    deliverable:'40+ HackerRank problems',
-    tasks:[
-      'Official Python Tutorial Ch. 3\u20139 \u2014 type every example, do not copy-paste',
-      'Python Data Science Handbook Ch. 2 (NumPy) \u2014 free online',
-      'NumPy quickstart + broadcasting/indexing docs',
-      'Understand broadcasting: why (3,1) + (1,4) = (3,4)',
-      'Understand vectorization: why np.sum() is 100\xd7 faster at the C-extension level, not just empirically',
-      'File I/O: read a CSV with open() before ever touching Pandas',
-      'Target: 40+ HackerRank Easy problems by end of Week 3. Start Medium tier by Day 18.',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
-      'Outreach: send 2\u20133 more messages; log any replies so far'
-    ]
-  },
-  { id:'w4', phase:1, weekNums:[4], days:5,
-    title:'Pandas \u2014 Data Manipulation',
-    deliverable:'End-to-end CSV pipeline',
-    tasks:[
-      'Python Data Science Handbook Ch. 3 (Pandas) \u2014 free online',
-      'Pandas User Guide: Indexing, GroupBy, Merge, Missing data, I/O tools',
-      'Day 1: DataFrame creation, loc vs iloc, Series ops \u2014 load the Titanic dataset from seaborn',
-      'Day 2: isnull(), fillna(), dropna() \u2014 GroupBy split-apply-combine pattern',
-      'Day 3: merge, join, concat \u2014 inner/outer/left/right joins',
-      'Day 4: apply(), value_counts(), pivot tables. Full loop: load \u2192 clean \u2192 explore \u2192 export',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
-      'Outreach: send 2\u20133 more messages; target list should be fully built by now'
-    ]
-  },
-
-  /* ── PHASE 2 ── */
-  { id:'w5', phase:2, weekNums:[5], days:5,
-    title:'Calculus Bridge \u2014 Gradient Descent from First Principles',
-    deliverable:'GD loop on f(x) = x\xb2',
-    tasks:[
-      '3Blue1Brown \u2014 Essence of Calculus, episodes 1\u20139',
-      'Andrew Ng CS229 Lecture Notes \u2014 gradient descent derivation section',
-      'Understand the derivative geometrically: instantaneous rate of change, slope of a tangent line',
-      'Partial derivatives and chain rule \u2014 this is the mathematical core of backpropagation',
-      'Derive the GD update rule: \u03b8_j = \u03b8_j \u2212 \u03b1 \u00b7 \u2202J/\u2202\u03b8_j yourself from the definition of a derivative',
-      'CRITICAL: Write GD for f(x)=x\xb2 from scratch. Start x=10, lr=0.1, 100 iters, plot convergence.',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
-      'Outreach: 2\u20133 messages this week; keep the cadence going even during heavier math weeks'
-    ]
-  },
-  { id:'w6', phase:2, weekNums:[6], days:6,
-    title:'Linear Regression \u2014 Full Derivation to Code',
-    deliverable:'LR in NumPy vs sklearn',
-    tasks:[
-      'Andrew Ng CS229 Lecture Notes: Linear Regression (pages 1\u201316) \u2014 gold standard for this derivation',
-      'StatQuest Linear Regression series \u2014 first 4 videos for intuition before math',
-      'Derive the hypothesis function, MSE cost, and its gradient by hand on paper',
-      'Derive the Normal Equation: \u03b8 = (X\u1d40X)\u207b\u00b9X\u1d40y \u2014 when does X\u1d40X fail to be invertible?',
-      'Implement LR from scratch in NumPy on California Housing; compute R\xb2 manually',
-      'Replicate with sklearn.linear_model.LinearRegression \u2014 coefficients must match to several decimals',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w7', phase:2, weekNums:[7], days:6,
-    title:'Logistic Regression \u2014 Classification Foundations',
-    deliverable:'LR + ROC-AUC on Breast Cancer',
-    tasks:[
-      'Andrew Ng CS229 Lecture Notes: Classification & Logistic Regression (pages 16\u201330)',
-      'StatQuest Logistic Regression series (4 videos) \u2014 watch before the math',
-      'Derive sigmoid \u03c3(z) = 1/(1+e\u207b\u1d63): why it maps \u211d \u2192 (0,1). Plot it.',
-      'Cross-entropy loss: why not MSE for classification? (non-convex loss surface)',
-      'Derive the gradient of cross-entropy. Implement: sigmoid, log loss, GD update, 0.5-threshold prediction.',
-      'Add L2 regularization (Ridge) \u2014 understand what \u03bb does geometrically to the decision boundary',
-      'Sklearn replication on Breast Cancer: compute Precision/Recall/F1/ROC-AUC manually. PR tradeoff is in every fintech interview.',
-      'SQL Medium track begins this week \u2014 separate tracker above, not A2Z',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w8', phase:2, weekNums:[8], days:5,
-    title:'Decision Trees + Ensemble Methods',
-    deliverable:'Ensemble model comparison',
-    tasks:[
-      'StatQuest: Decision Trees, Random Forest, Gradient Boosting series (8\u201310 videos)',
-      'sklearn User Guide: Decision Trees + Ensemble methods sections',
-      'Splitting criteria: Gini impurity = 1 \u2212 \u03a3p_i\xb2. Information Gain via entropy. Derive Gini.',
-      'Overfitting in trees \u2192 pruning via max_depth, min_samples_split',
-      'Random Forest: bagging + random feature subsets. Why averaging overfit trees works (bias-variance tradeoff).',
-      'XGBoost: sequential error correction. Tune: n_estimators, max_depth, learning_rate, subsample, colsample_bytree.',
-      'Do NOT derive RF or XGBoost from scratch \u2014 time cost >> interview payoff at this stage',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w9', phase:2, weekNums:[9], days:6,
-    title:'SQL Window Functions + EDA Start',
-    deliverable:'15 LeetCode SQL Medium',
-    note:'Mandatory \u2014 fintech interviewers will test this. Do it in Week 9, not later.',
-    tasks:[
-      'LeetCode SQL Medium \xd715: window functions (ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD), CTEs, subqueries, GROUP BY/HAVING',
-      'Mode Analytics SQL Tutorial \u2014 Advanced SQL section on window functions',
-      'After each LeetCode SQL problem, rewrite the solution using a CTE for practice',
-      'Download Kaggle Credit Card Fraud Detection dataset (0.17% fraud rate)',
-      'Begin EDA: feature distributions, initial class imbalance analysis, correlation matrix',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
-      'Outreach: 2\u20133 messages this week; check in on any pending replies'
-    ]
-  },
-  { id:'w10', phase:2, weekNums:[10], days:5,
-    title:'EDA Deep Dive \u2014 Credit Card Fraud Dataset',
-    deliverable:'Full EDA notebook + feature engineering',
-    tasks:[
-      'Full EDA: feature distributions, correlation matrix, outlier detection, class imbalance (0.17% fraud \u2014 understand why this matters)',
-      'Run ydata-profiling auto-report, then replicate key findings manually in a notebook',
-      'Feature engineering: create at least 3 new features with documented reasoning for each',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w11', phase:2, weekNums:[11], days:5,
-    title:'Project 1 \u2014 Data Pipeline + SMOTE',
-    deliverable:'Clean dataset, class imbalance handled',
-    tasks:[
-      'Clean dataset: handle missing values, remove duplicates, check for data leakage',
-      'Address class imbalance with SMOTE (imbalanced-learn). Understand why accuracy is a useless metric here.',
-      'Feature scaling: StandardScaler for logistic regression. Understand why tree-based models do not need it.',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[2],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w12', phase:2, weekNums:[12], days:6,
-    title:'Project 1 \u2014 Modeling + Hyperparameter Tuning',
-    deliverable:'Final model, ROC-AUC > 0.92',
-    tasks:[
-      'Train Logistic Regression, Random Forest, and XGBoost baselines \u2014 compare ROC-AUC',
-      'Tune the best model with GridSearchCV or RandomizedSearchCV',
-      'Final evaluation: Confusion matrix, Precision-Recall curve, ROC curve \u2014 plot all three',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w13', phase:2, weekNums:[13], days:6,
-    title:'Project 1 \u2014 SHAP Explainability + GitHub',
-    deliverable:'SHAP plots + professional README',
-    note:'SHAP is now core \u2014 not optional. Fintech interviewers at Barclays and JP Morgan probe model interpretability specifically.',
-    tasks:[
-      'Add SHAP explainability: install shap library, run TreeExplainer on your best model',
-      'Generate SHAP force plots for individual predictions (show why the model predicted fraud for a specific row)',
-      'Generate global SHAP bar chart of feature importances',
-      'Write a clean, reproducible Jupyter notebook with markdown explaining each step',
-      'Write README.md: problem statement, dataset, approach, SHAP findings, ROC-AUC result, how to run',
-      'Push to public GitHub repo. Draft the resume line: include ROC-AUC score + SHAP insight.',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[0],
-      'Outreach: once Project 1 is live, start applying to rolling-admission companies now \u2014 do not wait for Project 2'
-    ]
-  },
-  { id:'w14', phase:2, weekNums:[14], days:4,
-    title:'Buffer + Prompt Engineering Fundamentals',
-    deliverable:'Prompt engineering fundamentals',
-    note:'New in revised edition \u2014 the 2026 internship landscape expects hands-on LLM experience.',
-    tasks:[
-      'Review any weak areas from Weeks 5\u201313',
-      'Read Anthropic Prompt Engineering docs (docs.anthropic.com/en/docs/build-with-claude/prompt-engineering)',
-      'Read OpenAI Prompt Engineering guide (platform.openai.com/docs/guides/prompt-engineering)',
-      'Zero-shot vs few-shot vs chain-of-thought prompting \u2014 know the difference cold',
-      'System prompts, temperature, max_tokens \u2014 what each controls and why',
-      'Structured output prompting and role-play prompting for production pipelines',
-      'If ahead of schedule: add calibration curves to Project 1 (strong fintech bonus)',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[1],
-      'Outreach: 2\u20133 messages this week; log responses from earlier applications'
-    ]
-  },
-
-  /* ── PHASE 3 ── */
-  { id:'w15', phase:3, weekNums:[15,16], days:12,
-    title:'Backpropagation \u2014 Build Micrograd',
-    deliverable:'Micrograd trained on XOR',
-    note:'Single most important exercise in the entire roadmap. Do not compress this sprint.',
-    tasks:[
-      'Watch Karpathy\u2019s \u201cbuilding micrograd\u201d video \u2014 twice (2.5 hrs each)',
-      'Read every line of the micrograd source code on GitHub (under 200 lines)',
-      'Michael Nielsen \u2014 Neural Networks and Deep Learning, Ch. 1\u20132 (free online)',
-      'Forward pass: data flows input \u2192 output, activations computed at each layer',
-      'Backward pass: chain rule applied recursively from output \u2192 input',
-      'MANDATORY: Clone micrograd. Read it. DELETE the source. Rebuild from memory: Value class, __add__, __mul__, __pow__, relu, tanh, backward()',
-      'Train your micrograd MLP on XOR (2 inputs, 1 output). Convergence confirms correct gradients.',
-      'This is the micrograd week \u2014 no DSA time. Protect this block.',
-      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[2],
-      'Outreach: keep the 2\u20133/week cadence even during this heavier sprint \u2014 do not let it lapse'
-    ]
-  },
-  { id:'w17', phase:3, weekNums:[17,18], days:10,
-    title:'PyTorch \u2014 Tensors, Autograd, First MLP',
-    deliverable:'MNIST 97%+ accuracy',
-    tasks:[
-      'PyTorch \u201cLearn the Basics\u201d tutorial series in order (pytorch.org/tutorials)',
-      'Fast.ai Practical Deep Learning Part 1, Lessons 1\u20134 (course.fast.ai)',
-      'Tensors: same as NumPy arrays but with GPU support and gradient tracking',
-      'torch.autograd: requires_grad=True, .backward(), .grad \u2014 micrograd at production scale',
-      'nn.Module pattern: __init__ and forward. Training loop: forward \u2192 loss \u2192 zero_grad() \u2192 backward() \u2192 step(). Memorize this.',
-      'Build MLP on MNIST: 784\u2192128\u219264\u219210, ReLU, cross-entropy loss, Adam optimizer. Target: 97%+ test accuracy.',
-      'Plot training vs validation loss; spot overfitting. Experiment with Dropout and BatchNorm.',
-      'Light A2Z DP practice if energy allows \u2014 PyTorch + MNIST is the priority',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
-      'Outreach: 2\u20133 messages this week'
-    ]
-  },
-  { id:'w19', phase:3, weekNums:[19,20], days:10,
-    title:'Traditional NLP + Model Evaluation Best Practices',
-    deliverable:'IMDB sentiment classifier + evaluation report',
-    note:'New in revised edition: Model Evaluation Best Practices added in Week 20. Spend 2\u20133 extra hours on this \u2014 interviewers draw a clear line between candidates who know this and those who do not.',
-    tasks:[
-      'Jurafsky & Martin SLP3, Chapters 2, 3, 6 (web.stanford.edu/~jurafsky/slp3)',
-      'StatQuest Word2Vec series (3 videos) + read Mikolov et al. 2013 paper',
-      'Text preprocessing: tokenization, stopword removal, lemmatization \u2014 use spaCy, not NLTK from scratch',
-      'TF-IDF: build a TF-IDF + LogReg classifier on 20 Newsgroups dataset',
-      'Word embeddings and cosine similarity: why king \u2212 man + woman \u2248 queen',
-      'Build IMDB sentiment classifier: TF-IDF + Logistic Regression. Target 88%+ accuracy.',
-      'NEW \u2014 Stratified K-Fold cross-validation: when and why vs simple train/test split',
-      'NEW \u2014 Calibration curves: is a predicted probability of 0.8 actually correct 80% of the time?',
-      'NEW \u2014 Learning curves: diagnose underfitting vs overfitting by varying training set size',
-      'NEW \u2014 AP vs AUC-ROC for imbalanced datasets: Average Precision is almost always the better metric for fraud detection',
-      'Good checkpoint to push A2Z DP further \u2014 aim to be deep into DP by end of Phase 3',
-      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[0],
-      'Outreach: apply to a handful of rolling-admission companies now that Project 1 has been live for a while \u2014 do not wait for January'
-    ]
-  },
-
-  /* ── PHASE 4 ── */
-  { id:'w21', phase:4, weekNums:[21,22], days:11,
-    title:'Transformer Architecture + nanoGPT',
-    deliverable:'Character-level GPT trained on Shakespeare',
-    tasks:[
-      'Watch Karpathy\u2019s \u201cLet\u2019s build GPT\u201d (1h 56min) BEFORE reading the paper',
-      'Read \u201cAttention Is All You Need\u201d sections 3 and 3.2 only (arxiv.org/abs/1706.03762)',
-      'Read Jay Alammar\u2019s \u201cThe Illustrated Transformer\u201d (jalammar.github.io)',
-      'Watch Karpathy\u2019s makemore series \u2014 all 5 videos: bigrams \u2192 MLP \u2192 RNN \u2192 attention',
-      'Derive self-attention: Attention(Q,K,V) = softmax(QK\u1d40/\u221ad_k)\u00b7V from first principles',
-      'Multi-head attention: parallel heads attend to different aspects simultaneously',
-      'Positional encoding: sinusoidal \u2014 Transformers have no inherent sense of token position',
-      'Encoder-only (BERT) vs Decoder-only (GPT) vs Encoder-Decoder (T5) \u2014 know when each is appropriate',
-      'Build: follow Karpathy\u2019s nanoGPT, train character-level GPT on Shakespeare text',
-      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[1],
-      'Outreach: 2\u20133 messages this week',
-      'Behavioral prep: draft a first-pass STAR story for Project 1 (situation, task, action, result)'
-    ]
-  },
-  { id:'w23', phase:4, weekNums:[23,24], days:11,
-    title:'Hugging Face + LLM APIs + LangChain + RAG',
-    deliverable:'DistilBERT fine-tuned + RAG demo',
-    note:'New in revised edition: LLM APIs, LangChain, and RAG added. The 2026 internship landscape expects hands-on experience with all three.',
-    tasks:[
-      'Hugging Face Course, Chapters 1\u20134 (huggingface.co/course) \u2014 the definitive resource',
-      'Week 23 inference: pipeline() for classification, NER, QA, summarization, zero-shot. Load raw BERT + understand WordPiece tokenization, [CLS]/[SEP], attention masks.',
-      'Week 24 fine-tuning: Fine-tune DistilBERT on SST-2 with the Trainer API. Also run one loop with raw PyTorch.',
-      'Compare distilbert / bert-base / roberta on size vs speed vs accuracy tradeoffs',
-      'NEW \u2014 LLM APIs: make a real API call to OpenAI or Anthropic in Python. Understand messages[], role, temperature, max_tokens.',
-      'NEW \u2014 LangChain LCEL: chain a prompt template \u2192 LLM \u2192 output parser in 10 lines of code',
-      'NEW \u2014 Tool use / function calling: how models call external functions (search, calculator)',
-      'NEW \u2014 Streaming responses: why streaming matters for production UX',
-      'NEW \u2014 RAG pipeline: embed a PDF with sentence-transformers + FAISS, call an LLM with retrieved chunks',
-      'Understand vector databases: FAISS (in-memory) and ChromaDB (persistent). Chunking strategy.',
-      'CS Fundamentals (1 hr, once across the two weeks): ' + CS_TOPICS[2],
-      'Outreach: 2\u20133 messages this week',
-      'Behavioral prep: draft a STAR story for LifeQuest OS \u2014 a self-built gamified system is a strong \u201cproject you\u2019re proud of\u201d answer'
-    ]
-  },
-  { id:'w25', phase:4, weekNums:[25], days:5,
-    title:'Project 2 \u2014 Core NLP Pipeline',
-    deliverable:'3-task pipeline working locally',
-    tasks:[
-      'Build core pipeline: ingest raw text \u2192 tokenize \u2192 fine-tuned model \u2192 extract key info',
-      'Three tasks minimum: sentiment analysis, NER (company names, dates, amounts), extractive summarization',
-      'Dataset options: legal contracts (CUAD on HuggingFace), earnings call transcripts, product reviews',
-      'Consider adding RAG-enhanced Q&A using ChromaDB \u2014 strong differentiator per revised roadmap',
-      'A2Z: this is a good week to close out remaining DP/Tries gaps',
-      'CS Fundamentals (1 hr): ' + CS_TOPICS[3],
-      'Outreach: 2\u20133 messages this week',
-      'Behavioral prep: draft a STAR story for Project 2, even before it is fully deployed'
-    ]
-  },
-  { id:'w26', phase:4, weekNums:[26], days:6,
-    title:'Project 2 \u2014 FastAPI + Deployment + Polish',
-    deliverable:'Live URL + resume metrics',
-    note:'Mandatory \u2014 it must be a live URL, not just a GitHub link. If behind schedule, use HuggingFace Spaces + Gradio to save \u22481 week.',
-    tasks:[
-      'Wrap pipeline in FastAPI: POST /analyze + GET /health endpoints, Pydantic models, graceful error handling',
-      'Add response caching for repeated identical inputs',
-      'Deploy to Railway, Render, or HuggingFace Spaces + Gradio \u2014 confirm live URL from outside your machine',
-      'Measure inference latency (target <500ms), model accuracy, and API uptime',
-      'Write README: problem, architecture diagram, live demo URL, results table, how to run locally',
-      'Draft resume line: \u201cBuilt NLP pipeline using fine-tuned DistilBERT (91.3% accuracy) with RAG-enhanced Q&A using ChromaDB; deployed as FastAPI service, <400ms p99 latency.\u201d',
-      'A2Z: aim to have DP + Tries fully closed before applications open in January',
-      'CS Fundamentals (1 hr): review your weakest of the four rotating topics',
-      'Outreach: full application push \u2014 exhaust the target list, not just the 5 named companies',
-      'Behavioral prep: record yourself answering \u201cwhy this company\u201d for each of your top 5 targets; run 2\u20133 mock interviews (peers or Pramp)'
-    ]
-  }
-];
-
-/* ────────────────────────────────
-   SCHEDULE BUILDER
-────────────────────────────────── */
-function addDays(d, n){ var r=new Date(d.getTime()); r.setDate(r.getDate()+n); return r; }
-function pad2(n){ return n<10?('0'+n):(''+n); }
-function fmtDate(d){ return pad2(d.getDate())+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
-function fmtShort(d){ return pad2(d.getDate())+' '+MONTHS[d.getMonth()]; }
-function fmtRange(s,e){ if(s.getFullYear()===e.getFullYear()) return fmtShort(s)+' \u2013 '+fmtShort(e)+' '+e.getFullYear(); return fmtDate(s)+' \u2013 '+fmtDate(e); }
-function todayMid(){ var t=new Date(); t.setHours(0,0,0,0); return t; }
-
-function buildSchedule(){
-  var off=0, out=[];
-  for(var i=0;i<ENTRIES_RAW.length;i++){
-    var raw=ENTRIES_RAW[i];
-    var s=addDays(START_DATE,off), e=addDays(s,raw.days-1);
-    off+=raw.days;
-    var wl=raw.weekNums.length>1?('Weeks '+raw.weekNums[0]+'\u2013'+raw.weekNums[raw.weekNums.length-1]):('Week '+raw.weekNums[0]);
-    var cl=raw.weekNums.length>1?('W'+pad2(raw.weekNums[0])+'\u2013'+pad2(raw.weekNums[raw.weekNums.length-1])):('W'+pad2(raw.weekNums[0]));
-    out.push(Object.assign({},raw,{start:s,end:e,weekLabel:wl,codeLabel:cl}));
-  }
-  return out;
-}
-
-function findCurrent(entries, today){
-  for(var i=0;i<entries.length;i++) if(today.getTime()>=entries[i].start.getTime()&&today.getTime()<=entries[i].end.getTime()) return entries[i];
-  if(today.getTime()<entries[0].start.getTime()) return entries[0];
-  return null;
-}
-
-/* ────────────────────────────────
-   RESOURCES
-────────────────────────────────── */
-var RESOURCES = [
-  { group:'Math Foundations', items:[
-    { name:'3Blue1Brown \u2014 Essence of Linear Algebra', url:'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab', meta:'YouTube playlist \u2022 Weeks 1\u20132', phase:1 },
-    { name:'3Blue1Brown \u2014 Essence of Calculus', url:'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr', meta:'YouTube playlist \u2022 Week 5', phase:2 },
-    { name:'Mathematics for Machine Learning (Deisenroth et al.)', url:'https://mml-book.github.io/', meta:'Free book, \u00a72.1\u20132.4 for intuition only \u2022 Week 1', phase:1 },
-    { name:'Khan Academy \u2014 Statistics & Probability', url:'https://www.khanacademy.org/math/statistics-probability', meta:'Bayes\u2019 theorem, Normal distribution \u2022 Week 2', phase:1 }
-  ]},
-  { group:'Python, NumPy & Pandas', items:[
-    { name:'Official Python Tutorial', url:'https://docs.python.org/3/tutorial/', meta:'Ch. 3\u20139 \u2022 Week 3', phase:1 },
-    { name:'Python Data Science Handbook (VanderPlas)', url:'https://jakevdp.github.io/PythonDataScienceHandbook/', meta:'Free online \u2022 Ch. 2 NumPy, Ch. 3 Pandas \u2022 Weeks 3\u20134', phase:1 },
-    { name:'NumPy — Broadcasting & Indexing docs', url:'https://numpy.org/doc/stable/user/basics.broadcasting.html', meta:'Official docs \u2022 Week 3', phase:1 },
-    { name:'Pandas User Guide', url:'https://pandas.pydata.org/docs/user_guide/index.html', meta:'Indexing, GroupBy, Merge, I/O \u2022 Week 4', phase:1 }
-  ]},
-  { group:'Core ML (Phase 2)', items:[
-    { name:'Andrew Ng \u2014 CS229 Lecture Notes', url:'https://cs229.stanford.edu/main_notes.pdf', meta:'Linear + Logistic Regression derivations \u2022 Weeks 5\u20137', phase:2 },
-    { name:'StatQuest with Josh Starmer', url:'https://www.youtube.com/@statquest', meta:'LR, Logistic Regression, Trees, RF, XGBoost \u2022 Weeks 6\u20138', phase:2 },
-    { name:'scikit-learn User Guide', url:'https://scikit-learn.org/stable/user_guide.html', meta:'Trees + Ensembles sections \u2022 Week 8', phase:2 },
-    { name:'Mode Analytics — SQL Tutorial', url:'https://mode.com/sql-tutorial/', meta:'Advanced SQL / window functions \u2022 Week 9', phase:2 },
-    { name:'Kaggle — Credit Card Fraud Detection dataset', url:'https://www.kaggle.com/mlg-ulb/creditcardfraud', meta:'Project 1 dataset \u2022 Weeks 9\u201313', phase:2 },
-    { name:'ydata-profiling', url:'https://github.com/ydataai/ydata-profiling', meta:'Auto EDA report \u2022 Week 10', phase:2 },
-    { name:'SHAP documentation', url:'https://shap.readthedocs.io/', meta:'TreeExplainer, force plots \u2022 Week 13', phase:2 },
-    { name:'Anthropic — Prompt Engineering docs', url:'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering', meta:'Week 14', phase:2 },
-    { name:'OpenAI — Prompt Engineering guide', url:'https://platform.openai.com/docs/guides/prompt-engineering', meta:'Week 14', phase:2 }
-  ]},
-  { group:'Neural Networks & NLP (Phase 3)', items:[
-    { name:'Andrej Karpathy \u2014 \u201cThe spelled-out intro to neural networks: building micrograd\u201d', url:'https://www.youtube.com/watch?v=VMj-3S1tku0', meta:'Watch twice \u2022 Weeks 15\u201316', phase:3 },
-    { name:'micrograd source (GitHub)', url:'https://github.com/karpathy/micrograd', meta:'Read, delete, rebuild from memory \u2022 Weeks 15\u201316', phase:3 },
-    { name:'Michael Nielsen \u2014 Neural Networks and Deep Learning', url:'http://neuralnetworksanddeeplearning.com/', meta:'Free book, Ch. 1\u20132 \u2022 Weeks 15\u201316', phase:3 },
-    { name:'PyTorch — \u201cLearn the Basics\u201d tutorials', url:'https://pytorch.org/tutorials/beginner/basics/intro.html', meta:'Tensors, autograd, nn.Module \u2022 Weeks 17\u201318', phase:3 },
-    { name:'fast.ai — Practical Deep Learning Part 1', url:'https://course.fast.ai/', meta:'Lessons 1\u20134 \u2022 Weeks 17\u201318', phase:3 },
-    { name:'Jurafsky & Martin — Speech and Language Processing (SLP3)', url:'https://web.stanford.edu/~jurafsky/slp3/', meta:'Free draft, Ch. 2, 3, 6 \u2022 Weeks 19\u201320', phase:3 }
-  ]},
-  { group:'Transformers, LLMs & RAG (Phase 4)', items:[
-    { name:'Andrej Karpathy \u2014 \u201cLet\u2019s build GPT\u201d', url:'https://www.youtube.com/watch?v=kCc8FmEb1nY', meta:'Watch before the paper \u2022 Weeks 21\u201322', phase:4 },
-    { name:'Andrej Karpathy \u2014 makemore series', url:'https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ', meta:'All 5 videos \u2022 Weeks 21\u201322', phase:4 },
-    { name:'\u201cAttention Is All You Need\u201d (Vaswani et al.)', url:'https://arxiv.org/abs/1706.03762', meta:'Sections 3 + 3.2 only \u2022 Weeks 21\u201322', phase:4 },
-    { name:'Jay Alammar — The Illustrated Transformer', url:'https://jalammar.github.io/illustrated-transformer/', meta:'Weeks 21\u201322', phase:4 },
-    { name:'Hugging Face Course', url:'https://huggingface.co/course', meta:'Chapters 1\u20134 \u2022 Weeks 23\u201324', phase:4 },
-    { name:'Hugging Face Transformers docs', url:'https://huggingface.co/docs/transformers/index', meta:'pipeline / AutoModel / Trainer \u2022 Weeks 23\u201324', phase:4 },
-    { name:'LangChain — LCEL docs', url:'https://python.langchain.com/docs/concepts/lcel/', meta:'Weeks 23\u201324', phase:4 },
-    { name:'LangChain — RAG tutorial', url:'https://python.langchain.com/docs/tutorials/rag/', meta:'Weeks 23\u201324', phase:4 },
-    { name:'ChromaDB — quickstart', url:'https://docs.trychroma.com/getting-started', meta:'Vector DB for RAG \u2022 Weeks 23\u201324', phase:4 },
-    { name:'sentence-transformers (SBERT)', url:'https://www.sbert.net/', meta:'Embedding models for RAG \u2022 Weeks 23\u201324', phase:4 }
-  ]},
-  { group:'DSA, Outreach & Deployment', items:[
-    { name:'Striver\u2019s A2Z DSA Sheet', url:'https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/', meta:'DP + Tries remaining \u2022 ongoing', phase:0 },
-    { name:'LeetCode — SQL Medium', url:'https://leetcode.com/problemset/database/', meta:'Window functions, CTEs \u2022 Week 9', phase:2 },
-    { name:'HackerRank — Python domain', url:'https://www.hackerrank.com/domains/python', meta:'40+ Easy problems \u2022 Week 3', phase:1 },
-    { name:'HuggingFace Hub', url:'https://huggingface.co/', meta:'Datasets, model hosting, Spaces \u2022 Weeks 23\u201326', phase:4 },
-    { name:'Railway', url:'https://railway.app/', meta:'Project 2 deployment option \u2022 Week 26', phase:4 },
-    { name:'Render', url:'https://render.com/', meta:'Project 2 deployment option \u2022 Week 26', phase:4 }
-  ]}
-];
-
-function flattenResources(){
-  var out=[];
-  RESOURCES.forEach(function(g){ g.items.forEach(function(it){ out.push(Object.assign({group:g.group},it)); }); });
-  return out;
-}
-function resourceKey(it){ return (it.group+'::'+it.name).replace(/[^a-zA-Z0-9]/g,'_'); }
-function groupKey(name){ return name.replace(/[^a-zA-Z0-9]/g,'_'); }
-
-/* ────────────────────────────────
-   STATE
-────────────────────────────────── */
-function defaultState(){
-  var tasks={}, checkins={}, phaseExit={}, resourcesUsed={};
-  ENTRIES_RAW.forEach(function(e){ tasks[e.id]=e.tasks.map(function(){return false;}); checkins[e.id]={status:null,notes:'',savedAt:null}; });
-  PHASES.forEach(function(p){ phaseExit[p.id]=p.exit.map(function(){return false;}); });
-  flattenResources().forEach(function(it){ resourcesUsed[resourceKey(it)]=false; });
-  return{tasks:tasks,checkins:checkins,phaseExit:phaseExit,resourcesUsed:resourcesUsed,leetcode:337,hackerrank:0,csFundamentals:0,outreachSent:0,applicationsSent:0};
-}
-
-function hydrateState(raw){
-  var base=defaultState();
-  if(!raw||typeof raw!=='object') return base;
-  ENTRIES_RAW.forEach(function(e){
-    if(raw.tasks&&raw.tasks[e.id]!=null) for(var i=0;i<base.tasks[e.id].length;i++) base.tasks[e.id][i]=!!(Array.isArray(raw.tasks[e.id])?raw.tasks[e.id][i]:raw.tasks[e.id][String(i)]);
-    if(raw.checkins&&raw.checkins[e.id]){ var c=raw.checkins[e.id]; base.checkins[e.id]={status:c.status||null,notes:typeof c.notes==='string'?c.notes:'',savedAt:c.savedAt||null}; }
-  });
-  PHASES.forEach(function(p){ if(raw.phaseExit&&raw.phaseExit[p.id]!=null) for(var i=0;i<base.phaseExit[p.id].length;i++) base.phaseExit[p.id][i]=!!(Array.isArray(raw.phaseExit[p.id])?raw.phaseExit[p.id][i]:raw.phaseExit[p.id][String(i)]); });
-  if(raw.resourcesUsed&&typeof raw.resourcesUsed==='object'){
-    Object.keys(base.resourcesUsed).forEach(function(k){ if(raw.resourcesUsed[k]!=null) base.resourcesUsed[k]=!!raw.resourcesUsed[k]; });
-  }
-  base.leetcode=(typeof raw.leetcode==='number'&&raw.leetcode>=0)?raw.leetcode:0;
-  base.hackerrank=(typeof raw.hackerrank==='number'&&raw.hackerrank>=0)?raw.hackerrank:0;
-  base.csFundamentals=(typeof raw.csFundamentals==='number'&&raw.csFundamentals>=0)?raw.csFundamentals:0;
-  base.outreachSent=(typeof raw.outreachSent==='number'&&raw.outreachSent>=0)?raw.outreachSent:0;
-  base.applicationsSent=(typeof raw.applicationsSent==='number'&&raw.applicationsSent>=0)?raw.applicationsSent:0;
-  return base;
-}
-
-/* ────────────────────────────────
-   PROGRESS
-────────────────────────────────── */
-function calcEntry(id, state){ var a=state.tasks[id]||[]; return{done:a.filter(Boolean).length,total:a.length}; }
-function calcPhase(pid, entries, state){ var d=0,t=0; entries.forEach(function(e){if(e.phase===pid){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}}); return{done:d,total:t}; }
-function calcOverall(entries, state){ var d=0,t=0; entries.forEach(function(e){var p=calcEntry(e.id,state);d+=p.done;t+=p.total;}); return{done:d,total:t}; }
-function calcResources(state){ var keys=Object.keys(state.resourcesUsed); var done=keys.filter(function(k){return state.resourcesUsed[k];}).length; return{done:done,total:keys.length}; }
-function calcResourceGroup(groupName, state){
-  var g=RESOURCES.filter(function(x){return x.group===groupName;})[0];
-  if(!g) return{done:0,total:0};
-  var done=0;
-  g.items.forEach(function(it){ if(state.resourcesUsed[resourceKey(Object.assign({group:groupName},it))]) done++; });
-  return{done:done,total:g.items.length};
-}
-function pct(d,t){ return t>0?Math.round((d/t)*100):0; }
-function statusMeta(s){ if(s==='ontrack') return{label:'On track',cls:'st-ontrack'}; if(s==='behind') return{label:'Behind',cls:'st-behind'}; if(s==='skipped') return{label:'Skipped',cls:'st-skipped'}; return{label:'No check-in',cls:'st-none'}; }
-function phaseForEntry(id, entries){ for(var i=0;i<entries.length;i++) if(entries[i].id===id) return entries[i].phase; return null; }
-function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];}); }
-
-/* ────────────────────────────────
-   RENDER
-────────────────────────────────── */
-function renderTitle(entries, state, cur){
-  var ov=calcOverall(entries,state);
-  var last=entries[entries.length-1];
-  var phObj=cur?PHASES.filter(function(p){return p.id===cur.phase;})[0]:null;
-  var phText=cur?(phObj.code+' \u2014 '+phObj.name):'Complete';
-  var wkText=cur?(cur.weekLabel+' of 26'):'All 26 weeks done';
-  return '<div class="titleblock">'+
-    '<span class="rev-badge">REVISED EDITION 2026</span>'+
-    '<div class="tb-grid">'+
-    '<div class="tb-cell"><span class="tb-label">Project</span><span class="tb-value">ML Roadmap v2</span></div>'+
-    '<div class="tb-cell"><span class="tb-label">Operator</span><span class="tb-value">Adi</span></div>'+
-    '<div class="tb-cell"><span class="tb-label">Started</span><span class="tb-value">'+fmtDate(START_DATE)+'</span></div>'+
-    '<div class="tb-cell"><span class="tb-label">Finish (est.)</span><span class="tb-value">'+fmtDate(last.end)+'</span></div>'+
-    '<div class="tb-cell"><span class="tb-label">Now in</span><span class="tb-value">'+esc(phText)+'</span></div>'+
-    '<div class="tb-cell"><span class="tb-label">Calendar</span><span class="tb-value">'+esc(wkText)+'</span></div>'+
-    '</div>'+
-    '<div class="tb-progress-row"><span class="tb-progress-label">Tasks logged</span>'+
-    '<div class="progress-track"><div class="progress-fill" id="overallfill" style="width:'+pct(ov.done,ov.total)+'%"></div></div>'+
-    '<span class="tb-progress-text" id="overalltext">'+ov.done+'/'+ov.total+' \u2022 '+pct(ov.done,ov.total)+'%</span></div>'+
-    '<p class="tb-note">Compressed to your real ~25 hr/week budget (weekday evenings around fixed practicals + a Saturday deep-work block + light Sunday review). <strong>SHAP is core</strong>, <strong>LLM APIs + LangChain + RAG</strong> are integrated in Phase 4, and DSA is rescoped around your existing 337-question A2Z progress \u2014 just DP + Tries left. This edition also folds in a weekly <strong>CS fundamentals</strong> rotation, an <strong>outreach/applications</strong> track that starts Week 1 instead of waiting for January, and a <strong>behavioral prep</strong> track in the final phase. Start: 6 Jul 2026 \u00b7 Target: <strong>Apr\u2013Jun 2027 hiring cycle</strong>, with Dec\u2013Mar free for polish.</p></div>';
-}
-
-function renderThisWeek(entries, cur, state){
-  if(!cur) return '<div class="panel thisweek complete"><span class="eyebrow">STATUS</span><h2>Roadmap window complete</h2><p>All 26 weeks scheduled. Scroll down to update any outstanding tasks.</p></div>';
-  var ph=PHASES.filter(function(p){return p.id===cur.phase;})[0];
-  var prog=calcEntry(cur.id,state);
-  var meta=statusMeta(state.checkins[cur.id].status);
-  var isNew=(cur.id==='w13'||cur.id==='w14'||cur.id==='w19'||cur.id==='w23');
-  return '<div class="panel thisweek"><span class="eyebrow">THIS WEEK \u2022 '+cur.codeLabel+'</span>'+
-    '<div><h2>'+esc(cur.title)+'</h2>'+
-    '<div class="thisweek-tags"><span class="tag">'+fmtRange(cur.start,cur.end)+'</span><span class="tag">'+esc(ph.dailyTime)+'</span>'+
-    (isNew?'<span class="tag new-tag">\u2605 Revised edition addition</span>':'')+
-    '</div></div>'+
-    '<p class="deliverable">Deliverable: '+esc(cur.deliverable)+'</p>'+
-    '<div class="thisweek-bottom"><span class="mini-stat">'+prog.done+'/'+prog.total+' tasks done</span>'+
-    '<span class="badge '+meta.cls+'">'+meta.label+'</span>'+
-    '<button class="btn-primary" type="button" data-action="jump" data-entry="'+cur.id+'">Open this week\u2019s checklist \u2193</button></div></div>';
-}
-
-function renderDSA(state){
-  var a2zPct=pct(state.leetcode,450);
-  var sqlPct=pct(state.hackerrank,15);
-  return '<div class="dsa-panel">'+
-    '<div class="dsa-col">'+
-    '<span class="dsa-label">Striver\u2019s A2Z \u2014 DP + Tries (the actual gap)</span>'+
-    '<p class="dsa-note">337 done through Graphs. Arrays/Strings/Trees/Greedy/etc. already covered \u2014 no need to restart elsewhere. Remaining: DP + Tries, then 2\u20133 problems/week ongoing maintenance. ~450 is the full sheet (approximate).</p>'+
-    '<div class="dsa-controls">'+
-    '<button class="step-btn" type="button" data-action="lc-dec">\u2212</button>'+
-    '<input class="num-input" id="lcinput" type="number" min="0" value="'+state.leetcode+'" aria-label="A2Z problems solved" />'+
-    '<button class="step-btn" type="button" data-action="lc-inc">+</button>'+
-    '<span class="dsa-target">/ ~450</span></div>'+
-    '<div class="progress-track"><div class="progress-fill green" id="lcfill" style="width:'+a2zPct+'%"></div></div>'+
-    '</div>'+
-    '<div class="dsa-col">'+
-    '<span class="dsa-label">LeetCode SQL Medium \u2014 Fintech track</span>'+
-    '<p class="dsa-note">Separate from A2Z \u2014 window functions, CTEs, subqueries. Not covered by general DSA practice. Mandatory for Barclays/JP Morgan-style interviews. Week 9.</p>'+
-    '<div class="dsa-controls">'+
-    '<button class="step-btn" type="button" data-action="hr-dec">\u2212</button>'+
-    '<input class="num-input" id="hrinput" type="number" min="0" value="'+state.hackerrank+'" aria-label="SQL Medium problems solved" />'+
-    '<button class="step-btn" type="button" data-action="hr-inc">+</button>'+
-    '<span class="dsa-target">/ 15</span></div>'+
-    '<div class="progress-track"><div class="progress-fill violet" id="hrfill" style="width:'+sqlPct+'%"></div></div>'+
-    '</div></div>';
-}
-
-function renderGrowthTracks(state){
-  var csPct=pct(state.csFundamentals,26);
-  var outreachPct=pct(state.outreachSent,60);
-  var appsPct=pct(state.applicationsSent,25);
-  return '<div class="growth-panel">'+
-    '<div class="growth-col">'+
-    '<span class="growth-label">CS Fundamentals sessions</span>'+
-    '<p class="dsa-note">Rotates OS \u2192 DBMS \u2192 Networking \u2192 OOP/system design, ~1 hr/week. Not covered anywhere else in this roadmap, but shows up in JPM/Barclays SWE-track interviews.</p>'+
-    '<div class="dsa-controls">'+
-    '<button class="step-btn" type="button" data-action="cs-dec">\u2212</button>'+
-    '<input class="num-input" id="csinput" type="number" min="0" value="'+state.csFundamentals+'" aria-label="CS fundamentals sessions logged" />'+
-    '<button class="step-btn" type="button" data-action="cs-inc">+</button>'+
-    '<span class="dsa-target">/ 26 wks</span></div>'+
-    '<div class="progress-track"><div class="progress-fill violet" id="csfill" style="width:'+csPct+'%"></div></div>'+
-    '</div>'+
-    '<div class="growth-col">'+
-    '<span class="growth-label">Outreach messages sent</span>'+
-    '<p class="dsa-note">2\u20133/week starting Week 1 \u2014 not saved for January. Scale the UBS/Saptarshi pattern to your full target list.</p>'+
-    '<div class="dsa-controls">'+
-    '<button class="step-btn" type="button" data-action="outreach-dec">\u2212</button>'+
-    '<input class="num-input" id="outreachinput" type="number" min="0" value="'+state.outreachSent+'" aria-label="Outreach messages sent" />'+
-    '<button class="step-btn" type="button" data-action="outreach-inc">+</button>'+
-    '<span class="dsa-target">/ ~60</span></div>'+
-    '<div class="progress-track"><div class="progress-fill violet" id="outreachfill" style="width:'+outreachPct+'%"></div></div>'+
-    '</div>'+
-    '<div class="growth-col">'+
-    '<span class="growth-label">Applications submitted</span>'+
-    '<p class="dsa-note">Rolling-admission companies as soon as Project 1 is live; full push in January once both projects are deployed.</p>'+
-    '<div class="dsa-controls">'+
-    '<button class="step-btn" type="button" data-action="apps-dec">\u2212</button>'+
-    '<input class="num-input" id="appsinput" type="number" min="0" value="'+state.applicationsSent+'" aria-label="Applications submitted" />'+
-    '<button class="step-btn" type="button" data-action="apps-inc">+</button>'+
-    '<span class="dsa-target">/ 25\u201330</span></div>'+
-    '<div class="progress-track"><div class="progress-fill violet" id="appsfill" style="width:'+appsPct+'%"></div></div>'+
-    '</div></div>';
-}
-
-function renderResources(state){
-  var rp=calcResources(state);
-  var groupsHtml=RESOURCES.map(function(g){
-    var gp=calcResourceGroup(g.group,state);
-    var gk=groupKey(g.group);
-    var itemsHtml=g.items.map(function(it){
-      var key=resourceKey(Object.assign({group:g.group},it));
-      var checked=state.resourcesUsed[key]?' checked="checked"':'';
-      var doneCls=state.resourcesUsed[key]?' done':'';
-      return '<label class="res-item'+doneCls+'" data-res-name="'+esc((it.name+' '+it.meta).toLowerCase())+'">'+
-        '<input type="checkbox" data-action="resource" data-key="'+key+'" data-group="'+gk+'"'+checked+' />'+
-        '<span class="res-item-body"><a href="'+esc(it.url)+'" target="_blank" rel="noopener noreferrer">'+esc(it.name)+'<span class="res-link-icon" aria-hidden="true">\u2197</span></a>'+
-        '<span class="res-item-meta">'+esc(it.meta)+'</span></span></label>';
-    }).join('');
-    return '<div class="res-group">'+
-      '<div class="res-group-title"><span>'+esc(g.group)+'</span>'+
-      '<span class="res-group-count" id="resgroupcount_'+gk+'">'+gp.done+'/'+gp.total+'</span></div>'+
-      '<div class="res-group-items">'+itemsHtml+'</div></div>';
-  }).join('');
-  return '<div class="resources-panel">'+
-    '<div class="resources-toggle" data-action="toggle-resources" role="button" tabindex="0" aria-expanded="false">'+
-    '<h2>\ud83d\udcda Resources \u2014 everything the roadmap references</h2>'+
-    '<span class="resources-toggle-meta"><span id="resmetatext">'+rp.done+'/'+rp.total+' used</span><span class="chevron" id="reschevron">\u203a</span></span></div>'+
-    '<div class="resources-body" id="resourcesbody">'+
-    '<div class="res-search-wrap"><span class="res-search-icon" aria-hidden="true">\u26b2</span>'+
-    '<input class="res-search" type="text" id="ressearch" placeholder="Search resources by name, topic, or week\u2026" /></div>'+
-    '<div id="resgroups">'+groupsHtml+'</div>'+
-    '<p class="res-empty" id="resempty">No resources match your search.</p>'+
-    '<p class="res-summary">Tick a resource off once you\u2019ve actually gone through it \u2014 separate from the weekly task checkboxes above, this is just so you can see at a glance what\u2019s left across the whole roadmap.</p>'+
-    '</div></div>';
-}
-
-var NEW_TASK_PREFIXES=['NEW \u2014','NEW\u00a0\u2014'];
-function isNewTask(t){ return NEW_TASK_PREFIXES.some(function(p){return t.indexOf(p)===0;}); }
-
-function renderEntry(entry, state, isCurrent){
-  var prog=calcEntry(entry.id,state);
-  var checkin=state.checkins[entry.id];
-  var meta=statusMeta(checkin.status);
-  var isNewEntry=(entry.id==='w13'||entry.id==='w14'||entry.id==='w19'||entry.id==='w23');
-  var tasksHtml=entry.tasks.map(function(task,idx){
-    var checked=state.tasks[entry.id][idx]?' checked="checked"':'';
-    var newCls=isNewTask(task)?' class="new-item"':'';
-    return '<label class="task-item"><input type="checkbox" data-action="task" data-entry="'+entry.id+'" data-idx="'+idx+'"'+checked+' /><span'+newCls+'>'+esc(task)+'</span></label>';
-  }).join('');
-  var noteHtml=entry.note?('<p class="entry-note'+(entry.id==='w13'||entry.id==='w14'||entry.id==='w19'||entry.id==='w23'?' warn':'')+'">'+esc(entry.note)+'</p>'):'';
-  var curTag=isCurrent?'<span class="now-tag">NOW</span>':'';
-  var newTag=isNewEntry?'<span class="new-feature-tag">\u2605 REVISED</span>':'';
-  return '<div class="entry'+(isCurrent?' open':'')+'" id="entry_'+entry.id+'">' +
-    '<div class="entry-header" data-action="toggle-entry" data-entry="'+entry.id+'" role="button" tabindex="0" aria-expanded="'+(isCurrent?'true':'false')+'">'+
-    '<span class="entry-code">'+entry.codeLabel+'</span>'+
-    '<div class="entry-titlewrap"><span class="entry-date">'+fmtRange(entry.start,entry.end)+'</span>'+
-    '<span class="entry-title">'+esc(entry.title)+' '+curTag+newTag+'</span></div>'+
-    '<span class="badge '+meta.cls+'" id="badge_'+entry.id+'">'+meta.label+'</span>'+
-    '<span class="chevron" aria-hidden="true">\u203a</span></div>'+
-    '<div class="entry-body">'+noteHtml+
-    '<p class="entry-deliverable">Deliverable: '+esc(entry.deliverable)+'</p>'+
-    '<div class="task-list">'+tasksHtml+'</div>'+
-    '<p class="task-progress" id="taskprog_'+entry.id+'">'+prog.done+'/'+prog.total+' tasks done</p>'+
-    '<div class="checkin"><span class="checkin-label">Weekly check-in</span>'+
-    '<div class="pill-group">'+
-    '<button class="pill'+(checkin.status==='ontrack'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="ontrack">On track</button>'+
-    '<button class="pill'+(checkin.status==='behind'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="behind">Behind</button>'+
-    '<button class="pill'+(checkin.status==='skipped'?' active':'')+'" type="button" data-action="status" data-entry="'+entry.id+'" data-status="skipped">Skipped</button>'+
-    '</div><textarea data-action="notes" data-entry="'+entry.id+'" id="notes_'+entry.id+'" placeholder="What happened this week? What blocked you, what changes next week?">'+esc(checkin.notes)+'</textarea>'+
-    '<div class="save-row"><button class="btn-secondary" type="button" data-action="save-checkin" data-entry="'+entry.id+'">Save check-in</button>'+
-    '<span class="saved-msg" id="savedmsg_'+entry.id+'"></span></div></div></div></div>';
-}
-
-function renderPhase(phase, entries, state, cur){
-  var phEntries=entries.filter(function(e){return e.phase===phase.id;});
-  var prog=calcPhase(phase.id,entries,state);
-  var exitHtml=phase.exit.map(function(item,idx){
-    return '<label class="exit-item"><input type="checkbox" data-action="exit" data-phase="'+phase.id+'" data-idx="'+idx+'"'+(state.phaseExit[phase.id][idx]?' checked="checked"':'')+' /><span>'+esc(item)+'</span></label>';
-  }).join('');
-  var entriesHtml=phEntries.map(function(e){return renderEntry(e,state,!!(cur&&cur.id===e.id));}).join('');
-  return '<section class="phase-section">'+
-    '<div class="phase-header"><div class="phase-heading"><span class="phase-code">'+phase.code+'</span><h3>'+esc(phase.name)+'</h3></div>'+
-    '<span class="phase-time">'+esc(phase.dailyTime)+'</span></div>'+
-    '<p class="phase-goal">'+esc(phase.goal)+'</p>'+
-    '<div class="phase-progress-row"><div class="progress-track"><div class="progress-fill" id="phasefill_'+phase.id+'" style="width:'+pct(prog.done,prog.total)+'%"></div></div>'+
-    '<span class="phase-progress-text" id="phasetext_'+phase.id+'">'+prog.done+'/'+prog.total+' tasks</span></div>'+
-    '<button class="exit-toggle" type="button" data-action="toggle-exit" data-phase="'+phase.id+'" aria-expanded="false">View phase exit checklist \u25be</button>'+
-    '<div class="exit-panel" id="exitpanel_'+phase.id+'">'+exitHtml+'</div>'+
-    '<div class="entry-list">'+entriesHtml+'</div></section>';
-}
-
-function renderFooter(){
-  return '<div class="footer-row"><span class="save-status" id="savestatus">Loaded</span><button class="reset-btn" type="button" data-action="reset">Reset all progress</button></div>';
-}
-
-function renderApp(entries, state){
-  var today=todayMid(), cur=findCurrent(entries,today);
-  var html=renderTitle(entries,state,cur)+renderThisWeek(entries,cur,state)+renderDSA(state)+renderGrowthTracks(state)+renderResources(state);
-  PHASES.forEach(function(ph){ html+=renderPhase(ph,entries,state,cur); });
-  html+=renderFooter();
-  return html;
-}
-
-/* ────────────────────────────────
-   DOM UPDATES
-────────────────────────────────── */
-function updateBadge(id, state){ var el=document.getElementById('badge_'+id); if(!el) return; var m=statusMeta(state.checkins[id].status); el.className='badge '+m.cls; el.textContent=m.label; }
-function updatePhaseProg(pid, entries, state){ var p=calcPhase(pid,entries,state); var f=document.getElementById('phasefill_'+pid),t=document.getElementById('phasetext_'+pid); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' tasks'; }
-function updateOverallProg(entries, state){ var p=calcOverall(entries,state); var f=document.getElementById('overallfill'),t=document.getElementById('overalltext'); if(f)f.style.width=pct(p.done,p.total)+'%'; if(t)t.textContent=p.done+'/'+p.total+' \u2022 '+pct(p.done,p.total)+'%'; }
-function updateEntryUI(id, entries, state){ var el=document.getElementById('taskprog_'+id); if(el){var p=calcEntry(id,state);el.textContent=p.done+'/'+p.total+' tasks done';} var pid=phaseForEntry(id,entries); if(pid)updatePhaseProg(pid,entries,state); updateOverallProg(entries,state); }
-function updateLCUI(state){ var i=document.getElementById('lcinput'),f=document.getElementById('lcfill'); if(i)i.value=state.leetcode; if(f)f.style.width=pct(state.leetcode,450)+'%'; }
-function updateHRUI(state){ var i=document.getElementById('hrinput'),f=document.getElementById('hrfill'); if(i)i.value=state.hackerrank; if(f)f.style.width=pct(state.hackerrank,15)+'%'; }
-function updateCSUI(state){ var i=document.getElementById('csinput'),f=document.getElementById('csfill'); if(i)i.value=state.csFundamentals; if(f)f.style.width=pct(state.csFundamentals,26)+'%'; }
-function updateOutreachUI(state){ var i=document.getElementById('outreachinput'),f=document.getElementById('outreachfill'); if(i)i.value=state.outreachSent; if(f)f.style.width=pct(state.outreachSent,60)+'%'; }
-function updateAppsUI(state){ var i=document.getElementById('appsinput'),f=document.getElementById('appsfill'); if(i)i.value=state.applicationsSent; if(f)f.style.width=pct(state.applicationsSent,25)+'%'; }
-function updateResourcesUI(state, groupKeyChanged){
-  var rp=calcResources(state); var el=document.getElementById('resmetatext');
-  if(el) el.textContent=rp.done+'/'+rp.total+' used';
-  if(groupKeyChanged){
-    var g=RESOURCES.filter(function(x){return groupKey(x.group)===groupKeyChanged;})[0];
-    if(g){ var gp=calcResourceGroup(g.group,state); var gel=document.getElementById('resgroupcount_'+groupKeyChanged); if(gel) gel.textContent=gp.done+'/'+gp.total; }
-  }
-}
-function showSaved(id){ var el=document.getElementById('savedmsg_'+id); if(!el)return; el.textContent='Saved \u2713'; el.classList.add('show'); setTimeout(function(){el.classList.remove('show');},2200); }
-function setStatus(text){ var el=document.getElementById('savestatus'); if(el)el.textContent=text; }
-
-/* ────────────────────────────────
-   PERSISTENCE  (localStorage)
-────────────────────────────────── */
-var saveTimer=null;
-function doSave(){ setStatus('Saving\u2026'); try{ localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); setStatus('Saved'); }catch(e){ setStatus('Save failed \u2014 storage full?'); } }
-function scheduleSave(now){ if(saveTimer){clearTimeout(saveTimer);saveTimer=null;} if(now){doSave();return;} setStatus('Saving\u2026'); saveTimer=setTimeout(doSave,700); }
-function resetProgress(entries){ state=defaultState(); try{localStorage.removeItem(STORAGE_KEY);}catch(e){} render(entries); setStatus('Reset'); }
-
-/* ────────────────────────────────
-   EVENTS
-────────────────────────────────── */
-var appEl=null, entries=null, state=null;
-
-function handleClick(el, entriesArg){
-  if(!el||!el.getAttribute) return;
-  var action=el.getAttribute('data-action');
-  if(!action) return;
-  if(action==='toggle-entry'){
-    var id=el.getAttribute('data-entry'), c=document.getElementById('entry_'+id);
-    if(c){var o=c.classList.toggle('open'); el.setAttribute('aria-expanded',o?'true':'false');}
-  } else if(action==='toggle-exit'){
-    var pid=el.getAttribute('data-phase'), p=document.getElementById('exitpanel_'+pid);
-    if(p){var op=p.classList.toggle('open'); el.setAttribute('aria-expanded',op?'true':'false');}
-  } else if(action==='toggle-resources'){
-    var rb=document.getElementById('resourcesbody');
-    if(rb){var ro=rb.classList.toggle('open'); el.setAttribute('aria-expanded',ro?'true':'false');}
-  } else if(action==='jump'){
-    var eid=el.getAttribute('data-entry'), tgt=document.getElementById('entry_'+eid);
-    if(tgt){tgt.classList.add('open'); tgt.scrollIntoView({behavior:'smooth',block:'start'});}
-  } else if(action==='status'){
-    var eId=el.getAttribute('data-entry'), sv=el.getAttribute('data-status');
-    state.checkins[eId].status=(state.checkins[eId].status===sv)?null:sv;
-    var grp=el.parentElement; if(grp)Array.prototype.forEach.call(grp.children,function(b){b.classList.remove('active');}); if(state.checkins[eId].status===sv)el.classList.add('active');
-    updateBadge(eId,state); scheduleSave();
-  } else if(action==='save-checkin'){
-    var eId2=el.getAttribute('data-entry'), ne=document.getElementById('notes_'+eId2);
-    state.checkins[eId2].notes=ne?ne.value:''; state.checkins[eId2].savedAt=new Date().toISOString();
-    showSaved(eId2); scheduleSave(true);
-  } else if(action==='lc-inc'||action==='lc-dec'){
-    state.leetcode=Math.max(0,state.leetcode+(action==='lc-inc'?1:-1)); updateLCUI(state); scheduleSave();
-  } else if(action==='hr-inc'||action==='hr-dec'){
-    state.hackerrank=Math.max(0,state.hackerrank+(action==='hr-inc'?1:-1)); updateHRUI(state); scheduleSave();
-  } else if(action==='cs-inc'||action==='cs-dec'){
-    state.csFundamentals=Math.max(0,state.csFundamentals+(action==='cs-inc'?1:-1)); updateCSUI(state); scheduleSave();
-  } else if(action==='outreach-inc'||action==='outreach-dec'){
-    state.outreachSent=Math.max(0,state.outreachSent+(action==='outreach-inc'?1:-1)); updateOutreachUI(state); scheduleSave();
-  } else if(action==='apps-inc'||action==='apps-dec'){
-    state.applicationsSent=Math.max(0,state.applicationsSent+(action==='apps-inc'?1:-1)); updateAppsUI(state); scheduleSave();
-  } else if(action==='reset'){
-    if(window.confirm('Reset all saved progress? This cannot be undone.')) resetProgress(entriesArg);
-  }
-}
-
-function attachEvents(entriesArg){
-  appEl.addEventListener('click',function(e){handleClick(e.target.closest('[data-action]'),entriesArg);});
-  appEl.addEventListener('keydown',function(e){
-    if(e.key!=='Enter'&&e.key!==' ') return;
-    var el=e.target.closest('[data-action="toggle-entry"],[data-action="toggle-exit"],[data-action="toggle-resources"]');
-    if(el){e.preventDefault();handleClick(el,entriesArg);}
-  });
-  appEl.addEventListener('change',function(e){
-    var t=e.target; if(!t.matches) return;
-    if(t.matches('input[type="checkbox"][data-action="task"]')){
-      var eid=t.getAttribute('data-entry'), idx=parseInt(t.getAttribute('data-idx'),10);
-      state.tasks[eid][idx]=t.checked; updateEntryUI(eid,entriesArg,state); scheduleSave();
-    } else if(t.matches('input[type="checkbox"][data-action="exit"]')){
-      state.phaseExit[t.getAttribute('data-phase')][parseInt(t.getAttribute('data-idx'),10)]=t.checked; scheduleSave();
-    } else if(t.matches('input[type="checkbox"][data-action="resource"]')){
-      var rkey=t.getAttribute('data-key'), rgroup=t.getAttribute('data-group'); state.resourcesUsed[rkey]=t.checked;
-      var lbl=t.closest('.res-item'); if(lbl) lbl.classList.toggle('done',t.checked);
-      updateResourcesUI(state,rgroup); scheduleSave();
-    } else if(t.id==='lcinput'){
-      var v=parseInt(t.value,10); state.leetcode=isNaN(v)||v<0?0:v; updateLCUI(state); scheduleSave();
-    } else if(t.id==='hrinput'){
-      var v2=parseInt(t.value,10); state.hackerrank=isNaN(v2)||v2<0?0:v2; updateHRUI(state); scheduleSave();
-    } else if(t.id==='csinput'){
-      var v3=parseInt(t.value,10); state.csFundamentals=isNaN(v3)||v3<0?0:v3; updateCSUI(state); scheduleSave();
-    } else if(t.id==='outreachinput'){
-      var v4=parseInt(t.value,10); state.outreachSent=isNaN(v4)||v4<0?0:v4; updateOutreachUI(state); scheduleSave();
-    } else if(t.id==='appsinput'){
-      var v5=parseInt(t.value,10); state.applicationsSent=isNaN(v5)||v5<0?0:v5; updateAppsUI(state); scheduleSave();
-    }
-  });
-  appEl.addEventListener('input',function(e){
-    var t=e.target;
-    if(t.matches&&t.matches('textarea[data-action="notes"]')){ state.checkins[t.getAttribute('data-entry')].notes=t.value; scheduleSave(); }
-    if(t.matches&&t.id==='ressearch'){
-      var q=t.value.trim().toLowerCase();
-      var items=appEl.querySelectorAll('.res-item');
-      var anyVisible=false;
-      Array.prototype.forEach.call(items,function(it){
-        var name=it.getAttribute('data-res-name')||'';
-        var hide=q.length>0 && name.indexOf(q)===-1;
-        it.classList.toggle('res-hidden', hide);
-        if(!hide) anyVisible=true;
-      });
-      var groups=appEl.querySelectorAll('.res-group');
-      Array.prototype.forEach.call(groups,function(g){
-        var visible=g.querySelectorAll('.res-item:not(.res-hidden)').length;
-        g.classList.toggle('res-hidden', q.length>0 && visible===0);
-      });
-      var emptyEl=document.getElementById('resempty');
-      if(emptyEl) emptyEl.classList.toggle('show', q.length>0 && !anyVisible);
-    }
-  });
-}
-
-function render(entriesArg){ appEl.innerHTML=renderApp(entriesArg,state); }
-
-function init(){
-  appEl=document.getElementById('app');
-  entries=buildSchedule();
-  state=defaultState();
-  try{ var s=localStorage.getItem(STORAGE_KEY); if(s)state=hydrateState(JSON.parse(s)); }catch(e){ console.warn('Could not load saved progress, starting fresh.',e); }
-  render(entries);
-  attachEvents(entries);
-  setStatus('Loaded');
-}
-
-if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
-else init();
 </script>
 </body>
 </html>
